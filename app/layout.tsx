@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "New City Paradise",
     description: "A new standard of living, designed around you.",
     type: "website",
-    images: ["/images/new-city-paradise-hero.png"],
+    images: ["/images/logo.png"],
   },
 };
 
