@@ -88,3 +88,95 @@ export const amenities = [
   ["cross", "Healthcare", "Modern clinical services and round-the-clock care."],
   ["spark", "Entertainment", "Spaces for culture, sport and meaningful time together."],
 ] as const;
+
+export const projectFacts = [
+  {
+    label: "PHATA NOC",
+    value: "DG-PHATA/W-I/PHS/61/2022",
+    description: "The project states that 4,256 Kanal is approved by PHATA.",
+  },
+  {
+    label: "Planned community",
+    value: "20,000 Kanal",
+    description: "The stated overall vision for the complete master-planned development.",
+  },
+  {
+    label: "Main boulevard",
+    value: "330 feet",
+    description: "A wide central avenue designed to connect the community's districts.",
+  },
+  {
+    label: "Strategic setting",
+    value: "M-1 · CPEC · GT Road",
+    description: "Positioned near Burhan Interchange with access to major regional routes.",
+  },
+] as const;
+
+export const plotCategories = [
+  {
+    name: "Residential plots",
+    sizes: ["3.5 Marla", "5 Marla", "10 Marla", "1 Kanal"],
+  },
+  {
+    name: "Paradise Heights",
+    sizes: ["2 Kanal", "4 Kanal", "8 Kanal"],
+  },
+  {
+    name: "Awami Block",
+    sizes: ["4 Marla", "6 Marla"],
+  },
+  {
+    name: "Commercial Block",
+    sizes: ["2.5 Marla", "4 Marla", "7 Marla"],
+  },
+] as const;
+
+export const accessPoints = [
+  "Burhan Interchange",
+  "M-1 Motorway",
+  "Main GT Road",
+  "CPEC Route",
+  "New City Wah",
+  "Hazara Motorway",
+  "Brahma Jhang Bahtar Interchange",
+  "Quaid Avenue",
+  "Islamabad International Airport",
+  "M-2 Motorway",
+  "Jhang Bahtar Road",
+  "Thalian Interchange",
+] as const;
+
+export const masterPlanAmenities = [
+  "Glow Park",
+  "Waterfront District",
+  "Dancing Fountain",
+  "Botanical Garden",
+  "Bosporus Bridge",
+  "Football Ground",
+  "Cricket Stadium",
+  "Tennis Courts",
+  "Basketball Court",
+  "Mini Golf Course",
+  "Gymnasium",
+  "Hospital",
+  "Community Center",
+  "Schools and educational institutes",
+  "Mosques and commercial areas",
+] as const;
+
+export const awamiBlockFeatures = [
+  "Premium infrastructure",
+  "Eco-friendly environment",
+  "Botanical garden",
+  "Medical units",
+  "Educational centers",
+  "Fitness areas",
+  "Filtration plants",
+  "Mosque",
+] as const;
+
+export const developerProjects = [
+  "New City Wah Cantt",
+  "Avalon Plaza Rawalpindi",
+  "New City Paradise Lahore",
+] as const;

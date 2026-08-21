@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import BrandMark from "./BrandMark";
 
 const links = [
-  ["Story", "#about"],
-  ["Residences", "#properties"],
-  ["Lifestyle", "#lifestyle"],
-  ["Amenities", "#amenities"],
+  ["Story", "/#about"],
+  ["Masterplan", "/masterplan"],
+  ["Residences", "/#properties"],
+  ["Lifestyle", "/#lifestyle"],
+  ["Amenities", "/#amenities"],
 ];
 
-export default function Navbar() {
+export default function Navbar({ solid = false }: { solid?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -26,10 +27,10 @@ export default function Navbar() {
     <>
       <header
         className={`fixed left-1/2 top-4 z-50 flex w-[calc(100%-2rem)] max-w-[1480px] -translate-x-1/2 items-center justify-between rounded-full px-4 py-3 transition-all duration-500 sm:px-6 ${
-          scrolled ? "bg-ivory/90 text-ink shadow-lg backdrop-blur-xl" : "glass text-white"
+          scrolled || solid ? "bg-ivory/90 text-ink shadow-lg backdrop-blur-xl" : "glass text-white"
         }`}
       >
-        <BrandMark light={!scrolled} />
+        <BrandMark light={!scrolled && !solid} />
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary navigation">
           {links.map(([label, href]) => (
@@ -45,9 +46,9 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href="#contact"
+            href="/#contact"
             className={`hidden rounded-full px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] transition-colors sm:inline-flex ${
-              scrolled
+              scrolled || solid
                 ? "bg-ink text-white hover:bg-champagne"
                 : "bg-white text-ink hover:bg-champagne hover:text-white"
             }`}
@@ -89,7 +90,7 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="my-auto flex flex-col" aria-label="Mobile navigation">
-              {links.concat([["Contact", "#contact"]]).map(([label, href], index) => (
+              {links.concat([["Contact", "/#contact"]]).map(([label, href], index) => (
                 <motion.a
                   key={href}
                   href={href}

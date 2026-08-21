@@ -19,10 +19,11 @@ export default function Footer() {
               Explore
             </p>
             <nav className="mt-6 grid gap-3 text-sm text-white/55" aria-label="Footer navigation">
-              <a className="link-line w-fit" href="#about">Our story</a>
-              <a className="link-line w-fit" href="#properties">Residences</a>
-              <a className="link-line w-fit" href="#lifestyle">Lifestyle</a>
-              <a className="link-line w-fit" href="#amenities">Amenities</a>
+              <a className="link-line w-fit" href="/#about">Our story</a>
+              <a className="link-line w-fit" href="/masterplan">Masterplan</a>
+              <a className="link-line w-fit" href="/#properties">Residences</a>
+              <a className="link-line w-fit" href="/#lifestyle">Lifestyle</a>
+              <a className="link-line w-fit" href="/#amenities">Amenities</a>
             </nav>
           </div>
           <div>
@@ -31,7 +32,7 @@ export default function Footer() {
             </p>
             <div className="mt-6 grid gap-3 text-sm text-white/55">
               {socials.map((social) => (
-                <a key={social} className="link-line w-fit" href="#contact">
+                <a key={social} className="link-line w-fit" href="/#contact">
                   {social}
                 </a>
               ))}
@@ -48,8 +49,8 @@ export default function Footer() {
         <div className="flex flex-col gap-4 pt-7 text-[8px] uppercase tracking-[0.18em] text-white/25 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} New City Paradise. All rights reserved.</p>
           <div className="flex gap-5">
-            <a href="#contact" className="hover:text-white">Privacy</a>
-            <a href="#contact" className="hover:text-white">Terms</a>
+            <a href="/#contact" className="hover:text-white">Privacy</a>
+            <a href="/#contact" className="hover:text-white">Terms</a>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function BrandMark({ light = false }: { light?: boolean }) {
   return (
     <a
-      href="#home"
+      href="/#home"
       aria-label="New City Paradise — home"
       className={`group flex items-center gap-3 ${light ? "text-white" : "text-ink"}`}
     >

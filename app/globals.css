@@ -3,22 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Playfair Display";
-  src: url("./fonts/playfair-display-variable.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Playfair Display";
-  src: url("./fonts/playfair-display-italic-variable.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 400 900;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Poppins";
   src: url("./fonts/poppins-regular.ttf") format("truetype");
   font-style: normal;
@@ -79,7 +63,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-helvetica), Arial, sans-serif;
+  font-weight: 300;
 }
 
 ::selection {
@@ -105,9 +90,14 @@ button {
 }
 
 .display {
-  font-family: "Playfair Display", serif;
-  font-weight: 400;
+  font-family: var(--font-helvetica), Arial, sans-serif;
+  font-weight: 300;
   letter-spacing: -0.055em;
+}
+
+.hero-title {
+  font-family: var(--font-azonix), Arial, sans-serif;
+  font-weight: 400;
 }
 
 .eyebrow {

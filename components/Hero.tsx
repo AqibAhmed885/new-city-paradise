@@ -133,7 +133,7 @@ export default function Hero() {
     <section
       ref={root}
       id="home"
-      className="grain relative min-h-[100svh] overflow-hidden bg-ink text-white"
+      className=" relative min-h-[100svh] overflow-hidden bg-ink text-white"
     >
       {/* Background image */}
       <div
@@ -141,7 +141,7 @@ export default function Hero() {
         className="absolute -inset-y-[12%] inset-x-0 will-change-transform"
       >
         <Image
-          src="/images/image.avif"
+          src="/images/hero.avif"
           alt="Aerial view of New City Paradise at sunrise"
           fill
           priority
@@ -151,7 +151,7 @@ export default function Hero() {
       </div>
 
       {/* Background overlays */}
-      <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent via-black/5 to-black/90" />
+      {/* <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent via-black/5 to-black/90" /> */}
 
       {/* <div className="absolute z-10 inset-0 bg-[radial-gradient(circle_at_50%_34%,transparent_10%,rgba(0,0,0,.2)_85%)]" /> */}
 
@@ -159,7 +159,7 @@ export default function Hero() {
         {/* Building entrance wrapper */}
         <div
           ref={buildingEntrance}
-          className="pointer-events-none absolute -bottom-[10%] right-0 z-10 w-[92vw] max-w-[900px] will-change-transform sm:w-[80vw] lg:w-[70vw]"
+          className="pointer-events-none absolute -bottom-[1%] right-0 z-10 w-[92vw] max-w-[900px] will-change-transform sm:w-[80vw] lg:w-[70vw]"
         >
           {/* Building scroll wrapper */}
           <div
@@ -167,7 +167,7 @@ export default function Hero() {
             className="will-change-transform"
           >
             <Image
-              src="/images/arcade2.png"
+              src="/images/arcade1.png"
               alt="New City Paradise building"
               width={900}
               height={600}
@@ -181,12 +181,12 @@ export default function Hero() {
         {/* Title entrance wrapper */}
         <div
           ref={titleEntrance}
-          className="pointer-events-none absolute left-1/2 top-[31%] w-full -translate-x-1/2 -translate-y-1/2"
+          className="pointer-events-none absolute left-1/2 top-[34%] w-full -translate-x-1/2 -translate-y-1/2"
         >
           
           <h1
             ref={titleScroll}
-            className="display w-full text-center text-[clamp(4rem,12vw,14rem)] leading-[0.85] text-white will-change-transform"
+            className="hero-title w-full text-center text-[clamp(4rem,12vw,8rem)] uppercase leading-[0.85] text-white will-change-transform"
           >
             <span className="block">New City</span>
             <span className="block italic text-[#ebcfa7]">Paradise</span>

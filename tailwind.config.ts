@@ -15,7 +15,7 @@ const config: Config = {
         smoke: "#d8d4ce",
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "serif"],
+        serif: ["var(--font-helvetica)", "Arial", "sans-serif"],
         sans: ["Poppins", "sans-serif"],
       },
       boxShadow: {
