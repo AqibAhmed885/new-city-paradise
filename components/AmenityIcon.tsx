@@ -30,7 +30,7 @@ export default function AmenityIcon({ name }: { name: IconName }) {
       className="h-8 w-8"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.15"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

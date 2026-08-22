@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SalesPartners from "@/components/SalesPartners";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -12,7 +13,6 @@ const LifestyleGallery = dynamic(() => import("@/components/LifestyleGallery"));
 const Amenities = dynamic(() => import("@/components/Amenities"));
 const Investment = dynamic(() => import("@/components/Investment"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
-const Contact = dynamic(() => import("@/components/Contact"));
 
 export default function Home() {
   return (
@@ -21,14 +21,14 @@ export default function Home() {
       <main className="overflow-hidden">
         <Hero />
         <About />
+        <SalesPartners />
         <Stats />
         <PropertyShowcase />
         {/* <LifestyleGallery /> */}
         <Amenities />
         <Investment />
-        <SalesPartners />
         <Testimonials />
-        <Contact />
+        <HomeCTA />
       </main>
       <Footer />
     </SmoothScroll>

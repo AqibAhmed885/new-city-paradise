@@ -111,11 +111,10 @@ export default function Investment() {
             eyebrow="Investment"
             title={
               <>
-                Why Invest In<br />{" "}
+                Why Invest In {" "}
                 <span className="italic text-champagne">New City Paradise</span>
               </>
             }
-            description="More than a place to live, it is a stake in one of the region’s most considered growth stories."
           />
         </div>
 
@@ -123,8 +122,9 @@ export default function Investment() {
         <div className="relative hidden lg:grid lg:grid-cols-12 items-center gap-4">
           {/* Left Reasons */}
           <div className="col-span-3 space-y-16 text-right">
-            {leftReasons.map((item) => (
-              <article data-reason-card key={item.num} className="space-y-1.5">
+            {leftReasons.map((item, i
+            ) => (
+              <article data-reason-card key={item.num} className={`space-y-1.5 ${i === 0 || i === 2 ? "md:-mr-24 md:pl-24" : ""}`}>
                 <h3 className="text-2xl font-medium text-gray-900">{item.title}</h3>
                 <p className="text-base leading-relaxed text-gray-500">{item.desc}</p>
               </article>
@@ -137,7 +137,7 @@ export default function Investment() {
               {/* Central Hexagon */}
               <div
                 style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
-                className="absolute z-20 w-44 h-48 bg-white shadow-2xl flex flex-col items-center justify-center text-center p-4"
+                className="absolute z-20 w-44 h-48 bg-gray-200 shadow-2xl flex flex-col items-center justify-center text-center p-4"
               >
                 <span className="text-2xl  text-gray-900 leading-tight mt-0.5">
                   WHY<br />CHOOSE US
@@ -146,9 +146,9 @@ export default function Investment() {
 
               {/* 6 Radiating Petals */}
               {reasons.map((item, idx) => {
-                const angle = idx * 60 - 90; // Starting from top
+                const angle = idx * 60 - 60; // Starting from top
                 const rad = (angle * Math.PI) / 180;
-                const distance = 145; // Petal offset from center
+                const distance = 180; // Petal offset from center
                 const x = Math.cos(rad) * distance;
                 const y = Math.sin(rad) * distance;
                 const Icon = item.icon;
@@ -194,8 +194,8 @@ export default function Investment() {
 
           {/* Right Reasons */}
           <div className="col-span-3 space-y-16 text-left">
-            {rightReasons.map((item) => (
-              <article data-reason-card key={item.num} className="space-y-1.5">
+            {rightReasons.map((item, i) => (
+              <article data-reason-card key={item.num} className={`space-y-1.5  ${i === 0 || i === 2 ? "md:-ml-24 md:pr-24" : ""}`}>
                 <h3 className="text-2xl font-medium text-gray-900">{item.title}</h3>
                 <p className="text-base leading-relaxed text-gray-500">{item.desc}</p>
               </article>

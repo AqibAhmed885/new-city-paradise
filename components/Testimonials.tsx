@@ -39,7 +39,7 @@ export default function Testimonials() {
   const testimonial = testimonials[active];
 
   return (
-    <section className="relative min-h-[90svh] overflow-hidden bg-ink text-white">
+    <section className="relative h-[90svh] overflow-hidden bg-ink text-white">
       <Image
         src="/images/grand-estate.jpg"
         alt="A New City Paradise residence at dusk"
@@ -54,7 +54,7 @@ export default function Testimonials() {
       <div className="container-pad relative z-10 flex min-h-[90svh] flex-col justify-between py-16 sm:py-20">
         
 
-        <div className="py-20 sm:py-16">
+        <div className="py-20 sm:py-8">
           
           <div className="mt-10 min-h-[22rem] rounded-3xl bg-white/10 max-w-5xl backdrop-blur-md p-6  mx-auto text-center sm:min-h-[24rem]">
             <AnimatePresence mode="wait">
@@ -65,7 +65,7 @@ export default function Testimonials() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="display text-[clamp(2.5rem,5vw,4rem)] leading-[1.2]  text-white">
+                <p className="display text-[clamp(2.5rem,5vw,3rem)] italic leading-[1.2]  text-white">
                   “{testimonial.quote}”
                 </p>
                 <footer className="mt-12 flex items-center justify-end gap-5 text-left pl-5">

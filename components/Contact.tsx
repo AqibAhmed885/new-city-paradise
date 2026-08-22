@@ -21,18 +21,18 @@ export default function Contact() {
     <section id="contact" className="bg-ink text-white">
       <div className="grid lg:grid-cols-2">
         <div className="container-pad !mx-0 max-w-none py-24 sm:py-32 lg:pl-[max(4rem,calc((100vw-1600px)/2+4.5rem))]">
-         
 
-           <SectionHeading
-                      eyebrow="Investment"
-                      title={
-                        <h1 className="text-white">
-                          Find your Place<br />{" "}
-                          <span className="italic text-champagne">in Paradise.</span>
-                        </h1>
-                      }
+
+          <SectionHeading
+            eyebrow="Investment"
+            title={
+              <h1 className="text-white">
+                Find your Place<br />{" "}
+                <span className="italic text-champagne">in Paradise.</span>
+              </h1>
+            }
             description=""
-                    />
+          />
 
           <form onSubmit={submit} className="mt-14 max-w-xl" aria-label="Enquiry form">
             <div className="grid gap-x-7 sm:grid-cols-2">
@@ -82,9 +82,8 @@ export default function Contact() {
             </div>
             <p
               role="status"
-              className={`mt-6 text-sm text-champagne transition-opacity ${
-                sent ? "opacity-100" : "opacity-0"
-              }`}
+              className={`mt-6 text-sm text-champagne transition-opacity ${sent ? "opacity-100" : "opacity-0"
+                }`}
             >
               Thank you. A property consultant will contact you shortly.
             </p>

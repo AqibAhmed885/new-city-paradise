@@ -5,6 +5,8 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGsap } from "@/hooks/useGsap";
+import BrandMark from "./BrandMark";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -154,9 +156,11 @@ export default function Hero() {
       {/* <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent via-black/5 to-black/90" /> */}
 
       {/* <div className="absolute z-10 inset-0 bg-[radial-gradient(circle_at_50%_34%,transparent_10%,rgba(0,0,0,.2)_85%)]" /> */}
-
+      
       <div className="container-pad relative flex min-h-[100svh] flex-col justify-end pb-10 pt-32 sm:pb-12">
         {/* Building entrance wrapper */}
+        
+        <BrandMark />
         <div
           ref={buildingEntrance}
           className="pointer-events-none absolute -bottom-[1%] right-0 z-10 w-[92vw] max-w-[900px] will-change-transform sm:w-[80vw] lg:w-[70vw]"
@@ -192,7 +196,7 @@ export default function Hero() {
             <span className="block italic text-[#ebcfa7]">Paradise</span>
           </h1>
         </div>
-        <div className="absolute bottom-1/3  left-24  text-left text-[10px] font-bold uppercase tracking-[0.2em] text-black sm:text-[12px]">
+        <div className="absolute bottom-[40%]  left-24  text-left text-[10px] font-bold uppercase tracking-[0.2em] text-black sm:text-[12px]">
           <h1 className="flex flex-col gap-1 text-[clamp(1.2rem,3vw,1.5rem)] leading-[0.85] sm:text-[clamp(1.5rem,3vw,3rem)]">
             <span>Where</span>
             <span>heritage</span>
@@ -204,13 +208,13 @@ export default function Hero() {
         {/* Bottom content */}
         <div
           ref={content}
-          className="relative z-30 flex flex-col items-start justify-between gap-8 border-t border-white/35 pt-4 will-change-transform md:flex-row md:items-end"
+          className="relative z-30 flex flex-col items-start justify-between gap-8 bg-white/20 backdrop-blur-md p-2 px-4 rounded-2xl will-change-transform md:flex-row md:items-end"
         >
           
 
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <a
-              href="#properties"
+            <Link
+              href="/properties"
               className="group inline-flex items-center justify-center gap-5 rounded-full bg-white px-6 py-2.5 text-xs font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-champagne hover:text-white"
             >
               Explore residences
@@ -220,10 +224,10 @@ export default function Hero() {
                 <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
 
-            </a>
+            </Link>
 
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-2.5 text-xs font-medium uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-ink"
             >
               Book a visit

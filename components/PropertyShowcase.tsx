@@ -46,7 +46,7 @@ export default function PropertyShowcase() {
               Spaces to Call <br /> <span className="italic text-champagne">Your Own.</span>
             </>
           }
-          description="A limited collection of villas, residences and private estates — each created to bring architecture, nature and everyday life into balance."
+          // description="A limited collection of villas, residences and private estates — each created to bring architecture, nature and everyday life into balance."
         />
 
         <div className="mt-12 space-y-28 sm:mt-16 sm:space-y-20">
@@ -99,7 +99,7 @@ export default function PropertyShowcase() {
                   </div>
                 </dl> */}
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="group mt-9 inline-flex items-center gap-5 text-sm  uppercase tracking-[0.16em]"
                 >
                   View residence

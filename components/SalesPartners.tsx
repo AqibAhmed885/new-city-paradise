@@ -178,7 +178,7 @@ export default function SalesPartners() {
   }, []);
 
   return (
-    <section ref={root} id="partners" className="overflow-hidden bg-ivory py-28 sm:py-20">
+    <section ref={root} id="partners" className="overflow-hidden bg-slate-100 py-28 sm:py-20">
       <div className="container-pad w-full">
         <div className="flex items-center justify-center w-full">
           <h2
