@@ -13,7 +13,17 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "dastak.com.pk",
                 pathname: "/**",
-            }
+            },
+            {
+                protocol: "https",
+                hostname: "www.newcityparadise.com",
+                pathname: "/wp-content/uploads/**",
+            },
+            {
+                protocol: "https",
+                hostname: "newcityparadise.com",
+                pathname: "/wp-content/uploads/**",
+            },
         ],
     },
 };

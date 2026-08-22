@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import SectionHeading from "./SectionHeading";
 
 const fields = [
   { id: "name", label: "Your name", type: "text", autoComplete: "name" },
@@ -20,16 +21,18 @@ export default function Contact() {
     <section id="contact" className="bg-ink text-white">
       <div className="grid lg:grid-cols-2">
         <div className="container-pad !mx-0 max-w-none py-24 sm:py-32 lg:pl-[max(4rem,calc((100vw-1600px)/2+4.5rem))]">
-          <p className="eyebrow text-champagne">Begin your journey</p>
-          <h2 className="display mt-8 max-w-2xl text-[clamp(3.8rem,6.8vw,7rem)] leading-[0.87]">
-            Find your place
-            <br />
-            <span className="italic text-champagne">in paradise.</span>
-          </h2>
-          <p className="mt-8 max-w-md text-sm leading-7 text-white/45">
-            Speak with a dedicated property consultant or arrange a private
-            masterplan tour.
-          </p>
+         
+
+           <SectionHeading
+                      eyebrow="Investment"
+                      title={
+                        <h1 className="text-white">
+                          Find your Place<br />{" "}
+                          <span className="italic text-champagne">in Paradise.</span>
+                        </h1>
+                      }
+            description=""
+                    />
 
           <form onSubmit={submit} className="mt-14 max-w-xl" aria-label="Enquiry form">
             <div className="grid gap-x-7 sm:grid-cols-2">

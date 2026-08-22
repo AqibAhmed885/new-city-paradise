@@ -22,7 +22,7 @@ export default function Footer() {
               <a className="link-line w-fit" href="/#about">Our story</a>
               <a className="link-line w-fit" href="/masterplan">Masterplan</a>
               <a className="link-line w-fit" href="/#properties">Residences</a>
-              <a className="link-line w-fit" href="/#lifestyle">Lifestyle</a>
+              <a className="link-line w-fit" href="/#partners">Sales partners</a>
               <a className="link-line w-fit" href="/#amenities">Amenities</a>
             </nav>
           </div>

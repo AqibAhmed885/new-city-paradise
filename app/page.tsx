@@ -3,6 +3,7 @@ import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import SalesPartners from "@/components/SalesPartners";
 import SmoothScroll from "@/components/SmoothScroll";
 import Stats from "@/components/Stats";
 
@@ -22,9 +23,10 @@ export default function Home() {
         <About />
         <Stats />
         <PropertyShowcase />
-        <LifestyleGallery />
+        {/* <LifestyleGallery /> */}
         <Amenities />
         <Investment />
+        <SalesPartners />
         <Testimonials />
         <Contact />
       </main>

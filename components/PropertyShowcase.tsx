@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGsap } from "@/hooks/useGsap";
 import { properties } from "@/lib/data";
 import SectionHeading from "./SectionHeading";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,19 +37,19 @@ export default function PropertyShowcase() {
   }, []);
 
   return (
-    <section ref={root} id="properties" className="bg-ivory py-28 sm:py-40">
+    <section ref={root} id="properties" className="bg-white py-28 sm:py-20">
       <div className="container-pad">
         <SectionHeading
           eyebrow="Curated residences"
           title={
             <>
-              Spaces to call <span className="italic text-champagne">your own.</span>
+              Spaces to Call <br /> <span className="italic text-champagne">Your Own.</span>
             </>
           }
           description="A limited collection of villas, residences and private estates — each created to bring architecture, nature and everyday life into balance."
         />
 
-        <div className="mt-24 space-y-28 sm:mt-32 sm:space-y-40">
+        <div className="mt-12 space-y-28 sm:mt-16 sm:space-y-20">
           {properties.map((property, index) => (
             <article
               data-property
@@ -59,7 +60,7 @@ export default function PropertyShowcase() {
             >
               <div
                 data-property-image
-                className="group relative aspect-[4/5] overflow-hidden bg-smoke shadow-luxe lg:col-span-7 lg:aspect-[1.22/1]"
+                className="group relative aspect-[4/5] overflow-hidden  shadow-luxe lg:col-span-7 lg:aspect-[1.5/1]"
               >
                 <Image
                   src={property.image}
@@ -77,13 +78,13 @@ export default function PropertyShowcase() {
                 {/* <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-champagne">
                   {property.eyebrow}
                 </p> */}
-                <h3 className="display mt-5 text-[clamp(2.8rem,5vw,6rem)] leading-[1]">
+                <h1 className="display tracking-normal mt-5 text-[clamp(3.8rem,7.5vw,4rem)]  font-medium leading-[1]">
                   {property.title}
-                </h3>
+                </h1>
                 <p className="mt-5 max-w-lg text-base leading-7 text-black/50">
                   {property.description}
                 </p>
-                <dl className="mt-10 grid grid-cols-2 border-y border-black/15 py-6">
+                {/* <dl className="mt-10 grid grid-cols-2 border-y border-black/15 py-6">
                   <div>
                     <dt className="text-xs font-medium   text-black/40">
                       Investment
@@ -96,8 +97,8 @@ export default function PropertyShowcase() {
                     </dt>
                     <dd className="mt-2 font-serif text-xl">{property.area}</dd>
                   </div>
-                </dl>
-                <a
+                </dl> */}
+                <Link
                   href="#contact"
                   className="group mt-9 inline-flex items-center gap-5 text-sm  uppercase tracking-[0.16em]"
                 >
@@ -107,7 +108,7 @@ export default function PropertyShowcase() {
                     <path d="M11.5 1.76307C11.5 1.76307 22.7671 0.813286 24.4769 2.52311C26.1868 4.23294 25.2369 15.5 25.2369 15.5" stroke="#141B34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
 
-                </a>
+                </Link>
               </div>
             </article>
           ))}

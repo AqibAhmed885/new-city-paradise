@@ -36,37 +36,35 @@ export default function Amenities() {
   }, []);
 
   return (
-    <section ref={root} id="amenities" className="bg-[#eee9e2] py-28 sm:py-40">
+    <section ref={root} id="amenities" className="bg-gray-100 py-14 sm:py-20">
       <div className="container-pad">
         <SectionHeading
           eyebrow="Designed around you"
           title={
             <>
-              Everything you need,
+              Everything You Need,
               <br />
-              <span className="italic text-champagne">beautifully close.</span>
+              <span className="italic text-champagne">Beautifully Close.</span>
             </>
           }
           description="Every practical detail has been integrated into the masterplan, creating a community that feels effortless from day one."
         />
         <div
           data-grid
-          className="mt-20 grid border-l border-t border-black/10 sm:grid-cols-2 lg:grid-cols-5"
+          className="mt-10 grid gap-2  sm:grid-cols-2 lg:grid-cols-5"
         >
           {amenities.map(([icon, title, description], index) => (
             <article
               data-amenity
               key={title}
-              className="group min-h-72 border-b border-r border-black/10 bg-ivory/30 p-7 transition-all duration-500 hover:-translate-y-2 hover:bg-ink hover:text-white hover:shadow-luxe"
+              className="group min-h-72 bg-gray-50 rounded-2xl p-7 transition-all duration-500 hover:-translate-y-2 hover:bg-gray-600 hover:text-white hover:shadow-luxe"
             >
               <div className="flex items-start justify-between text-champagne">
                 <AmenityIcon name={icon} />
-                <span className="font-serif text-sm italic text-current opacity-60">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                
               </div>
-              <h3 className="mt-16 font-serif text-2xl">{title}</h3>
-              <p className="mt-4 text-xs leading-6 text-black/45 transition-colors group-hover:text-white/45">
+              <h3 className="mt-12 font-serif text-2xl">{title}</h3>
+              <p className="mt-4 text-sm leading-6 text-black/60 transition-colors group-hover:text-white/45">
                 {description}
               </p>
             </article>

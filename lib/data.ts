@@ -26,6 +26,33 @@ export const properties = [
     area: "1 Kanal · 6 Beds",
     image: "/images/grand-estate.jpg",
   },
+  {
+    eyebrow: "Urban retreat",
+    title: "Skyline Penthouses",
+    description:
+      "A limited collection of duplex penthouses with soaring ceilings, floor-to-ceiling windows and panoramic city views.",
+    price: "From PKR 3.10 Cr",
+    area: "3,500 sq. ft. · 5 Beds",
+    image: "/images/skyline-penthouse.png",
+  },
+  {
+    eyebrow: "Exclusive community",
+    title: "The Terrace Townhomes",
+    description:
+      "Modern three-story townhomes with expansive private terraces, offering a balanced lifestyle of indoor and outdoor living.",
+    price: "From PKR 1.95 Cr",
+    area: "7 Marla · 3 Beds",
+    image: "/images/terrace-townhome.jpeg",
+  },
+  {
+    eyebrow: "Boutique collection",
+    title: "The Boulevard Lofts",
+    description:
+      "Chic, open-plan lofts located directly on the main boulevard, featuring industrial-inspired architecture and proximity to premium retail.",
+    price: "From PKR 1.10 Cr",
+    area: "1,200 sq. ft. · 2 Beds",
+    image: "/images/boulevard-loft.png",
+  },
 ];
 
 export const gallery = [
@@ -180,3 +207,94 @@ export const developerProjects = [
   "Avalon Plaza Rawalpindi",
   "New City Paradise Lahore",
 ] as const;
+
+export type SalesPartner = {
+  name: string;
+  logo: string;
+};
+
+export type SalesPartnerCategory = {
+  name: string;
+  number: string;
+  partners: SalesPartner[];
+};
+
+export const salesPartnerCategories: SalesPartnerCategory[] = [
+  {
+    name: "Platinum",
+    number: "01",
+    partners: [
+      { name: "A&A Enterprises", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/AA.jpg" },
+      { name: "AA Properties", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/AA_Properties.jpg" },
+      { name: "Al Sadat Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Al_Sadat.jpg" },
+      { name: "99 Marlaz", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/99Marlaz.jpg" },
+      { name: "Ameer Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Ameer_Marketing-1.jpg" },
+      { name: "BGA Enterprises", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/BGA-1.jpg" },
+      { name: "Current Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Current_Marketing-1.jpg" },
+      { name: "Estate Land Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Estate_Land-1.jpg" },
+      { name: "F1 Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/F1_Marketing-1.jpg" },
+      { name: "Ilhaaq Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/ILHAAQ.jpg" },
+      { name: "Jawad Khan Builders", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Jawad_Khan-1.jpg" },
+      { name: "Makan Solutions", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Makan-1.jpg" },
+      { name: "MSAT Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/MsAT-1.jpg" },
+      { name: "Mybro", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Mybro-1.jpg" },
+      { name: "NTS Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/NTS-1.jpg" },
+      { name: "Arena Properties", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Platinum-1.jpg" },
+      { name: "Property Bank", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Property_Bank-1.jpg" },
+      { name: "Rhaas Group", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Rhaas_Group-1.jpg" },
+      { name: "Sky Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Sky_Marketing-1.jpg" },
+      { name: "Subhan Group of Companies", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Subhan-1.jpg" },
+      { name: "Tagine Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Tagine_Marketing-1.jpg" },
+      { name: "Tajarat Properties", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Tajarat-1.jpg" },
+      { name: "Tari Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Tari_Marketing.jpg" },
+      { name: "Twin Cities Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Twin_Cities_Marketing.png" },
+      { name: "Glow Star", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Glow.Starjpg.jpg" },
+    ],
+  },
+  {
+    name: "Gold",
+    number: "02",
+    partners: [
+      { name: "Askari Real Estate & Builders", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Askari_Real.jpg" },
+      { name: "Red Leaf", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/RedLeaf.jpg" },
+      { name: "Sultan Mehmood & Sons", logo: "https://newcityparadise.com/wp-content/uploads/2023/04/SMS.jpg" },
+      { name: "5 Star Real Estate", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/5Star.jpg" },
+      { name: "Skylark Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/skylark.jpg" },
+    ],
+  },
+  {
+    name: "Silver",
+    number: "03",
+    partners: [
+      { name: "Moon Stone Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver03-1.jpg" },
+      { name: "IS Enterprises", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver02-1.jpg" },
+      { name: "AK Estate and Builders", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver01-1.jpg" },
+      { name: "RJ Marketing & Developers", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/RJ_Marketing.jpg" },
+      { name: "Land Venture", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver17-1.jpg" },
+      { name: "PRE GOLD", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/RRE-1.jpg" },
+      { name: "Afan Enterprise", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver22.jpg" },
+      { name: "C7 Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver23.jpg" },
+      { name: "Millionaire Business Solutions", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver21.jpg" },
+      { name: "Property Hi-Tech Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver25.png" },
+      { name: "Pasban Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver26.jpg" },
+      { name: "Land Provider", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver27.jpg" },
+      { name: "Khan Marketing", logo: "https://newcityparadise.com/wp-content/uploads/2023/04/Silver28.jpg" },
+      { name: "AK Builder", logo: "https://newcityparadise.com/wp-content/uploads/2023/04/Silver29.jpg" },
+      { name: "4P Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver20-2.jpg" },
+      { name: "Bajaan Enterprises", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver16-2.jpg" },
+      { name: "Estate Ville", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver15-2.jpg" },
+      { name: "Al Rauf", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver14-2.jpg" },
+      { name: "S&A Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver13-2.jpg" },
+      { name: "Invent Vista Realtors", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver12-2.jpg" },
+      { name: "BM Associates", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver10-2.jpg" },
+      { name: "Mehran Real Estate", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver11-1.jpg" },
+      { name: "Circle Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver18-1.jpg" },
+      { name: "Executive Enterprises", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver09-1.jpg" },
+      { name: "Pak Land Associates", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver08-1.jpg" },
+      { name: "RIWA Associates", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver07-1.jpg" },
+      { name: "Abbasi group of Marketing", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver06-1.jpg" },
+      { name: "KPK Real Estate & Builder's", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver05-1.jpg" },
+      { name: "Marjan Real Estate", logo: "https://www.newcityparadise.com/wp-content/uploads/2023/04/Silver04-2.jpg" },
+    ],
+  },
+];

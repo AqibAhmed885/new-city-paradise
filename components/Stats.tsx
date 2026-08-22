@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGsap } from "@/hooks/useGsap";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,18 +100,18 @@ export default function Stats() {
   }, []);
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-[#050505] py-28 text-white sm:py-40">
-      <div className="pointer-events-none absolute right-0 top-0 h-[30rem] w-[30rem] rounded-full bg-champagne/[0.06] blur-[120px]" />
+    <section ref={root} className="relative overflow-hidden bg-[#050505] py-28 text-white sm:py-20">
+      {/* <div className="pointer-events-none absolute right-0 top-0 h-[30rem] w-[30rem] rounded-full bg-champagne/[0.06] blur-[120px]" /> */}
 
       <div className="container-pad relative">
-        <h2 className="max-w-6xl text-[clamp(3.8rem,7.5vw,4rem)] hero-title font-light leading-[0.92] tracking-[-0.055em]">
+        <h2 className="max-w-6xl text-[clamp(3.8rem,7.5vw,4rem)] font-medium leading-[1.2]">
           <span data-heading-reveal className="block">Building Spaces  </span>
           <span data-heading-reveal className="block italic text-champagne">
             That Tell Stories
           </span>
         </h2>
 
-        <div data-stat-grid className="mt-24 grid gap-5 sm:grid-cols-2 lg:mt-32 lg:grid-cols-3">
+        <div data-stat-grid className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           <div aria-hidden="true" className="hidden lg:block" />
 
           {stats.map((stat) => (
@@ -119,7 +120,7 @@ export default function Stats() {
               key={stat.label}
               className="group flex min-h-[22rem] flex-col rounded-[1.5rem] border border-white/25 bg-black/20 p-7 transition-all duration-500 hover:-translate-y-1 hover:border-champagne/70 hover:bg-white/[0.03] sm:min-h-[25rem] sm:p-10"
             >
-              <p className="flex items-start font-serif text-[clamp(4.2rem,7vw,4rem)] hero-title italic leading-none tracking-[-0.06em]">
+              <p className="flex items-start  text-[clamp(4.2rem,7vw,4rem)] display italic leading-none tracking-[-0.06em]">
                 <span data-count={stat.value}>0</span>
                 <span className="ml-4 -mt-2 text-[0.48em] text-champagne">{stat.suffix}</span>
               </p>
@@ -137,17 +138,17 @@ export default function Stats() {
             data-stat-card
             className="flex min-h-[18rem] flex-col items-start justify-end py-5 sm:col-span-2 lg:col-span-1 lg:min-h-[25rem] lg:px-5"
           >
-            <p className="max-w-md font-serif text-2xl italic leading-9 text-white/70 sm:text-3xl sm:leading-10">
+            <p className="max-w-md  text-1xl italic leading-9 text-white/70 sm:text-2xl sm:leading-10">
               Creating exceptional communities where modern living, comfort,
               and opportunity come together.
             </p>
-            <a
+            <Link
               href="/masterplan"
               aria-label="Explore the New City Paradise masterplan"
               className="mt-9 grid h-16 w-16 place-items-center rounded-full bg-[#efc38f] text-2xl text-ink transition-transform duration-300 hover:-translate-y-1 hover:translate-x-1"
             >
               ↗
-            </a>
+            </Link>
           </div>
         </div>
       </div>
