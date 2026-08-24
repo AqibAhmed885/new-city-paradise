@@ -91,7 +91,7 @@ export default function Hero() {
       // After that, it moves downward and fades out.
       gsap.to(titleScroll.current, {
         y: 260,
-        opacity: 0,
+        opacity: 50,
         ease: "none",
         scrollTrigger: {
           trigger: root.current,
@@ -103,7 +103,7 @@ export default function Hero() {
 
       // Building moves upward as soon as scrolling starts.
       gsap.to(buildingScroll.current, {
-        y: -320,
+        y: 20,
         scale: 1.06,
         ease: "none",
         scrollTrigger: {
@@ -143,7 +143,7 @@ export default function Hero() {
         className="absolute -inset-y-[12%] inset-x-0 will-change-transform"
       >
         <Image
-          src="/images/hero.avif"
+          src="/images/background1.png"
           alt="Aerial view of New City Paradise at sunrise"
           fill
           priority
@@ -157,21 +157,21 @@ export default function Hero() {
 
       {/* <div className="absolute z-10 inset-0 bg-[radial-gradient(circle_at_50%_34%,transparent_10%,rgba(0,0,0,.2)_85%)]" /> */}
       
-      <div className="container-pad relative flex min-h-[100svh] flex-col justify-end pb-10 pt-32 sm:pb-12">
+      <div className="container-pad relative flex min-h-[100svh] flex-col  pb-10 pt-1 sm:pb-1">
         {/* Building entrance wrapper */}
         
         <BrandMark />
         <div
           ref={buildingEntrance}
-          className="pointer-events-none absolute -bottom-[1%] right-0 z-10 w-[92vw] max-w-[900px] will-change-transform sm:w-[80vw] lg:w-[70vw]"
+          className="pointer-events-none absolute -bottom-[25%] right-0 z-10 w-[92vw]  will-change-transform sm:w-[80vw] lg:w-[100vw]"
         >
           {/* Building scroll wrapper */}
           <div
-            // ref={buildingScroll}
+            ref={buildingScroll}
             className="will-change-transform"
           >
             <Image
-              src="/images/arcade1.png"
+              src="/images/hero.png"
               alt="New City Paradise building"
               width={900}
               height={600}
@@ -196,8 +196,8 @@ export default function Hero() {
             <span className="block italic text-[#ebcfa7]">Paradise</span>
           </h1>
         </div>
-        <div className="absolute bottom-[40%]  left-24  text-left text-[10px] font-bold uppercase tracking-[0.2em] text-black sm:text-[12px]">
-          <h1 className="flex flex-col gap-1 text-[clamp(1.2rem,3vw,1.5rem)] leading-[0.85] sm:text-[clamp(1.5rem,3vw,3rem)]">
+        <div className="absolute bottom-[10%] rounded-2xl border border-white/30 z-20 bg-white/20 backdrop-blur-sm p-4 left-24  text-left text-[10px] font-bold uppercase tracking-[0.2em] text-black sm:text-[12px]">
+          <h1 className="flex flex-col gap-1  text-[clamp(1.2rem,3vw,1.5rem)] leading-[0.85] sm:text-[clamp(1.5rem,3vw,3rem)]">
             <span>Where</span>
             <span>heritage</span>
             <span>meets</span>

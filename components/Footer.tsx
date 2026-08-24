@@ -24,6 +24,7 @@ export default function Footer() {
               <a className="link-line w-fit" href="/#properties">Residences</a>
               <a className="link-line w-fit" href="/#partners">Sales partners</a>
               <a className="link-line w-fit" href="/#amenities">Amenities</a>
+              <a className="link-line w-fit" href="/blog">Blog</a>
             </nav>
           </div>
           <div>
@@ -49,7 +50,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4 pt-7 text-[8px] uppercase tracking-[0.18em] text-white/25 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} New City Paradise. All rights reserved.</p>
           <div className="flex gap-5">
-            <a href="/contact" className="hover:text-white">Privacy</a>
+            <a href="/privacy-policy" className="hover:text-white">Privacy</a>
             <a href="/contact" className="hover:text-white">Terms</a>
           </div>
         </div>

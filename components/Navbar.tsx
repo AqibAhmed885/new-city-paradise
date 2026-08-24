@@ -10,6 +10,7 @@ const links = [
   ["Residences", "/#properties"],
   ["Partners", "/#partners"],
   ["Amenities", "/#amenities"],
+  ["Blog", "/blog"],
 ];
 
 export default function Navbar({ solid = false }: { solid?: boolean }) {

@@ -6,7 +6,7 @@ export default function BrandMark({ light = false }: { light?: boolean }) {
     <Link
       href="/#home"
       aria-label="New City Paradise — home"
-      className={`group flex items-center gap-3 ${light ? "text-white" : "text-ink"}`}
+      className={`group flex items-center z-20  py-2 px-4  gap-3 ${light ? "text-white" : "text-ink"}`}
     >
       <Image
         src="/images/paradise-logo.png"

@@ -3,6 +3,7 @@ import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HomeCTA from "@/components/HomeCTA";
+import HomeBlog from "@/components/HomeBlog";
 import Navbar from "@/components/Navbar";
 import SalesPartners from "@/components/SalesPartners";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -28,6 +29,7 @@ export default function Home() {
         <Amenities />
         <Investment />
         <Testimonials />
+        <HomeBlog />
         <HomeCTA />
       </main>
       <Footer />
