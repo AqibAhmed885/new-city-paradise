@@ -10,9 +10,13 @@ export default function Hero() {
           muted
           loop
           playsInline
+          // @ts-ignore
+          webkit-playsinline="true"
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover scale-[1.25]"
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/Hero.mp4" type="video/mp4" />
         </video>
         {/* Subtle dark gradient overlay at top for navbar readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/20" />
