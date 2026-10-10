@@ -6,22 +6,16 @@ export default function BrandMark({ light = false }: { light?: boolean }) {
     <Link
       href="/#home"
       aria-label="New City Paradise — home"
-      className={`group flex items-center z-20  py-2 px-4  gap-3 ${light ? "text-white" : "text-ink"}`}
+      className={`group flex items-center z-20 gap-3 ${light ? "opacity-100" : "opacity-90"}`}
     >
       <Image
-        src="/images/paradise-logo.png"
+        src="/images/logo.png"
         alt="New City Paradise"
-        width={280}
-        height={120}
+        width={300}
+        height={70}
+        className="w-48 sm:w-64 h-auto"
+        priority
       />
-      {/* <span className="hidden leading-none sm:block">
-        <strong className="block font-serif text-[15px] font-normal tracking-[0.1em]">
-          NEW CITY
-        </strong>
-        <span className="mt-1 block text-[7px] font-bold tracking-[0.45em] opacity-70">
-          PARADISE
-        </span>
-      </span> */}
     </Link>
   );
 }

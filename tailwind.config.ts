@@ -15,8 +15,9 @@ const config: Config = {
         smoke: "#d8d4ce",
       },
       fontFamily: {
-        serif: ["var(--font-helvetica)", "Arial", "sans-serif"],
-        sans: ["Poppins", "sans-serif"],
+        serif: ["Adobe Garamond Pro", "Georgia", "serif"],
+        sans: ["Optima", "sans-serif"],
+        menu: ["var(--font-source-sans)", "Source Sans 3", "Segoe UI", "system-ui"],
       },
       boxShadow: {
         luxe: "0 30px 80px rgba(17, 15, 12, 0.13)",

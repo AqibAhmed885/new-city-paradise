@@ -100,7 +100,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-[#050505] py-28 text-white sm:py-20">
+    <section ref={root} className="relative overflow-hidden bg-[#050505] py-16 text-white sm:py-16">
       {/* <div className="pointer-events-none absolute right-0 top-0 h-[30rem] w-[30rem] rounded-full bg-champagne/[0.06] blur-[120px]" /> */}
 
       <div className="container-pad relative">
@@ -111,24 +111,23 @@ export default function Stats() {
           </span>
         </h2>
 
-        <div data-stat-grid className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-          <div aria-hidden="true" className="hidden lg:block" />
+        <div data-stat-grid className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
 
           {stats.map((stat) => (
             <article
               data-stat-card
               key={stat.label}
-              className="group flex min-h-[22rem] flex-col rounded-[1.5rem] border border-white/25 bg-black/20 p-7 transition-all duration-500 hover:-translate-y-1 hover:border-champagne/70 hover:bg-white/[0.03] sm:min-h-[25rem] sm:p-10"
+              className="group flex min-h-[15rem] flex-col rounded-[1.5rem] border border-white/25 bg-black/20 p-7 transition-all duration-500 hover:-translate-y-1 hover:border-champagne/70 hover:bg-white/[0.03] sm:min-h-[17rem] sm:p-10"
             >
               <p className="flex items-start  text-[clamp(4.2rem,7vw,4rem)] display italic leading-none tracking-[-0.06em]">
                 <span data-count={stat.value}>0</span>
-                <span className="ml-4 -mt-2 text-[0.48em] text-champagne">{stat.suffix}</span>
+                <span className={`${stat.suffix.includes('/') ? 'ml-2 text-[0.75em]' : 'ml-4 -mt-2 text-[0.48em]'} text-champagne`}>{stat.suffix}</span>
               </p>
               
               <h1 className="mt-auto  text-xl text-white sm:text-2xl">
                 {stat.label}
               </h1>
-              <p className="text-lg  text-white/80 sm:text-xl">
+              <p className="text-lg  text-white/80 sm:text-xl mt-2">
                 {stat.description}
               </p>
             </article>
@@ -136,7 +135,7 @@ export default function Stats() {
 
           <div
             data-stat-card
-            className="flex min-h-[18rem] flex-col items-start justify-end py-5 sm:col-span-2 lg:col-span-1 lg:min-h-[25rem] lg:px-5"
+            className="flex flex-col items-start justify-end py-5 sm:col-span-2 lg:col-span-2 lg:px-10"
           >
             <p className="max-w-md  text-1xl italic leading-9 text-white/70 sm:text-2xl sm:leading-10">
               Creating exceptional communities where modern living, comfort,

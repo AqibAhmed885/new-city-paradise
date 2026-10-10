@@ -2,10 +2,9 @@ import dynamic from "next/dynamic";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Communities from "@/components/Communities";
 import HomeCTA from "@/components/HomeCTA";
-import HomeBlog from "@/components/HomeBlog";
 import Navbar from "@/components/Navbar";
-import SalesPartners from "@/components/SalesPartners";
 import SmoothScroll from "@/components/SmoothScroll";
 import Stats from "@/components/Stats";
 
@@ -21,15 +20,14 @@ export default function Home() {
       <Navbar />
       <main className="overflow-hidden">
         <Hero />
+        <Communities />
         <About />
-        <SalesPartners />
         <Stats />
         <PropertyShowcase />
         {/* <LifestyleGallery /> */}
         <Amenities />
         <Investment />
         <Testimonials />
-        <HomeBlog />
         <HomeCTA />
       </main>
       <Footer />

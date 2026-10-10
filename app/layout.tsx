@@ -75,12 +75,19 @@ export const viewport: Viewport = {
   themeColor: "#12110f",
 };
 
+import { Source_Sans_3 } from "next/font/google";
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-source-sans",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${helvetica.variable} ${azonix.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${helvetica.variable} ${azonix.variable} ${sourceSans.variable}`}>
+      <body className="font-serif">{children}</body>
     </html>
   );
 }
