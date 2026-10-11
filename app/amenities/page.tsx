@@ -5,13 +5,23 @@ import SmoothScroll from "@/components/SmoothScroll";
 import AmenitiesClient from "@/components/AmenitiesClient";
 
 export const metadata: Metadata = {
-  title: "World-Class Amenities | New City Paradise",
+  title: "Amenities & Masterplan Facilities | New City Paradise Wah",
   description:
-    "Explore the signature amenities of New City Paradise: Glow Park, 330-ft Main Boulevard, Waterfront District, Dancing Fountains, Sports Complex, and 24/7 Healthcare.",
+    "Explore the signature world-class amenities of New City Paradise Wah: Glow Park, 330-ft Main Boulevard, Waterfront District, Dancing Fountain, Sports Complex, and 24/7 Healthcare on CPEC Route.",
+  keywords: [
+    "New City Paradise amenities",
+    "New City Paradise Wah facilities",
+    "Glow Park New City Paradise",
+    "330 ft main boulevard New City Paradise",
+    "New City Wah masterplan",
+    "waterfront district New City Paradise",
+    "Burhan Interchange housing amenities",
+    "PHATA approved facilities Wah",
+  ],
   openGraph: {
-    title: "World-Class Amenities | New City Paradise",
+    title: "World-Class Amenities | New City Paradise Wah",
     description:
-      "A luxurious living community in the heart of CPEC with Glow Park, Dancing Fountains, sports facilities, and international healthcare.",
+      "A luxurious living community on GT Road Burhan & CPEC with Glow Park, Dancing Fountains, sports facilities, and international healthcare.",
     images: [
       {
         url: "/images/amenities/glow-park.jpg",

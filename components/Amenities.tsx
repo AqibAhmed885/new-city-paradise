@@ -45,7 +45,7 @@ export default function Amenities() {
       <div className="container-pad max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-[10px] font-menu uppercase tracking-[0.28em] text-champagne font-semibold block mb-3">
-            Master-Planned Living &amp; Infrastructure
+            New City Paradise Wah · Master-Planned Infrastructure
           </span>
           <h2 className="text-[clamp(2.4rem,5vw,3.8rem)] font-serif text-ink leading-tight tracking-tight">
             Everything You Need,{" "}
@@ -54,7 +54,7 @@ export default function Amenities() {
             </span>
           </h2>
           <p className="mt-4 font-serif text-base sm:text-lg text-black/65 leading-relaxed">
-            Every practical detail of New City Paradise is integrated directly into the PHATA-approved masterplan — ensuring uninterrupted utilities, smart 24/7 security, and accessible recreation throughout the community.
+            Every practical detail of New City Paradise Wah is integrated directly into the PHATA-approved masterplan along the 330-ft GT Road &amp; Burhan Interchange M-1 — ensuring uninterrupted underground utilities, 24/7 smart security, and world-class recreation for all residential &amp; commercial plots.
           </p>
         </div>
 
