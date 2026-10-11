@@ -96,11 +96,11 @@ export default function About() {
       
             <h2
               data-intro
-              className="mt-6 text-[clamp(3.4rem,6vw,4rem)]  font-medium leading-[1] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(3.4rem,6vw,4rem)] font-medium leading-[1] tracking-[-0.04em]"
             >
-              Your Vission Drive 
+              Your Vision Drives 
               <br />
-              <span className="italic  text-champagne">Our Mission</span>
+              <span className="italic text-champagne">Our Mission</span>
             </h2>
 
             

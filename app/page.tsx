@@ -22,7 +22,6 @@ export default function Home() {
         <Hero />
         <Communities />
         <About />
-        <Stats />
         <PropertyShowcase />
         {/* <LifestyleGallery /> */}
         <Amenities />
