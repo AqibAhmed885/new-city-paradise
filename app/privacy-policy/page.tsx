@@ -5,9 +5,18 @@ import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy | New City Paradise",
   description:
     "Learn how New City Paradise collects, protects, uses, shares, and retains personal information.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+  openGraph: {
+    title: "Privacy Policy | New City Paradise",
+    description:
+      "Learn how New City Paradise collects, protects, uses, shares, and retains personal information.",
+    url: "https://newcityparadise.com/privacy-policy",
+  },
 };
 
 const policySections = [

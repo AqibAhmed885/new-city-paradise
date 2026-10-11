@@ -54,6 +54,12 @@ export default function Hero() {
         {/* Subtle dark gradient overlay at top for navbar readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/20" />
       </div>
+
+      {/* Accessible primary heading for search crawlers & screen readers */}
+      <div className="sr-only">
+        <h1>New City Paradise — PHATA-Approved Housing Society at Burhan Interchange &amp; CPEC Route</h1>
+        <p>A master-planned residential and commercial community on 330-ft GT Road near Wah Cantt, developed by the developers of New City Wah.</p>
+      </div>
     </section>
   );
 }

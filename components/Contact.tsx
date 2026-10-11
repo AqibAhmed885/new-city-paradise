@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import SectionHeading from "./SectionHeading";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 
 const fields = [
   { id: "name", label: "Your name", type: "text", autoComplete: "name" },
@@ -103,16 +104,18 @@ export default function Contact() {
               Visit our sales gallery
             </p>
             <address className="mt-4 not-italic">
-              <p className="font-serif text-2xl">New City Paradise</p>
+              <p className="font-serif text-2xl">{SITE_CONFIG.name}</p>
               <p className="mt-2 text-xs leading-6 text-white/55">
-                Main GT Road, near M-1 Motorway
-                <br />
-                Burhan Interchange, Punjab
+                {SITE_CONFIG.location.address}
               </p>
             </address>
             <div className="mt-5 flex gap-6 text-[9px] uppercase tracking-[0.16em] text-white/75">
-              <a className="link-line" href="tel:+92511111111">+92 51 111 111 111</a>
-              <a className="link-line" href="mailto:hello@newcityparadise.com">Email us</a>
+              <a className="link-line" href={`tel:${SITE_CONFIG.phoneTel}`}>
+                {SITE_CONFIG.phoneDisplay}
+              </a>
+              <a className="link-line" href={`mailto:${SITE_CONFIG.email}`}>
+                {SITE_CONFIG.email}
+              </a>
             </div>
           </div>
         </div>

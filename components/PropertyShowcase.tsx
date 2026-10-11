@@ -78,9 +78,9 @@ export default function PropertyShowcase() {
                 {/* <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-champagne">
                   {property.eyebrow}
                 </p> */}
-                <h1 className="display tracking-normal mt-5 text-[clamp(3.8rem,7.5vw,4rem)]  font-medium leading-[1]">
+                <h3 className="display tracking-normal mt-5 text-[clamp(3.8rem,7.5vw,4rem)] font-medium leading-[1]">
                   {property.title}
-                </h1>
+                </h3>
                 <p className="mt-5 max-w-lg text-base leading-7 text-black/50">
                   {property.description}
                 </p>

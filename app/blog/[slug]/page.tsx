@@ -23,12 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   return {
-    title: post.title,
+    title: `${post.title} | New City Paradise`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
+      url: `https://newcityparadise.com/blog/${post.slug}`,
       publishedTime: post.date,
       images: [post.image],
     },

@@ -1,6 +1,5 @@
 import BrandMark from "./BrandMark";
-
-const socials = ["Instagram", "Facebook", "YouTube", "LinkedIn"];
+import { SITE_CONFIG } from "@/lib/siteConfig";
 
 export default function Footer() {
   return (
@@ -22,9 +21,9 @@ export default function Footer() {
               <a className="link-line w-fit" href="/about">Our story</a>
               <a className="link-line w-fit" href="/masterplan">Masterplan</a>
               <a className="link-line w-fit" href="/#properties">Residences</a>
-              <a className="link-line w-fit" href="/#partners">Sales partners</a>
               <a className="link-line w-fit" href="/amenities">Amenities</a>
               <a className="link-line w-fit" href="/blog">Blog</a>
+              <a className="link-line w-fit" href="/contact">Sales Office</a>
             </nav>
           </div>
           <div>
@@ -32,11 +31,30 @@ export default function Footer() {
               Follow
             </p>
             <div className="mt-6 grid gap-3 text-sm text-white/55">
-              {socials.map((social) => (
-                <a key={social} className="link-line w-fit" href="/contact">
-                  {social}
-                </a>
-              ))}
+              <a
+                className="link-line w-fit"
+                href={SITE_CONFIG.socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+              </a>
+              <a
+                className="link-line w-fit"
+                href={SITE_CONFIG.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+              <a
+                className="link-line w-fit"
+                href={SITE_CONFIG.socials.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                YouTube
+              </a>
             </div>
           </div>
         </div>

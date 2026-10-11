@@ -18,10 +18,14 @@ export const metadata: Metadata = {
     "Burhan Interchange housing amenities",
     "PHATA approved facilities Wah",
   ],
+  alternates: {
+    canonical: "/amenities",
+  },
   openGraph: {
     title: "World-Class Amenities | New City Paradise Wah",
     description:
       "A luxurious living community on GT Road Burhan & CPEC with Glow Park, Dancing Fountains, sports facilities, and international healthcare.",
+    url: "https://newcityparadise.com/amenities",
     images: [
       {
         url: "/images/amenities/glow-park.jpg",

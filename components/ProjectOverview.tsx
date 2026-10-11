@@ -136,14 +136,14 @@ export default function ProjectOverview() {
             </div>
 
             <div className="grid gap-8 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
-              <h2
+              <h1
                 data-hero-reveal
                 className="display max-w-6xl text-[clamp(4rem,9vw,10rem)] leading-[0.8]"
               >
                 One vision,
                 <br />
                 <span className="italic text-champagne">every future.</span>
-              </h2>
+              </h1>
               <p data-hero-reveal className="max-w-md text-sm leading-7 text-white/65">
                 A connected masterplan bringing homes, commerce, education,
                 healthcare, recreation and generous green spaces into one

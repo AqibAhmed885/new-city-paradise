@@ -7,9 +7,18 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { blogPosts } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Journal",
+  title: "Latest News & Project Updates | New City Paradise",
   description:
-    "Read New City Paradise news, investment insights, location guides, and stories about modern community living.",
+    "Read the latest New City Paradise development updates, site progress, PHATA news, and real estate investment insights near Wah Cantt and Burhan.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "New City Paradise News & Articles",
+    description:
+      "Stay updated on development progress, project milestones, and masterplan news at New City Paradise.",
+    url: "https://newcityparadise.com/blog",
+  },
 };
 
 export default function BlogPage() {

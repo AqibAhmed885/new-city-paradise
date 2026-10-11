@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Source_Sans_3 } from "next/font/google";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import "./globals.css";
 
 const helvetica = localFont({
@@ -46,38 +48,76 @@ const azonix = localFont({
   fallback: ["Arial", "sans-serif"],
 });
 
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-source-sans",
+  display: "swap",
+});
+
+const isProduction =
+  process.env.VERCEL_ENV === "production" ||
+  process.env.NODE_ENV === "production" && !process.env.VERCEL_URL;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://newcityparadise.com"),
+  metadataBase: new URL(SITE_CONFIG.domain),
   title: {
-    default: "New City Paradise | Luxury Living, Reimagined",
+    default: "New City Paradise | PHATA-Approved Housing Society near Burhan Interchange",
     template: "%s | New City Paradise",
   },
   description:
-    "Official New City Paradise (New City Wah Phase 3) — a PHATA-approved 20,000 Kanal master-planned community on 330-ft GT Road, Burhan Interchange M-1, and CPEC Route. Explore residential & commercial plots for sale.",
+    "New City Paradise is a PHATA-approved master-planned community located on the 330-ft GT Road adjacent to Burhan Interchange (M-1) and the CPEC Route. Developed by the developers of New City Wah.",
   keywords: [
     "New City Paradise",
     "New City Paradise Wah",
-    "New City Wah",
-    "New City Paradise Burhan",
-    "New City Paradise CPEC",
-    "New City Phase 3",
+    "New City Wah Phase 3",
+    "Burhan Interchange",
     "PHATA approved housing society",
-    "plots for sale in New City Paradise",
-    "New City Paradise payment plan",
+    "CPEC Route",
+    "GT Road housing society",
     "residential plots Wah Cantt",
-    "commercial plots GT Road Burhan",
-    "New City Paradise Islamabad",
-    "New City Paradise Rawalpindi",
-    "Burhan Interchange M-1",
-    "3.5 Marla plot New City Paradise",
-    "5 Marla plot New City Paradise",
-    "Awami Block New City Paradise",
-    "luxury real estate Pakistan",
+    "commercial plots Burhan",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: isProduction
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+      },
   openGraph: {
-    title: "New City Paradise | PHATA Approved Living near Wah Cantt & CPEC",
-    description: "Master-planned residential & commercial plots on 330-ft GT Road adjacent to Burhan Interchange M-1. Developed by New City Wah developers.",
+    title: "New City Paradise | PHATA-Approved Community at Burhan Interchange",
+    description:
+      "Master-planned residential and commercial plots on 330-ft GT Road adjacent to Burhan Interchange M-1 and CPEC Route. Developed by New City Wah developers.",
+    url: SITE_CONFIG.domain,
+    siteName: SITE_CONFIG.name,
+    locale: "en_PK",
     type: "website",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 683,
+        height: 184,
+        alt: "New City Paradise Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "New City Paradise | PHATA-Approved Community at Burhan Interchange",
+    description:
+      "Master-planned residential and commercial plots on 330-ft GT Road adjacent to Burhan Interchange M-1 and CPEC Route.",
     images: ["/images/logo.png"],
   },
 };
@@ -88,18 +128,61 @@ export const viewport: Viewport = {
   themeColor: "#12110f",
 };
 
-import { Source_Sans_3 } from "next/font/google";
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_CONFIG.domain}/#organization`,
+        name: SITE_CONFIG.name,
+        legalName: SITE_CONFIG.legalName,
+        url: SITE_CONFIG.domain,
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_CONFIG.domain}/images/logo.png`,
+          width: 683,
+          height: 184,
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: SITE_CONFIG.phoneTel,
+          contactType: "customer service",
+          areaServed: "PK",
+          availableLanguage: ["English", "Urdu"],
+        },
+        sameAs: [
+          SITE_CONFIG.socials.facebook,
+          SITE_CONFIG.socials.instagram,
+          SITE_CONFIG.socials.youtube,
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_CONFIG.domain}/#website`,
+        url: SITE_CONFIG.domain,
+        name: SITE_CONFIG.name,
+        publisher: {
+          "@id": `${SITE_CONFIG.domain}/#organization`,
+        },
+        inLanguage: "en-PK",
+      },
+    ],
+  };
+
   return (
-    <html lang="en" className={`${helvetica.variable} ${azonix.variable} ${sourceSans.variable}`}>
+    <html
+      lang="en"
+      className={`${helvetica.variable} ${azonix.variable} ${sourceSans.variable}`}
+    >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="font-serif">{children}</body>
     </html>
   );

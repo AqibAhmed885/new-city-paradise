@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { AMENITIES_DATA, AmenityItem } from "@/lib/amenitiesData";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 
 const categories = [
   "All Amenities",
@@ -343,7 +344,7 @@ export default function AmenitiesClient() {
               Book An On-Site Visit
             </Link>
             <a
-              href="https://wa.me/1234567890"
+              href={SITE_CONFIG.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3.5 border border-white/30 text-white text-xs font-menu uppercase tracking-widest hover:bg-white hover:text-black transition-colors"

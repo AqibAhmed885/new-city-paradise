@@ -5,9 +5,18 @@ import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contact Sales Office & Location | New City Paradise",
   description:
-    "Contact New City Paradise, speak with a property consultant, or arrange a visit to our sales gallery.",
+    "Get in touch with New City Paradise sales gallery on Main GT Road near Burhan Interchange (M-1). Connect via phone, WhatsApp, or arrange an on-site visit.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact New City Paradise | Sales Office & Location",
+    description:
+      "Speak with authorized property consultants or visit our site office at Burhan Interchange, GT Road.",
+    url: "https://newcityparadise.com/contact",
+  },
 };
 
 export default function ContactPage() {
