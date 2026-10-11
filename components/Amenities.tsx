@@ -36,7 +36,7 @@ export default function Amenities() {
   }, []);
 
   return (
-    <section ref={root} id="amenities" className="bg-gray-100 py-14 sm:py-20">
+    <section ref={root} id="amenities" className="relative z-20 bg-gray-100 py-14 sm:py-20">
       <div className="container-pad">
         <SectionHeading
           eyebrow="Designed around you"

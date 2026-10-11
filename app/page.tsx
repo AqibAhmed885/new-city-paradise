@@ -19,9 +19,8 @@ export default function Home() {
       <main className="overflow-hidden">
         <Hero />
         <Communities />
-        <PropertyShowcase />
-        {/* <LifestyleGallery /> */}
         <Amenities />
+        <PropertyShowcase />
         <Investment />
         <Testimonials />
         <HomeCTA />
