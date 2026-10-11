@@ -64,28 +64,30 @@ export default function Communities() {
     if (!containerRef.current) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    // Pinning / stacking animation on large viewports (desktop & tablet)
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 1024px)", () => {
       const cards = gsap.utils.toArray<HTMLElement>("[data-stack-card]");
 
       cards.forEach((card, i) => {
-        // Sticky Pinning for each card as user scrolls
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top top",
-          pin: true,
-          pinSpacing: false,
-          end: () => `+=${card.offsetHeight}`,
-        });
-
-        // Scale down, dim, and subtle blur the previous card when the next card slides over it
+        // Sticky Pinning only for cards before the last one
+        // The last card does NOT pin and natural scroll flows directly into the next section
         if (i < cards.length - 1) {
           const nextCard = cards[i + 1];
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top",
+            pin: true,
+            pinSpacing: false,
+            endTrigger: nextCard,
+            end: "top top",
+          });
+
+          // Subtle scale and soft brightness dim as the next card stacks over it
           gsap.to(card.querySelector("[data-card-inner]"), {
             scale: 0.94,
-            filter: "brightness(0.75)",
+            filter: "brightness(0.8)",
             ease: "none",
             scrollTrigger: {
               trigger: nextCard,
@@ -102,105 +104,110 @@ export default function Communities() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative bg-[#0d0c0a] w-full">
-      {communities.map((community, index) => (
-        <div
-          key={community.id}
-          data-stack-card
-          className="min-h-screen w-full flex items-center justify-center sticky top-0 overflow-hidden"
-          style={{ zIndex: index + 1 }}
-        >
+    <section ref={containerRef} className="relative bg-[#0d0c0a] w-full z-10">
+      {communities.map((community, index) => {
+        const isLast = index === communities.length - 1;
+        return (
           <div
-            data-card-inner
-            className={`w-full min-h-screen ${community.theme} flex items-center py-20 lg:py-24 shadow-[0_-15px_40px_rgba(0,0,0,0.18)] transition-all duration-300 origin-top`}
+            key={community.id}
+            data-stack-card
+            className={`min-h-screen w-full flex items-center justify-center overflow-hidden ${
+              isLast ? "relative" : "sticky top-0"
+            }`}
+            style={{ zIndex: index + 1 }}
           >
-            <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-16">
-              <div
-                className={`flex flex-col ${
-                  community.reverse ? "lg:flex-row-reverse" : "lg:flex-row"
-                } items-center gap-12 lg:gap-20`}
-              >
-                {/* 4-Image Luxury Mosaic Grid */}
-                <div className="w-full lg:w-3/5 grid grid-cols-3 gap-2 sm:gap-3">
-                  <div className="col-span-2 aspect-[4/3] relative overflow-hidden group shadow-md">
-                    <Image
-                      src={community.images[0]}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                      alt={`${community.title} exterior view`}
-                    />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                  </div>
-                  <div className="col-span-1 aspect-[4/3] relative overflow-hidden group shadow-md">
-                    <Image
-                      src={community.images[1]}
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 20vw"
-                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                      alt={`${community.title} interior detail`}
-                    />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                  </div>
-                  <div className="col-span-1 aspect-[3/4] relative overflow-hidden group shadow-md">
-                    <Image
-                      src={community.images[2]}
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 20vw"
-                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                      alt={`${community.title} architecture perspective`}
-                    />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                  </div>
-                  <div className="col-span-2 aspect-[16/10] relative overflow-hidden group shadow-md">
-                    <Image
-                      src={community.images[3]}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                      alt={`${community.title} panoramic view`}
-                    />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                  </div>
-                </div>
-
-                {/* Editorial Content Block */}
-                <div className="w-full lg:w-2/5 flex flex-col items-start max-w-lg">
-                  {/* Category Tracker */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-[10px] tracking-[0.28em] uppercase font-menu font-semibold text-champagne">
-                      0{index + 1} / 03
-                    </span>
-                    <span className="w-6 h-[1px] bg-champagne/40" />
-                    <span className="text-[10px] tracking-[0.24em] uppercase font-menu text-gray-500 font-semibold">
-                      {community.tag}
-                    </span>
+            <div
+              data-card-inner
+              className={`w-full min-h-screen ${community.theme} flex items-center py-20 lg:py-24 shadow-[0_-15px_40px_rgba(0,0,0,0.18)] transition-all duration-300 origin-top`}
+            >
+              <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-16">
+                <div
+                  className={`flex flex-col ${
+                    community.reverse ? "lg:flex-row-reverse" : "lg:flex-row"
+                  } items-center gap-12 lg:gap-20`}
+                >
+                  {/* 4-Image Luxury Mosaic Grid */}
+                  <div className="w-full lg:w-3/5 grid grid-cols-3 gap-2 sm:gap-3">
+                    <div className="col-span-2 aspect-[4/3] relative overflow-hidden group shadow-md">
+                      <Image
+                        src={community.images[0]}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                        alt={`${community.title} exterior view`}
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                    </div>
+                    <div className="col-span-1 aspect-[4/3] relative overflow-hidden group shadow-md">
+                      <Image
+                        src={community.images[1]}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 20vw"
+                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                        alt={`${community.title} interior detail`}
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                    </div>
+                    <div className="col-span-1 aspect-[3/4] relative overflow-hidden group shadow-md">
+                      <Image
+                        src={community.images[2]}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 20vw"
+                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                        alt={`${community.title} architecture perspective`}
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                    </div>
+                    <div className="col-span-2 aspect-[16/10] relative overflow-hidden group shadow-md">
+                      <Image
+                        src={community.images[3]}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                        alt={`${community.title} panoramic view`}
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                    </div>
                   </div>
 
-                  <h2 className="text-4xl lg:text-[46px] leading-[1.08] font-serif text-ink mb-6 tracking-tight">
-                    {community.title}
-                  </h2>
+                  {/* Editorial Content Block */}
+                  <div className="w-full lg:w-2/5 flex flex-col items-start max-w-lg">
+                    {/* Category Tracker */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="text-[10px] tracking-[0.28em] uppercase font-menu font-semibold text-champagne">
+                        0{index + 1} / 03
+                      </span>
+                      <span className="w-6 h-[1px] bg-champagne/40" />
+                      <span className="text-[10px] tracking-[0.24em] uppercase font-menu text-gray-500 font-semibold">
+                        {community.tag}
+                      </span>
+                    </div>
 
-                  <p className="text-[14px] leading-relaxed text-gray-600 mb-10 font-serif">
-                    {community.description}
-                  </p>
+                    <h2 className="text-4xl lg:text-[46px] leading-[1.08] font-serif text-ink mb-6 tracking-tight">
+                      {community.title}
+                    </h2>
 
-                  <Link
-                    href={`/masterplan`}
-                    className="group flex items-center gap-4 text-[11px] tracking-[0.24em] uppercase font-menu font-semibold text-ink"
-                  >
-                    <span className="w-8 h-[1px] bg-ink group-hover:w-16 transition-all duration-300 ease-out"></span>
-                    DISCOVER MORE
-                    <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">
-                      &rarr;
-                    </span>
-                  </Link>
+                    <p className="text-[14px] leading-relaxed text-gray-600 mb-10 font-serif">
+                      {community.description}
+                    </p>
+
+                    <Link
+                      href={`/masterplan`}
+                      className="group flex items-center gap-4 text-[11px] tracking-[0.24em] uppercase font-menu font-semibold text-ink"
+                    >
+                      <span className="w-8 h-[1px] bg-ink group-hover:w-16 transition-all duration-300 ease-out"></span>
+                      DISCOVER MORE
+                      <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">
+                        &rarr;
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </section>
   );
 }

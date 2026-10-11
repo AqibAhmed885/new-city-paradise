@@ -37,7 +37,7 @@ export default function PropertyShowcase() {
   }, []);
 
   return (
-    <section ref={root} id="properties" className="bg-white py-28 sm:py-20">
+    <section ref={root} id="properties" className="relative z-20 bg-white py-28 sm:py-20">
       <div className="container-pad">
         <SectionHeading
           eyebrow="Curated residences"
