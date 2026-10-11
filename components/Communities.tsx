@@ -1,12 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGsap } from "@/hooks/useGsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const communities = [
   {
     id: "residential",
     tag: "PREMIUM LIVING",
     title: "Residential Plots",
-    description: "Experience a lifestyle of unparalleled luxury and comfort. Our residential plots are thoughtfully designed to provide the perfect canvas for your dream home, surrounded by lush landscapes and modern amenities.",
+    description:
+      "Experience a lifestyle of unparalleled luxury and comfort. Our residential plots are thoughtfully designed to provide the perfect canvas for your dream home, surrounded by lush landscapes and modern amenities.",
     images: [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600&auto=format&fit=crop",
@@ -14,12 +23,14 @@ const communities = [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
     ],
     reverse: false,
+    theme: "bg-[#F4F3EE]",
   },
   {
     id: "commercial",
     tag: "BUSINESS HUB",
     title: "Commercial Zone",
-    description: "Strategically located to maximize visibility and foot traffic, our commercial plots offer the perfect opportunity for businesses to thrive in a rapidly growing, high-value community.",
+    description:
+      "Strategically located to maximize visibility and foot traffic, our commercial plots offer the perfect opportunity for businesses to thrive in a rapidly growing, high-value community along the main boulevard.",
     images: [
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop",
@@ -27,12 +38,14 @@ const communities = [
       "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop",
     ],
     reverse: true,
+    theme: "bg-[#ECEAE4]",
   },
   {
     id: "villas",
     tag: "EXCLUSIVE HOMES",
     title: "Awami Villas",
-    description: "Discover the perfect blend of affordability and elegance. Awami Villas offer beautifully constructed, move-in ready homes designed for modern families seeking a secure and vibrant neighborhood.",
+    description:
+      "Discover the perfect blend of affordability and elegance. Awami Villas offer beautifully constructed, move-in ready homes designed for modern families seeking a secure and vibrant neighborhood.",
     images: [
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
@@ -40,56 +53,154 @@ const communities = [
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop",
     ],
     reverse: false,
+    theme: "bg-[#F7F6F2]",
   },
 ];
 
 export default function Communities() {
-  return (
-    <section className="bg-[#F3F2EE] py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col gap-32 lg:gap-48">
-        {communities.map((community, index) => (
-          <div 
-            key={community.id} 
-            className={`flex flex-col ${community.reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24`}
-          >
-            {/* Image Grid */}
-            <div className="w-full lg:w-3/5 grid grid-cols-3 gap-2">
-              <div className="col-span-2 aspect-[4/3] relative overflow-hidden group">
-                <Image src={community.images[0]} fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt={`${community.title} view 1`} />
-              </div>
-              <div className="col-span-1 aspect-[4/3] relative overflow-hidden group">
-                <Image src={community.images[1]} fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt={`${community.title} view 2`} />
-              </div>
-              <div className="col-span-1 aspect-[3/4] relative overflow-hidden group">
-                <Image src={community.images[2]} fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt={`${community.title} view 3`} />
-              </div>
-              <div className="col-span-2 aspect-[16/10] relative overflow-hidden group">
-                <Image src={community.images[3]} fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt={`${community.title} view 4`} />
-              </div>
-            </div>
+  const containerRef = useRef<HTMLElement>(null);
 
-            {/* Content Content */}
-            <div className="w-full lg:w-2/5 flex flex-col items-start max-w-md">
-              <span className="text-[9px] tracking-[0.2em] uppercase font-sans text-gray-500 font-semibold mb-6">
-                {community.tag}
-              </span>
-              <h2 className="text-4xl lg:text-[44px] leading-tight font-serif text-ink mb-8">
-                {community.title}
-              </h2>
-              <p className="text-[13px] leading-relaxed text-gray-600 mb-12">
-                {community.description}
-              </p>
-              <Link 
-                href={`/${community.id}`} 
-                className="group flex items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-sans font-semibold text-ink"
+  useGsap(() => {
+    if (!containerRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Pinning / stacking animation on large viewports (desktop & tablet)
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+      const cards = gsap.utils.toArray<HTMLElement>("[data-stack-card]");
+
+      cards.forEach((card, i) => {
+        // Sticky Pinning for each card as user scrolls
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top top",
+          pin: true,
+          pinSpacing: false,
+          end: () => `+=${card.offsetHeight}`,
+        });
+
+        // Scale down, dim, and subtle blur the previous card when the next card slides over it
+        if (i < cards.length - 1) {
+          const nextCard = cards[i + 1];
+          gsap.to(card.querySelector("[data-card-inner]"), {
+            scale: 0.94,
+            filter: "brightness(0.75)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: nextCard,
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
+            },
+          });
+        }
+      });
+    });
+
+    return () => mm.revert();
+  }, []);
+
+  return (
+    <section ref={containerRef} className="relative bg-[#0d0c0a] w-full">
+      {communities.map((community, index) => (
+        <div
+          key={community.id}
+          data-stack-card
+          className="min-h-screen w-full flex items-center justify-center sticky top-0 overflow-hidden"
+          style={{ zIndex: index + 1 }}
+        >
+          <div
+            data-card-inner
+            className={`w-full min-h-screen ${community.theme} flex items-center py-20 lg:py-24 shadow-[0_-15px_40px_rgba(0,0,0,0.18)] transition-all duration-300 origin-top`}
+          >
+            <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-16">
+              <div
+                className={`flex flex-col ${
+                  community.reverse ? "lg:flex-row-reverse" : "lg:flex-row"
+                } items-center gap-12 lg:gap-20`}
               >
-                <span className="w-8 h-[1px] bg-ink group-hover:w-16 transition-all duration-300 ease-out"></span>
-                DISCOVER MORE
-              </Link>
+                {/* 4-Image Luxury Mosaic Grid */}
+                <div className="w-full lg:w-3/5 grid grid-cols-3 gap-2 sm:gap-3">
+                  <div className="col-span-2 aspect-[4/3] relative overflow-hidden group shadow-md">
+                    <Image
+                      src={community.images[0]}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      alt={`${community.title} exterior view`}
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                  </div>
+                  <div className="col-span-1 aspect-[4/3] relative overflow-hidden group shadow-md">
+                    <Image
+                      src={community.images[1]}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 20vw"
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      alt={`${community.title} interior detail`}
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                  </div>
+                  <div className="col-span-1 aspect-[3/4] relative overflow-hidden group shadow-md">
+                    <Image
+                      src={community.images[2]}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 20vw"
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      alt={`${community.title} architecture perspective`}
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                  </div>
+                  <div className="col-span-2 aspect-[16/10] relative overflow-hidden group shadow-md">
+                    <Image
+                      src={community.images[3]}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      alt={`${community.title} panoramic view`}
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                  </div>
+                </div>
+
+                {/* Editorial Content Block */}
+                <div className="w-full lg:w-2/5 flex flex-col items-start max-w-lg">
+                  {/* Category Tracker */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-[10px] tracking-[0.28em] uppercase font-menu font-semibold text-champagne">
+                      0{index + 1} / 03
+                    </span>
+                    <span className="w-6 h-[1px] bg-champagne/40" />
+                    <span className="text-[10px] tracking-[0.24em] uppercase font-menu text-gray-500 font-semibold">
+                      {community.tag}
+                    </span>
+                  </div>
+
+                  <h2 className="text-4xl lg:text-[46px] leading-[1.08] font-serif text-ink mb-6 tracking-tight">
+                    {community.title}
+                  </h2>
+
+                  <p className="text-[14px] leading-relaxed text-gray-600 mb-10 font-serif">
+                    {community.description}
+                  </p>
+
+                  <Link
+                    href={`/masterplan`}
+                    className="group flex items-center gap-4 text-[11px] tracking-[0.24em] uppercase font-menu font-semibold text-ink"
+                  >
+                    <span className="w-8 h-[1px] bg-ink group-hover:w-16 transition-all duration-300 ease-out"></span>
+                    DISCOVER MORE
+                    <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">
+                      &rarr;
+                    </span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </section>
   );
 }
