@@ -6,7 +6,7 @@ import BrandMark from "./BrandMark";
 import Link from "next/link";
 
 const links = [
-  ["Story", "/#about"],
+  ["Story", "/about"],
   ["Masterplan", "/masterplan"],
   ["Residences", "/#properties"],
   ["Amenities", "/amenities"],

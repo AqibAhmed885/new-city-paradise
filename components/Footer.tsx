@@ -19,7 +19,7 @@ export default function Footer() {
               Explore
             </p>
             <nav className="mt-6 grid gap-3 text-sm text-white/55" aria-label="Footer navigation">
-              <a className="link-line w-fit" href="/#about">Our story</a>
+              <a className="link-line w-fit" href="/about">Our story</a>
               <a className="link-line w-fit" href="/masterplan">Masterplan</a>
               <a className="link-line w-fit" href="/#properties">Residences</a>
               <a className="link-line w-fit" href="/#partners">Sales partners</a>

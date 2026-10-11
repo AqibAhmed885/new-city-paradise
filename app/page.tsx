@@ -1,12 +1,10 @@
 import dynamic from "next/dynamic";
-import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Communities from "@/components/Communities";
 import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
-import Stats from "@/components/Stats";
 
 const PropertyShowcase = dynamic(() => import("@/components/PropertyShowcase"));
 const LifestyleGallery = dynamic(() => import("@/components/LifestyleGallery"));
@@ -21,7 +19,6 @@ export default function Home() {
       <main className="overflow-hidden">
         <Hero />
         <Communities />
-        <About />
         <PropertyShowcase />
         {/* <LifestyleGallery /> */}
         <Amenities />
