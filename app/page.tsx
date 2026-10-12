@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HeroIntro from "@/components/HeroIntro";
 import Communities from "@/components/Communities";
+import FeaturedDistricts from "@/components/FeaturedDistricts";
 import LocationMapSection from "@/components/LocationMapSection";
 import BookingAndFaq from "@/components/BookingAndFaq";
 import HomeCTA from "@/components/HomeCTA";
@@ -27,6 +28,9 @@ export default function Home() {
 
         {/* 3. Verified Residential & Commercial Plot Options (3.5, 5, 10 Marla, 1 Kanal) */}
         <Communities />
+
+        {/* 4. L Prime Block & Water Front District Featured Showcase */}
+        <FeaturedDistricts />
 
         {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
         <AzimutePerspectiveExperience />
