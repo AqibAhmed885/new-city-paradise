@@ -10,7 +10,6 @@ import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
 
-const PropertyShowcase = dynamic(() => import("@/components/PropertyShowcase"));
 const AzimutePerspectiveExperience = dynamic(
   () => import("@/components/AzimutePerspectiveExperience")
 );
@@ -35,10 +34,7 @@ export default function Home() {
         {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
         <AzimutePerspectiveExperience />
 
-        {/* 6. Proven Developer Delivered Projects Portfolio */}
-        <PropertyShowcase />
-
-        {/* 7. Strategic Position & Minutes Away from Major Landmarks Map Section */}
+        {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
 
         {/* 8. Booking Steps & Verified FAQs */}

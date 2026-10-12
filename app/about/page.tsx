@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import AboutClient from "@/components/AboutClient";
+import PropertyShowcase from "@/components/PropertyShowcase";
 
 export const metadata: Metadata = {
   title: "About Us | New City Paradise",
@@ -33,6 +34,7 @@ export default function AboutPage() {
       <Navbar solid={false} />
       <main className="overflow-hidden">
         <AboutClient />
+        <PropertyShowcase />
       </main>
       <Footer />
     </SmoothScroll>

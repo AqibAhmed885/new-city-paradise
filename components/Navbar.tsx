@@ -7,6 +7,7 @@ import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 
 const links = [
+  ["About Us", "/about"],
   ["Location", "/#location-connectivity"],
   ["Plots & Plans", "/#plots-overview"],
   ["Masterplan", "/masterplan"],
