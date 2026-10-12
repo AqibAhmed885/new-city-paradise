@@ -103,15 +103,15 @@ export default function Stats() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between pb-12 border-b border-black/10 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-[#1b3d2f]/30 bg-[#1b3d2f]/5 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#1b3d2f] animate-pulse" />
-              <span className="text-[10px] font-menu uppercase tracking-[0.24em] text-[#1b3d2f] font-semibold">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-champagne/40 bg-champagne/10 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
+              <span className="text-[10px] font-menu uppercase tracking-[0.24em] text-champagne font-semibold">
                 Verified Project Fundamentals
               </span>
             </div>
-            <h2 className="text-[clamp(2.4rem,5vw,3.8rem)] font-light leading-[1.1] uppercase tracking-tight font-sans text-ink">
+            <h2 className="font-serif text-[clamp(2.3rem,4.6vw,3.6rem)] font-normal leading-[1.08] tracking-tight uppercase text-ink">
               <span data-heading-reveal className="block">Legal Approvals &amp;</span>
-              <span data-heading-reveal className="block italic text-[#1b3d2f] font-serif lowercase first-letter:uppercase">
+              <span data-heading-reveal className="block italic text-champagne font-light lowercase first-letter:uppercase">
                 Unmatched Location
               </span>
             </h2>
@@ -128,14 +128,14 @@ export default function Stats() {
             <article
               data-stat-card
               key={item.title}
-              className="group relative flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-[#1b3d2f]/60 hover:shadow-xl"
+              className="group relative flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-champagne/60 hover:shadow-xl"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#1b3d2f]/5 border border-[#1b3d2f]/15 flex items-center justify-center group-hover:border-[#1b3d2f]/40 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-champagne/10 border border-champagne/20 flex items-center justify-center group-hover:border-champagne/50 transition-colors">
                     {item.icon}
                   </div>
-                  <span className="text-[9px] font-menu uppercase tracking-widest text-[#1b3d2f] bg-[#1b3d2f]/10 px-2.5 py-1 rounded-md border border-[#1b3d2f]/20 font-semibold">
+                  <span className="text-[9px] font-menu uppercase tracking-widest text-champagne bg-champagne/10 px-2.5 py-1 rounded-md border border-champagne/20 font-semibold">
                     {item.tag}
                   </span>
                 </div>
@@ -144,7 +144,7 @@ export default function Stats() {
                   {item.code}
                 </p>
 
-                <h3 className="text-xl sm:text-2xl font-sans uppercase font-light text-ink tracking-tight leading-snug group-hover:text-[#1b3d2f] transition-colors">
+                <h3 className="text-xl sm:text-2xl font-serif font-normal text-ink tracking-tight leading-snug group-hover:text-champagne transition-colors">
                   {item.title}
                 </h3>
 
@@ -153,9 +153,9 @@ export default function Stats() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-5 border-t border-black/10 flex items-center justify-between text-[10px] font-menu uppercase tracking-widest text-black/50 group-hover:text-[#1b3d2f] transition-colors">
+              <div className="mt-8 pt-5 border-t border-black/10 flex items-center justify-between text-[10px] font-menu uppercase tracking-widest text-black/50 group-hover:text-champagne transition-colors">
                 <span>Verified Authority</span>
-                <span className="text-[#1b3d2f] group-hover:translate-x-1 transition-transform">&rarr;</span>
+                <span className="text-champagne group-hover:translate-x-1 transition-transform">&rarr;</span>
               </div>
             </article>
           ))}
@@ -164,14 +164,14 @@ export default function Stats() {
         {/* Bottom Banner with Masterplan Link */}
         <div className="mt-14 rounded-2xl border border-black/10 bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-center gap-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1b3d2f] shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-champagne shrink-0" />
             <p className="font-serif text-base sm:text-lg text-black/80 font-light">
               Explore plot categories across Awami Block, 3.5 &amp; 5 Marla, and commercial avenues.
             </p>
           </div>
           <Link
             href="/masterplan"
-            className="shrink-0 inline-flex items-center gap-3 px-6 py-3 bg-[#1b3d2f] text-white text-[11px] font-menu uppercase tracking-widest font-medium hover:bg-[#12281f] transition-colors rounded-full"
+            className="shrink-0 inline-flex items-center gap-3 px-6 py-3 bg-ink text-white text-[11px] font-menu uppercase tracking-widest font-medium hover:bg-champagne transition-colors rounded-full"
           >
             Explore Complete Masterplan &rarr;
           </Link>

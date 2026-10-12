@@ -60,12 +60,12 @@ export default function BookingAndFaq() {
         {/* Booking Process Block */}
         <div className="mb-20">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-            <p className="eyebrow text-[#1b3d2f] text-[10px] sm:text-xs uppercase tracking-[0.28em] font-semibold">
+            <p className="eyebrow text-champagne text-[10px] sm:text-xs uppercase tracking-[0.28em] font-semibold">
               Transparent Guidance
             </p>
             <h2 className="font-serif text-[clamp(2rem,4vw,3.25rem)] leading-[1.08] tracking-tight text-ink mt-2">
               Plot Booking &amp;{" "}
-              <span className="italic text-[#1b3d2f]">Inquiry Process.</span>
+              <span className="italic text-champagne font-light">Inquiry Process.</span>
             </h2>
             <p className="mt-3 text-sm sm:text-base text-black/70 font-serif leading-relaxed">
               Straightforward, legally verified steps to inquire and book residential or commercial plots directly with authorized representatives.
@@ -97,7 +97,7 @@ export default function BookingAndFaq() {
         {/* FAQs Accordion Block */}
         <div className="max-w-4xl mx-auto pt-10 border-t border-black/10">
           <div className="text-center mb-10">
-            <p className="eyebrow text-[#1b3d2f] text-[10px] sm:text-xs uppercase tracking-[0.28em] font-semibold">
+            <p className="eyebrow text-champagne text-[10px] sm:text-xs uppercase tracking-[0.28em] font-semibold">
               Buyer Due Diligence
             </p>
             <h2 className="font-serif text-[clamp(1.8rem,3.5vw,2.75rem)] leading-[1.1] text-ink mt-2">
@@ -137,8 +137,8 @@ export default function BookingAndFaq() {
           </div>
 
           {/* Need assistance CTA */}
-          <div className="mt-12 text-center p-6 rounded-2xl bg-[#1b3d2f]/5 border border-[#1b3d2f]/15">
-            <p className="text-xs uppercase tracking-wider font-menu text-[#1b3d2f] font-semibold">
+          <div className="mt-12 text-center p-6 rounded-2xl bg-white border border-champagne/30 shadow-sm">
+            <p className="text-xs uppercase tracking-wider font-menu text-champagne font-semibold">
               Need Verification or Individual Plot Assistance?
             </p>
             <p className="text-sm font-serif text-black/70 mt-1">
@@ -147,7 +147,7 @@ export default function BookingAndFaq() {
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <a
                 href={`tel:${SITE_CONFIG.phoneTel}`}
-                className="px-5 py-2.5 rounded-full bg-[#1b3d2f] text-white text-xs font-menu uppercase tracking-wider hover:bg-[#12281f] transition-colors"
+                className="px-5 py-2.5 rounded-full bg-ink text-white text-xs font-menu uppercase tracking-wider hover:bg-champagne transition-colors"
               >
                 Call {SITE_CONFIG.phoneDisplay}
               </a>
@@ -155,7 +155,7 @@ export default function BookingAndFaq() {
                 href={SITE_CONFIG.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-2.5 rounded-full border border-champagne bg-white text-ink text-xs font-menu uppercase tracking-wider hover:bg-champagne hover:text-white transition-colors"
+                className="px-5 py-2.5 rounded-full border border-champagne bg-champagne/10 text-ink text-xs font-menu uppercase tracking-wider hover:bg-champagne hover:text-white transition-colors"
               >
                 Direct WhatsApp
               </a>

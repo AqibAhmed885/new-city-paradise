@@ -14,7 +14,6 @@ const PropertyShowcase = dynamic(() => import("@/components/PropertyShowcase"));
 const AzimutePerspectiveExperience = dynamic(
   () => import("@/components/AzimutePerspectiveExperience")
 );
-const HomeBlog = dynamic(() => import("@/components/HomeBlog"));
 
 export default function Home() {
   return (
@@ -42,13 +41,10 @@ export default function Home() {
         {/* 7. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
 
-        {/* 8. Real, Dated Development Updates */}
-        <HomeBlog />
-
-        {/* 9. Booking Steps & Verified FAQs */}
+        {/* 8. Booking Steps & Verified FAQs */}
         <BookingAndFaq />
 
-        {/* 10. Direct Contact & Confirmed Sales CTA */}
+        {/* 9. Direct Contact & Confirmed Sales CTA */}
         <HomeCTA />
       </main>
       <Footer />

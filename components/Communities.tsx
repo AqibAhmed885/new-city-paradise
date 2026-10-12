@@ -196,9 +196,9 @@ export default function Communities() {
                       {community.title}
                     </h2>
 
-                    <div className="mb-6 inline-flex items-center gap-2 rounded-md bg-[#1b3d2f]/10 px-3 py-1 text-xs font-menu font-medium text-[#1b3d2f]">
-                      <span>Plot sizes:</span>
-                      <strong className="font-semibold">{community.sizes}</strong>
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-md bg-champagne/15 border border-champagne/30 px-3 py-1 text-xs font-menu font-medium text-ink">
+                      <span className="text-black/60">Plot sizes:</span>
+                      <strong className="font-semibold text-ink">{community.sizes}</strong>
                     </div>
 
                     <p className="text-[14px] leading-relaxed text-gray-600 mb-8 font-serif">

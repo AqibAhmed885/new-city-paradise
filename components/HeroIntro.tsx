@@ -10,9 +10,9 @@ export default function HeroIntro() {
         <div className="flex flex-col items-center text-center">
           
           {/* Eyebrow tag */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#1b3d2f]/20 bg-[#1b3d2f]/5 text-[#1b3d2f] mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#1b3d2f] animate-pulse" />
-            <span className="text-[10px] sm:text-xs font-menu uppercase tracking-[0.26em] font-semibold">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-champagne/40 bg-champagne/10 text-ink mb-6">
+            <span className="w-2 h-2 rounded-full bg-champagne animate-pulse" />
+            <span className="text-[10px] sm:text-xs font-menu uppercase tracking-[0.26em] font-semibold text-champagne">
               PHATA NOC Approved · DG-PHATA/W-I/PHS/61/2022
             </span>
           </div>
@@ -20,7 +20,9 @@ export default function HeroIntro() {
           {/* Canonical Homepage H1 */}
           <h1 className="font-serif text-[clamp(2.1rem,4.6vw,3.75rem)] leading-[1.08] tracking-tight text-ink max-w-5xl">
             New City Paradise Wah —{" "}
-            <span className="italic text-[#1b3d2f] font-light">Residential &amp; Commercial Plots</span>{" "}
+            <span className="italic font-serif font-light text-champagne lowercase first-letter:uppercase">
+              Residential &amp; Commercial Plots
+            </span>{" "}
             near Burhan Interchange.
           </h1>
 
@@ -33,14 +35,14 @@ export default function HeroIntro() {
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="#plots-overview"
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#1b3d2f] text-white text-xs font-menu uppercase tracking-widest hover:bg-[#12281f] transition-all shadow-md"
+              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-ink text-white text-xs font-menu uppercase tracking-widest hover:bg-champagne hover:text-white transition-all shadow-md"
             >
               <span>Explore Plot Options</span>
               <span>↓</span>
             </Link>
             <Link
               href="#location-connectivity"
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#1b3d2f]/30 bg-white text-ink text-xs font-menu uppercase tracking-widest hover:bg-[#1b3d2f]/10 transition-all"
+              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-black/20 bg-white text-ink text-xs font-menu uppercase tracking-widest hover:bg-black/5 transition-all"
             >
               <span>Location &amp; Routes</span>
               <span>→</span>
@@ -58,7 +60,7 @@ export default function HeroIntro() {
 
           {/* Verified Quick Highlights Grid */}
           <div className="mt-14 w-full grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-black/10 text-left">
-            <div className="border-l-2 border-[#1b3d2f] pl-4">
+            <div className="border-l-2 border-champagne pl-4">
               <span className="text-[10px] font-menu uppercase tracking-wider text-black/50 block">PHATA Approved</span>
               <p className="font-serif text-lg sm:text-xl font-medium text-ink mt-0.5">4,256+ Kanal</p>
               <p className="text-[11px] text-black/60 font-serif mt-0.5">NOC: 61/2022</p>
@@ -68,7 +70,7 @@ export default function HeroIntro() {
               <p className="font-serif text-lg sm:text-xl font-medium text-ink mt-0.5">330-Ft Boulevard</p>
               <p className="text-[11px] text-black/60 font-serif mt-0.5">Direct GT Road access</p>
             </div>
-            <div className="border-l-2 border-[#1b3d2f] pl-4">
+            <div className="border-l-2 border-champagne pl-4">
               <span className="text-[10px] font-menu uppercase tracking-wider text-black/50 block">Motorway Junction</span>
               <p className="font-serif text-lg sm:text-xl font-medium text-ink mt-0.5">0 KM Burhan</p>
               <p className="text-[11px] text-black/60 font-serif mt-0.5">M-1 &amp; CPEC corridor</p>

@@ -11,7 +11,6 @@ const links = [
   ["Plots & Plans", "/#plots-overview"],
   ["Masterplan", "/masterplan"],
   ["Amenities", "/amenities"],
-  ["Updates", "/blog"],
   ["FAQs", "/#faqs"],
   ["Contact", "/contact"],
 ];
