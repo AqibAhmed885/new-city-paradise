@@ -18,11 +18,11 @@ export default function Footer() {
               Explore
             </p>
             <nav className="mt-6 grid gap-3 text-sm text-white/55" aria-label="Footer navigation">
-              <a className="link-line w-fit" href="/about">Our story</a>
+              <a className="link-line w-fit" href="/about">Our Story</a>
               <a className="link-line w-fit" href="/masterplan">Masterplan</a>
-              <a className="link-line w-fit" href="/#properties">Residences</a>
+              <a className="link-line w-fit" href="/#plots-overview">Plots &amp; Plans</a>
               <a className="link-line w-fit" href="/amenities">Amenities</a>
-              <a className="link-line w-fit" href="/blog">Blog</a>
+              <a className="link-line w-fit" href="/blog">Development Updates</a>
               <a className="link-line w-fit" href="/contact">Sales Office</a>
             </nav>
           </div>
@@ -69,7 +69,7 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} New City Paradise. All rights reserved.</p>
           <div className="flex gap-5">
             <a href="/privacy-policy" className="hover:text-white">Privacy</a>
-            <a href="/contact" className="hover:text-white">Terms</a>
+            <a href="/terms" className="hover:text-white">Terms</a>
           </div>
         </div>
       </div>

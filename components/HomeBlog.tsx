@@ -50,12 +50,12 @@ export default function HomeBlog() {
       <div className="container-pad">
         <div className="flex flex-col gap-8 border-b border-black/15 pb-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p data-blog-intro className="text-[10px] font-semibold uppercase tracking-[0.24em] text-champagne">
-              The Paradise Journal
+            <p data-blog-intro className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#1b3d2f]">
+              Project News &amp; Dated Updates
             </p>
-            <h2 data-blog-intro className="mt-5 max-w-4xl text-[clamp(3.4rem,7vw,6.75rem)] leading-[0.9] tracking-[-0.055em]">
-              Ideas for living
-              <span className="block italic text-champagne">and investing well.</span>
+            <h2 data-blog-intro className="mt-4 max-w-4xl text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight font-serif text-ink">
+              Development Milestones
+              <span className="block italic text-[#1b3d2f]">and Project Insights.</span>
             </h2>
           </div>
           <div data-blog-intro className="max-w-sm lg:pb-2">

@@ -581,6 +581,9 @@ export default function AzimutePerspectiveExperience() {
               <h3 className="text-base sm:text-2xl font-normal text-white tracking-tight truncate">
                 {currentItem.title}
               </h3>
+              <span className="hidden md:inline-block px-2.5 py-0.5 rounded text-[10px] font-menu uppercase tracking-wider bg-champagne/20 text-champagne border border-champagne/30 shrink-0">
+                Planned Masterplan Amenity
+              </span>
             </div>
 
             {/* Action Buttons */}

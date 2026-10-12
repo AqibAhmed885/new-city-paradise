@@ -11,49 +11,58 @@ gsap.registerPlugin(ScrollTrigger);
 
 const communities = [
   {
-    id: "residential",
-    tag: "PREMIUM LIVING",
+    id: "residential-plots",
+    tag: "VERIFIED PLOT SIZES",
     title: "Residential Plots",
+    sizes: "3.5 Marla · 5 Marla · 10 Marla · 1 Kanal",
     description:
-      "Experience a lifestyle of unparalleled luxury and comfort. Our residential plots are thoughtfully designed to provide the perfect canvas for your dream home, surrounded by lush landscapes and modern amenities.",
+      "Official residential plots in New City Paradise planned around wide carpeted roads, underground electricity, serene parks, and planned civic amenities. Designed for modern family home construction with direct access from the 330-ft main boulevard.",
     images: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
-    ],
-    reverse: false,
-    theme: "bg-[#F4F3EE]",
-  },
-  {
-    id: "commercial",
-    tag: "BUSINESS HUB",
-    title: "Commercial Zone",
-    description:
-      "Strategically located to maximize visibility and foot traffic, our commercial plots offer the perfect opportunity for businesses to thrive in a rapidly growing, high-value community along the main boulevard.",
-    images: [
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop",
-    ],
-    reverse: true,
-    theme: "bg-[#ECEAE4]",
-  },
-  {
-    id: "villas",
-    tag: "EXCLUSIVE HOMES",
-    title: "Awami Villas",
-    description:
-      "Discover the perfect blend of affordability and elegance. Awami Villas offer beautifully constructed, move-in ready homes designed for modern families seeking a secure and vibrant neighborhood.",
-    images: [
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop",
+      "/images/isla.jpg",
+      "/images/central-park.jpg",
+      "/images/crystal-lakes.jpg",
+      "/images/new-city-paradise-hero.png",
     ],
     reverse: false,
     theme: "bg-[#F7F6F2]",
+    linkText: "View Masterplan & Plots",
+    linkHref: "/masterplan",
+  },
+  {
+    id: "commercial-plots",
+    tag: "BUSINESS CORRIDOR",
+    title: "Commercial Plots",
+    sizes: "2.5 Marla · 4 Marla · 7 Marla",
+    description:
+      "High-visibility commercial sectors strategically aligned along the 330-ft grand entrance boulevard and primary arterial avenues. Optimized for corporate retail, executive offices, financial centers, and upscale retail flagships.",
+    images: [
+      "/images/arcade1.png",
+      "/images/arcade2.png",
+      "/images/arcade3.png",
+      "/images/newcityarcade.png",
+    ],
+    reverse: true,
+    theme: "bg-[#F0EDE6]",
+    linkText: "Explore Commercial Sectors",
+    linkHref: "/masterplan",
+  },
+  {
+    id: "awami-block",
+    tag: "COMMUNITY SECTOR",
+    title: "Awami Block",
+    sizes: "4 Marla · 6 Marla Planned Plots",
+    description:
+      "A dedicated community-oriented sector thoughtfully planned with essential neighborhood amenities, community mosques, primary healthcare units, family parks, and water filtration facilities.",
+    images: [
+      "/images/garden-villa.jpg",
+      "/images/wellness-club.jpg",
+      "/images/learning-campus.jpg",
+      "/images/grand-estate.jpg",
+    ],
+    reverse: false,
+    theme: "bg-[#F7F6F2]",
+    linkText: "Inquire About Awami Block",
+    linkHref: "/contact",
   },
 ];
 
@@ -104,7 +113,7 @@ export default function Communities() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative bg-[#0d0c0a] w-full z-10">
+    <section ref={containerRef} id="plots-overview" className="relative bg-[#0d0c0a] w-full z-10">
       {communities.map((community, index) => {
         const isLast = index === communities.length - 1;
         return (
@@ -183,20 +192,25 @@ export default function Communities() {
                       </span>
                     </div>
 
-                    <h2 className="text-4xl lg:text-[46px] leading-[1.08] font-serif text-ink mb-6 tracking-tight">
+                    <h2 className="text-4xl lg:text-[46px] leading-[1.08] font-serif text-ink mb-3 tracking-tight">
                       {community.title}
                     </h2>
 
-                    <p className="text-[14px] leading-relaxed text-gray-600 mb-10 font-serif">
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-md bg-[#1b3d2f]/10 px-3 py-1 text-xs font-menu font-medium text-[#1b3d2f]">
+                      <span>Plot sizes:</span>
+                      <strong className="font-semibold">{community.sizes}</strong>
+                    </div>
+
+                    <p className="text-[14px] leading-relaxed text-gray-600 mb-8 font-serif">
                       {community.description}
                     </p>
 
                     <Link
-                      href={`/masterplan`}
+                      href={community.linkHref}
                       className="group flex items-center gap-4 text-[11px] tracking-[0.24em] uppercase font-menu font-semibold text-ink"
                     >
                       <span className="w-8 h-[1px] bg-ink group-hover:w-16 transition-all duration-300 ease-out"></span>
-                      DISCOVER MORE
+                      {community.linkText}
                       <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">
                         &rarr;
                       </span>

@@ -61,7 +61,7 @@ const isProduction =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.domain),
   title: {
-    default: "New City Paradise | PHATA-Approved Housing Society near Burhan Interchange",
+    default: "New City Paradise Wah | Plots near Burhan Interchange",
     template: "%s | New City Paradise",
   },
   description:

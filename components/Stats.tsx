@@ -98,26 +98,26 @@ export default function Stats() {
   }, []);
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-[#070605] py-20 text-white sm:py-24 border-t border-white/10">
+    <section ref={root} className="relative overflow-hidden bg-ivory py-20 text-ink sm:py-24 border-y border-black/10">
       <div className="container-pad relative max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between pb-12 border-b border-white/15 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between pb-12 border-b border-black/10 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-champagne/30 bg-white/[0.03] mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-              <span className="text-[10px] font-menu uppercase tracking-[0.24em] text-champagne">
-                Why Invest in New City Paradise
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-[#1b3d2f]/30 bg-[#1b3d2f]/5 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1b3d2f] animate-pulse" />
+              <span className="text-[10px] font-menu uppercase tracking-[0.24em] text-[#1b3d2f] font-semibold">
+                Verified Project Fundamentals
               </span>
             </div>
-            <h2 className="text-[clamp(2.4rem,5vw,3.8rem)] font-light leading-[1.1] uppercase tracking-tight font-sans">
-              <span data-heading-reveal className="block">Benchmark Standards</span>
-              <span data-heading-reveal className="block italic text-champagne font-serif lowercase first-letter:uppercase">
-                Uncompromising Distinction
+            <h2 className="text-[clamp(2.4rem,5vw,3.8rem)] font-light leading-[1.1] uppercase tracking-tight font-sans text-ink">
+              <span data-heading-reveal className="block">Legal Approvals &amp;</span>
+              <span data-heading-reveal className="block italic text-[#1b3d2f] font-serif lowercase first-letter:uppercase">
+                Unmatched Location
               </span>
             </h2>
           </div>
 
-          <p data-heading-reveal className="max-w-md font-serif text-base sm:text-lg text-white/65 leading-relaxed font-light">
+          <p data-heading-reveal className="max-w-md font-serif text-base sm:text-lg text-black/70 leading-relaxed font-light">
             Engineered to lead the region with transparent legal approvals, unmatched highway connectivity, and master-planned waterfront serenity.
           </p>
         </div>
@@ -128,50 +128,50 @@ export default function Stats() {
             <article
               data-stat-card
               key={item.title}
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/15 bg-[#12110f]/80 p-7 transition-all duration-500 hover:-translate-y-2 hover:border-champagne/60 hover:bg-[#181613] hover:shadow-2xl"
+              className="group relative flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-[#1b3d2f]/60 hover:shadow-xl"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center group-hover:border-champagne/40 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#1b3d2f]/5 border border-[#1b3d2f]/15 flex items-center justify-center group-hover:border-[#1b3d2f]/40 transition-colors">
                     {item.icon}
                   </div>
-                  <span className="text-[9px] font-menu uppercase tracking-widest text-champagne/90 bg-champagne/10 px-2.5 py-1 rounded-md border border-champagne/20">
+                  <span className="text-[9px] font-menu uppercase tracking-widest text-[#1b3d2f] bg-[#1b3d2f]/10 px-2.5 py-1 rounded-md border border-[#1b3d2f]/20 font-semibold">
                     {item.tag}
                   </span>
                 </div>
 
-                <p className="text-[11px] font-mono tracking-wider text-white/40 uppercase mb-2">
+                <p className="text-[11px] font-mono tracking-wider text-black/50 uppercase mb-2">
                   {item.code}
                 </p>
 
-                <h3 className="text-xl sm:text-2xl font-sans uppercase font-light text-white tracking-tight leading-snug group-hover:text-champagne transition-colors">
+                <h3 className="text-xl sm:text-2xl font-sans uppercase font-light text-ink tracking-tight leading-snug group-hover:text-[#1b3d2f] transition-colors">
                   {item.title}
                 </h3>
 
-                <p className="mt-3.5 font-serif text-sm sm:text-base leading-relaxed text-white/65 font-light">
+                <p className="mt-3.5 font-serif text-sm sm:text-base leading-relaxed text-black/70 font-light">
                   {item.description}
                 </p>
               </div>
 
-              <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-[10px] font-menu uppercase tracking-widest text-white/45 group-hover:text-white transition-colors">
+              <div className="mt-8 pt-5 border-t border-black/10 flex items-center justify-between text-[10px] font-menu uppercase tracking-widest text-black/50 group-hover:text-[#1b3d2f] transition-colors">
                 <span>Verified Authority</span>
-                <span className="text-champagne group-hover:translate-x-1 transition-transform">&rarr;</span>
+                <span className="text-[#1b3d2f] group-hover:translate-x-1 transition-transform">&rarr;</span>
               </div>
             </article>
           ))}
         </div>
 
         {/* Bottom Banner with Masterplan Link */}
-        <div className="mt-14 rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.03] to-transparent p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-14 rounded-2xl border border-black/10 bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-center gap-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-champagne shrink-0" />
-            <p className="font-serif text-base sm:text-lg text-white/80 font-light">
-              Explore plot categories across Awami Block, 3.5 & 5 Marla, and commercial avenues.
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1b3d2f] shrink-0" />
+            <p className="font-serif text-base sm:text-lg text-black/80 font-light">
+              Explore plot categories across Awami Block, 3.5 &amp; 5 Marla, and commercial avenues.
             </p>
           </div>
           <Link
             href="/masterplan"
-            className="shrink-0 inline-flex items-center gap-3 px-6 py-3 bg-champagne text-black text-[11px] font-menu uppercase tracking-widest font-medium hover:bg-white transition-colors"
+            className="shrink-0 inline-flex items-center gap-3 px-6 py-3 bg-[#1b3d2f] text-white text-[11px] font-menu uppercase tracking-widest font-medium hover:bg-[#12281f] transition-colors rounded-full"
           >
             Explore Complete Masterplan &rarr;
           </Link>
@@ -180,3 +180,4 @@ export default function Stats() {
     </section>
   );
 }
+

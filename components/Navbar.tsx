@@ -7,11 +7,13 @@ import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 
 const links = [
-  ["Story", "/about"],
+  ["Location", "/#location-connectivity"],
+  ["Plots & Plans", "/#plots-overview"],
   ["Masterplan", "/masterplan"],
-  ["Residences", "/#properties"],
   ["Amenities", "/amenities"],
-  ["Blog", "/blog"],
+  ["Updates", "/blog"],
+  ["FAQs", "/#faqs"],
+  ["Contact", "/contact"],
 ];
 
 export default function Navbar({ solid = false }: { solid?: boolean }) {

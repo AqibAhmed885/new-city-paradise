@@ -25,12 +25,12 @@ export default function Contact() {
 
 
           <SectionHeading
-            eyebrow="Investment"
+            eyebrow="Contact & Sales Office"
             title={
-              <h1 className="text-white">
+              <h2 className="text-white">
                 Find your Place<br />{" "}
                 <span className="italic text-champagne">in Paradise.</span>
-              </h1>
+              </h2>
             }
             description=""
           />
