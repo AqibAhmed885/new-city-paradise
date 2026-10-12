@@ -8,7 +8,9 @@ import SmoothScroll from "@/components/SmoothScroll";
 
 const PropertyShowcase = dynamic(() => import("@/components/PropertyShowcase"));
 const LifestyleGallery = dynamic(() => import("@/components/LifestyleGallery"));
-const Amenities = dynamic(() => import("@/components/Amenities"));
+const AzimutePerspectiveExperience = dynamic(
+  () => import("@/components/AzimutePerspectiveExperience")
+);
 const Investment = dynamic(() => import("@/components/Investment"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 
@@ -16,10 +18,10 @@ export default function Home() {
   return (
     <SmoothScroll>
       <Navbar />
-      <main className="overflow-hidden">
+      <main className="overflow-x-clip">
         <Hero />
         <Communities />
-        <Amenities />
+        <AzimutePerspectiveExperience />
         <PropertyShowcase />
         <Investment />
         <Testimonials />
