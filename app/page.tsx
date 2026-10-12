@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HeroIntro from "@/components/HeroIntro";
-import Stats from "@/components/Stats";
 import Communities from "@/components/Communities";
 import LocationMapSection from "@/components/LocationMapSection";
 import BookingAndFaq from "@/components/BookingAndFaq";
@@ -26,10 +25,7 @@ export default function Home() {
         {/* 2. Canonical H1 & Verified Project Orientation immediately following video */}
         <HeroIntro />
 
-        {/* 3. Verified Project Fundamentals & PHATA Approval */}
-        <Stats />
-
-        {/* 4. Verified Residential & Commercial Plot Options (3.5, 5, 10 Marla, 1 Kanal) */}
+        {/* 3. Verified Residential & Commercial Plot Options (3.5, 5, 10 Marla, 1 Kanal) */}
         <Communities />
 
         {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
