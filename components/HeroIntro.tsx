@@ -18,9 +18,9 @@ export default function HeroIntro() {
           </div>
 
           {/* Canonical Homepage H1 */}
-          <h1 className="font-serif text-[clamp(2.1rem,4.6vw,3.75rem)] leading-[1.08] tracking-tight text-ink max-w-5xl">
+          <h1 className="text-[clamp(2.1rem,4.6vw,3.75rem)] leading-[1.08] tracking-tight text-ink max-w-5xl font-normal">
             New City Paradise Wah —{" "}
-            <span className="italic font-serif font-light text-champagne lowercase first-letter:uppercase">
+            <span className="italic font-light text-champagne lowercase first-letter:uppercase">
               Residential &amp; Commercial Plots
             </span>{" "}
             near Burhan Interchange.

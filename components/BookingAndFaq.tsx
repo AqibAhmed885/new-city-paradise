@@ -63,7 +63,7 @@ export default function BookingAndFaq() {
             <p className="eyebrow text-champagne text-[10px] sm:text-xs uppercase tracking-[0.28em] font-semibold">
               Transparent Guidance
             </p>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3.25rem)] leading-[1.08] tracking-tight text-ink mt-2">
+            <h2 className="text-[clamp(2rem,4vw,3.25rem)] leading-[1.08] tracking-tight text-ink mt-2 font-normal">
               Plot Booking &amp;{" "}
               <span className="italic text-champagne font-light">Inquiry Process.</span>
             </h2>
@@ -82,7 +82,7 @@ export default function BookingAndFaq() {
                   <span className="font-menu text-xs font-bold tracking-widest text-champagne block mb-3">
                     STEP {st.step}
                   </span>
-                  <h3 className="font-serif text-lg font-semibold text-ink leading-snug">
+                  <h3 className="text-lg font-semibold text-ink leading-snug">
                     {st.title}
                   </h3>
                   <p className="mt-3 text-xs leading-relaxed text-black/65 font-serif">
@@ -100,7 +100,7 @@ export default function BookingAndFaq() {
             <p className="eyebrow text-champagne text-[10px] sm:text-xs uppercase tracking-[0.28em] font-semibold">
               Buyer Due Diligence
             </p>
-            <h2 className="font-serif text-[clamp(1.8rem,3.5vw,2.75rem)] leading-[1.1] text-ink mt-2">
+            <h2 className="text-[clamp(1.8rem,3.5vw,2.75rem)] leading-[1.1] text-ink mt-2 font-normal">
               Frequently Asked Questions.
             </h2>
           </div>

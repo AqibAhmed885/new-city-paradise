@@ -192,7 +192,7 @@ export default function Communities() {
                       </span>
                     </div>
 
-                    <h2 className="text-4xl lg:text-[46px] leading-[1.08] font-serif text-ink mb-3 tracking-tight">
+                    <h2 className="text-4xl lg:text-[46px] leading-[1.08] text-ink mb-3 tracking-tight font-normal">
                       {community.title}
                     </h2>
 

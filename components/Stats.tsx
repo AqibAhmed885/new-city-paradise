@@ -109,7 +109,7 @@ export default function Stats() {
                 Verified Project Fundamentals
               </span>
             </div>
-            <h2 className="font-serif text-[clamp(2.3rem,4.6vw,3.6rem)] font-normal leading-[1.08] tracking-tight uppercase text-ink">
+            <h2 className="text-[clamp(2.3rem,4.6vw,3.6rem)] font-normal leading-[1.08] tracking-tight uppercase text-ink">
               <span data-heading-reveal className="block">Legal Approvals &amp;</span>
               <span data-heading-reveal className="block italic text-champagne font-light lowercase first-letter:uppercase">
                 Unmatched Location

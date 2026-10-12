@@ -15,8 +15,9 @@ const config: Config = {
         smoke: "#d8d4ce",
       },
       fontFamily: {
+        heading: ["var(--font-helvetica)", '"helvetica Fallback"', "Arial", "sans-serif"],
+        sans: ["var(--font-helvetica)", '"helvetica Fallback"', "Arial", "sans-serif"],
         serif: ["Adobe Garamond Pro", "Georgia", "serif"],
-        sans: ["Optima", "sans-serif"],
         menu: ["var(--font-source-sans)", "Source Sans 3", "Segoe UI", "system-ui"],
       },
       boxShadow: {

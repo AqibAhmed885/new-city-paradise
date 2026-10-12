@@ -64,13 +64,13 @@ export default function LocationMapSection() {
             <p className="text-[11px] font-menu uppercase tracking-[0.28em] text-champagne font-semibold mb-3">
               STRATEGIC POSITION
             </p>
-            <h2 className="font-serif text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[1.05] tracking-tight uppercase text-ink">
+            <h2 className="text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[1.05] tracking-tight uppercase text-ink font-normal">
               MINUTES AWAY FROM{" "}
-              <span className="italic font-serif font-light text-champagne lowercase first-letter:uppercase">
+              <span className="italic font-light text-champagne lowercase first-letter:uppercase">
                 MAJOR
               </span>
               <br />
-              <span className="italic font-serif font-light text-champagne lowercase first-letter:uppercase">
+              <span className="italic font-light text-champagne lowercase first-letter:uppercase">
                 LANDMARKS
               </span>
             </h2>
