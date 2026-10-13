@@ -2,15 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import {
-  ArrowRight,
-  Plus,
-} from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ArrowRight } from "lucide-react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,10 +13,10 @@ gsap.registerPlugin(ScrollTrigger);
 const communities = [
   {
     id: "residential-plots",
+    number: "01",
     tag: "VERIFIED PLOT SIZES",
     title: "Residential Plots",
-    sizes:
-      "3.5 Marla · 5 Marla · 10 Marla · 1 Kanal",
+    sizes: "3.5 Marla · 5 Marla · 10 Marla · 1 Kanal",
     description:
       "Official residential plots in New City Paradise planned around wide carpeted roads, underground electricity, serene parks, and planned civic amenities. Designed for modern family home construction with direct access from the 330-ft main boulevard.",
     images: [
@@ -35,13 +28,12 @@ const communities = [
     linkText: "View Masterplan & Plots",
     linkHref: "/masterplan",
   },
-
   {
     id: "commercial-plots",
+    number: "02",
     tag: "BUSINESS CORRIDOR",
     title: "Commercial Plots",
-    sizes:
-      "2.5 Marla · 4 Marla · 7 Marla",
+    sizes: "2.5 Marla · 4 Marla · 7 Marla",
     description:
       "High-visibility commercial sectors strategically aligned along the 330-ft grand entrance boulevard and primary arterial avenues. Optimized for corporate retail, executive offices, financial centers, and upscale retail flagships.",
     images: [
@@ -50,17 +42,15 @@ const communities = [
       "/images/arcade3.png",
       "/images/newcityarcade.png",
     ],
-    linkText:
-      "Explore Commercial Sectors",
+    linkText: "Explore Commercial Sectors",
     linkHref: "/masterplan",
   },
-
   {
     id: "awami-block",
+    number: "03",
     tag: "COMMUNITY SECTOR",
     title: "Awami Block",
-    sizes:
-      "4 Marla · 6 Marla Planned Plots",
+    sizes: "4 Marla · 6 Marla Planned Plots",
     description:
       "A dedicated community-oriented sector thoughtfully planned with essential neighborhood amenities, community mosques, primary healthcare units, family parks, and water filtration facilities.",
     images: [
@@ -69,32 +59,55 @@ const communities = [
       "/images/learning-campus.jpg",
       "/images/grand-estate.jpg",
     ],
-    linkText:
-      "Inquire About Awami Block",
+    linkText: "Inquire About Awami Block",
     linkHref: "/contact",
+  },
+  {
+    id: "l-prime-block",
+    number: "04",
+    tag: "L PRIME BLOCK",
+    title: "L Prime Block",
+    sizes: "Elite Residential Sector",
+    description:
+      "Sculpted around dedicated green parks, wide carpeted avenues, and underground utilities — an elite residential sector offering an enduring standard of privacy and refined modern living.",
+    images: [
+      "/images/garden-villa.jpg",
+      "/images/garden-villa.jpg",
+      "/images/garden-villa.jpg",
+      "/images/garden-villa.jpg",
+    ],
+    linkText: "View District Specs",
+    linkHref: "/masterplan",
+  },
+  {
+    id: "waterfront-district",
+    number: "05",
+    tag: "WATERFRONT DISTRICT",
+    title: "Water Front District",
+    sizes: "Riverside Residential Sector",
+    description:
+      "A scenic riverside sanctuary along the natural contours of the Haro River, featuring tranquil promenades, lush green vistas, and curated leisure experiences.",
+    images: [
+      "/images/amenities/water-front.jpg",
+      "/images/amenities/water-front.jpg",
+      "/images/amenities/water-front.jpg",
+      "/images/amenities/water-front.jpg",
+    ],
+    linkText: "View District Specs",
+    linkHref: "/masterplan",
   },
 ];
 
 export default function Communities() {
-  const [activeIndex, setActiveIndex] =
-    useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const desktopStackClasses = [
+    "lg:min-h-[500vh] lg:-mb-[400vh]",
+    "lg:min-h-[400vh] lg:-mb-[300vh]",
+    "lg:min-h-[300vh] lg:-mb-[200vh]",
+    "lg:min-h-[200vh] lg:-mb-[100vh]",
+    "lg:min-h-[100vh] lg:mb-0",
+  ];
 
-  const activeIndexRef = useRef(0);
-
-  const sectionRef =
-    useRef<HTMLElement>(null);
-
-  const galleryRef =
-    useRef<HTMLDivElement>(null);
-
-  const activeCommunity =
-    communities[activeIndex];
-
-  /*
-   * ==========================================
-   * DESKTOP SCROLL SEQUENCE
-   * ==========================================
-   */
   useEffect(() => {
     const section = sectionRef.current;
 
@@ -106,53 +119,21 @@ export default function Communities() {
       mm.add(
         "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
         () => {
-          const trigger =
-            ScrollTrigger.create({
-              trigger: section,
+          const cards =
+            gsap.utils.toArray<HTMLElement>(
+              "[data-stack-card]",
+              section
+            );
 
-              start: "top top",
+          cards.forEach((card, index) => {
+            const panel =
+              card.querySelector<HTMLElement>(
+                "[data-stack-panel]"
+              );
 
-              end: "bottom bottom",
+            if (!panel) return;
 
-              scrub: true,
-
-              invalidateOnRefresh: true,
-
-              onUpdate: (self) => {
-                /*
-                 * Divide section scroll into
-                 * 3 equal accordion states.
-                 */
-                const progress =
-                  self.progress;
-
-                const index = Math.min(
-                  communities.length - 1,
-                  Math.floor(
-                    progress *
-                    communities.length
-                  )
-                );
-
-                /*
-                 * Prevent unnecessary React
-                 * state updates on every frame.
-                 */
-                if (
-                  index !==
-                  activeIndexRef.current
-                ) {
-                  activeIndexRef.current =
-                    index;
-
-                  setActiveIndex(index);
-                }
-              },
-            });
-
-          return () => {
-            trigger.kill();
-          };
+          });
         }
       );
 
@@ -164,853 +145,572 @@ export default function Communities() {
     };
   }, []);
 
-  /*
-   * ==========================================
-   * GALLERY CHANGE ANIMATION
-   * ==========================================
-   */
-  useEffect(() => {
-    const gallery =
-      galleryRef.current;
-
-    if (!gallery) return;
-
-    const items =
-      gallery.querySelectorAll(
-        "[data-gallery-item]"
-      );
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        items,
-        {
-          opacity: 0,
-          y: 20,
-          scale: 1.025,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-
-          duration: 0.7,
-
-          stagger: 0.07,
-
-          ease: "power3.out",
-
-          clearProps:
-            "transform,opacity",
-        }
-      );
-    }, gallery);
-
-    return () => ctx.revert();
-  }, [activeIndex]);
-
-  /*
-   * Manual accordion click still works.
-   */
-  const handleAccordionClick = (
-    index: number
-  ) => {
-    activeIndexRef.current = index;
-    setActiveIndex(index);
-  };
-
   return (
     <section
       ref={sectionRef}
       id="plots-overview"
-      /*
-       * 3 items = 300vh.
-       *
-       * Sticky content remains visible while
-       * user moves through 3 scroll states.
-       */
       className="
         relative
-        bg-white
-        text-ink
-
-        lg:h-[300vh]
+        bg-gray-200
       "
     >
-      {/* ===================================== */}
-      {/* STICKY VIEWPORT */}
-      {/* ===================================== */}
+      {/* ================================================= */}
+      {/* SECTION INTRO */}
+      {/* ================================================= */}
+
+      {/* <div
+        className="
+          relative
+          z-[1]
+          mx-auto
+          mb-16
+          px-4
+          sm:px-8
+          max-w-[1440px]
+          text-white
+          lg:mb-12
+        "
+      >
+        <span
+          className="
+            mb-5
+            block
+            text-[10px]
+            font-menu
+            font-semibold
+            uppercase
+            tracking-[0.2em]
+            text-champagne
+          "
+        >
+          Explore New City Paradise
+        </span>
+
+        <h2
+          className="
+            max-w-[850px]
+            text-[clamp(2.7rem,4.5vw,5.2rem)]
+            font-normal
+            leading-[1]
+
+            tracking-[-0.045em]
+          "
+        >
+          Find the right place
+
+          <br />
+
+          <span
+            className="
+              font-light
+              italic
+
+              text-champagne
+            "
+          >
+            for your future.
+          </span>
+        </h2>
+      </div> */}
+
+      {/* ================================================= */}
+      {/* STACK */}
+      {/* ================================================= */}
 
       <div
         className="
           relative
-
-          py-12
-
-          sm:py-14
-
-          lg:sticky
-          lg:top-0
-          lg:flex
-          lg:min-h-screen
-          lg:items-center
-          lg:overflow-hidden
-          lg:py-8
-
-          xl:py-10
         "
       >
-        <div
-          className="
-            relative
-            mx-auto
-            w-full
-            max-w-[1440px]
+        {communities.map((community, index) => {
+          const desktopTop = 0;
 
-            px-4
-
-            sm:px-6
-
-            lg:px-8
-
-            xl:px-4
-          "
-        >
-          {/* ================================= */}
-          {/* HEADING */}
-          {/* ================================= */}
-
-          <div
-            className="
-              mb-8
-
-              lg:mb-10
-            "
-          >
-            <h2
-              className="
-                max-w-[760px]
-
-                text-[clamp(2.4rem,3.2vw,4rem)]
-
-                font-normal
-
-                capitalize
-
-                leading-[1.05]
-
-                tracking-[-0.04em]
-
-                text-ink
-              "
+          return (
+            <article
+              key={community.id}
+              id={community.id}
+              data-stack-card
+              className={`
+                relative
+                min-h-[92vh]
+                ${desktopStackClasses[index]}
+              `}
+              style={{
+                zIndex: 10 + index * 10,
+              }}
             >
-              Find the right place
+              {/* ========================================= */}
+              {/* STICKY CARD */}
+              {/* ========================================= */}
 
-              <br />
-
-              <span
-                className="
-                  font-light
-                  italic
-                  text-champagne
-                "
-              >
-                for your future.
-              </span>
-            </h2>
-          </div>
-
-          {/* ================================= */}
-          {/* ACCORDION + GALLERY */}
-          {/* ================================= */}
-
-          <div
-            className="
-              grid
-              grid-cols-1
-
-              gap-10
-
-              lg:grid-cols-12
-              lg:items-start
-              lg:gap-12
-
-              xl:gap-16
-            "
-          >
-            {/* ================================ */}
-            {/* LEFT ACCORDION */}
-            {/* ================================ */}
-
-            <div
-              className="
-                lg:col-span-5
-              "
-            >
               <div
+                data-stack-panel
                 className="
+                  relative
                   border-t
-                  border-black/15
+                  overflow-hidden
+                  bg-[#F7F5EF]
+                  lg:sticky
+                  lg:min-h-[100svh]
                 "
+                style={{
+                  top: `${desktopTop}px`,
+                }}
               >
-                {communities.map(
-                  (community, index) => {
-                    const isActive =
-                      activeIndex === index;
 
-                    return (
-                      <div
-                        key={
-                          community.id
-                        }
+
+                {/* ======================================= */}
+                {/* MAIN CARD LAYOUT */}
+                {/* ======================================= */}
+
+                <div
+                  className="
+                    grid
+
+                    min-h-[760px]
+
+                    grid-cols-1
+
+                    lg:min-h-[100svh]
+                    lg:grid-cols-12
+                  "
+                >
+                  {/* ===================================== */}
+                  {/* LEFT CONTENT */}
+                  {/* ===================================== */}
+
+                  <div
+                    data-stack-content
+                    className="
+                      relative
+
+                      flex
+                      flex-col
+                      justify-center
+
+                      px-6
+                      pb-12
+                      pt-24
+
+                      sm:px-10
+                      sm:pb-14
+                      sm:pt-28
+
+                      lg:col-span-6
+                      lg:px-14
+                      lg:py-28
+
+                      xl:px-16
+                    "
+                  >
+                    <div
+                      className="
+                        max-w-[520px]
+                      "
+                    >
+                      {/* TITLE */}
+
+                      <h3
                         className="
-                          border-b
-                          border-black/15
+                          text-[clamp(2.8rem,4vw,5rem)]
+
+                          font-normal
+
+                          leading-[0.98]
+
+                          tracking-[-0.05em]
+
+                          text-ink
                         "
                       >
-                        {/* HEADER */}
+                        {community.title}
+                      </h3>
 
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleAccordionClick(
-                              index
-                            )
-                          }
-                          aria-expanded={
-                            isActive
-                          }
-                          aria-controls={`${community.id}-panel`}
+                      {/* SIZES */}
+
+                      <div
+                        className="
+                          mt-7
+
+                          flex
+                          flex-wrap
+
+                          items-center
+
+                          gap-x-3
+                          gap-y-2
+                        "
+                      >
+                        <span
                           className="
-                            group
+                            text-[9px]
 
-                            flex
-                            w-full
+                            font-menu
+                            font-semibold
 
-                            items-center
-                            justify-between
+                            uppercase
 
-                            gap-5
+                            tracking-[0.14em]
 
-                            py-5
-
-                            text-left
-
-                            lg:py-5
-
-                            xl:py-6
+                            text-black/40
                           "
                         >
-                          <div
-                            className="
-                              flex
-                              min-w-0
-                              items-center
-                              gap-4
-                            "
-                          >
-                            {/* NUMBER */}
+                          Plot Sizes
+                        </span>
 
-                            <span
-                              className={`
-                                text-[9px]
-                                font-menu
-                                font-semibold
+                        <span
+                          className="
+                            hidden
 
-                                tracking-[0.18em]
+                            h-3
+                            w-px
 
-                                transition-colors
-                                duration-300
+                            bg-black/15
 
-                                ${isActive
-                                  ? "text-champagne"
-                                  : "text-black/30"
-                                }
-                              `}
-                            >
-                              0
-                              {index +
-                                1}
-                            </span>
+                            sm:block
+                          "
+                        />
 
-                            {/* TITLE */}
+                        <span
+                          className="
+                            text-[12px]
 
-                            <h3
-                              className={`
-                                text-[clamp(1.5rem,1.8vw,2rem)]
+                            font-menu
+                            font-medium
 
-                                font-normal
+                            text-ink
 
-                                leading-[1.08]
-
-                                tracking-[-0.035em]
-
-                                transition-colors
-                                duration-300
-
-                                ${isActive
-                                  ? "text-ink"
-                                  : "text-black/45 group-hover:text-ink"
-                                }
-                              `}
-                            >
-                              {
-                                community.title
-                              }
-                            </h3>
-                          </div>
-
-                          {/* PLUS */}
-
-                          <span
-                            className={`
-                              flex
-                              h-9
-                              w-9
-                              shrink-0
-
-                              items-center
-                              justify-center
-
-                              rounded-full
-
-                              border
-
-                              transition-all
-                              duration-500
-
-                              ${isActive
-                                ? "rotate-45 border-champagne bg-champagne text-white"
-                                : "border-black/15 text-ink group-hover:border-black/40"
-                              }
-                            `}
-                          >
-                            <Plus
-                              size={
-                                15
-                              }
-                              strokeWidth={
-                                1.6
-                              }
-                            />
-                          </span>
-                        </button>
-
-                        {/* ======================= */}
-                        {/* ACCORDION CONTENT */}
-                        {/* ======================= */}
-
-                        <div
-                          id={`${community.id}-panel`}
-                          className={`
-                            grid
-
-                            transition-[grid-template-rows,opacity]
-                            duration-500
-
-                            ease-[cubic-bezier(.16,1,.3,1)]
-
-                            ${isActive
-                              ? "grid-rows-[1fr] opacity-100"
-                              : "grid-rows-[0fr] opacity-0"
-                            }
-                          `}
+                            sm:text-[13px]
+                          "
                         >
-                          <div
-                            className="
-                              overflow-hidden
-                            "
-                          >
-                            <div
-                              className="
-                                pb-6
-                                pl-[30px]
-
-                                sm:pl-[34px]
-
-                                lg:pb-7
-                              "
-                            >
-                              {/* TAG */}
-
-                              <span
-                                className="
-                                  mb-2
-                                  block
-
-                                  text-[9px]
-
-                                  font-menu
-                                  font-semibold
-
-                                  uppercase
-
-                                  tracking-[0.13em]
-
-                                  text-champagne
-                                "
-                              >
-                                {
-                                  community.tag
-                                }
-                              </span>
-
-                              {/* SIZE */}
-
-                              <div
-                                className="
-                                  mb-3
-
-                                  flex
-                                  flex-wrap
-                                  items-center
-
-                                  gap-2
-
-                                  text-xs
-                                "
-                              >
-                                <span
-                                  className="
-                                    text-black/45
-                                  "
-                                >
-                                  Plot
-                                  sizes
-                                </span>
-
-                                <span
-                                  className="
-                                    h-3
-                                    w-px
-
-                                    bg-black/15
-                                  "
-                                />
-
-                                <strong
-                                  className="
-                                    font-menu
-                                    font-medium
-
-                                    text-ink
-                                  "
-                                >
-                                  {
-                                    community.sizes
-                                  }
-                                </strong>
-                              </div>
-
-                              {/* DESCRIPTION */}
-
-                              <p
-                                className="
-                                  max-w-[500px]
-
-                                  font-serif
-
-                                  text-[13px]
-
-                                  leading-[1.75]
-
-                                  text-black/60
-
-                                  xl:text-[14px]
-                                "
-                              >
-                                {
-                                  community.description
-                                }
-                              </p>
-
-                              {/* CTA */}
-
-                              <Link
-                                href={
-                                  community.linkHref
-                                }
-                                className="
-                                  group/link
-
-                                  mt-5
-
-                                  inline-flex
-
-                                  items-center
-
-                                  gap-3
-
-                                  text-[10px]
-
-                                  font-menu
-                                  font-semibold
-
-                                  uppercase
-
-                                  tracking-[0.12em]
-
-                                  text-ink
-                                "
-                              >
-                                {
-                                  community.linkText
-                                }
-
-                                <ArrowRight
-                                  size={
-                                    13
-                                  }
-                                  className="
-                                    transition-transform
-                                    duration-300
-
-                                    group-hover/link:translate-x-1
-                                  "
-                                />
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
+                          {community.sizes}
+                        </span>
                       </div>
-                    );
-                  }
-                )}
-              </div>
 
-              {/* SCROLL PROGRESS */}
+                      {/* DESCRIPTION */}
 
-              <div
-                className="
-                  mt-5
-                  flex
-                  items-center
-                  gap-3
-                "
-              >
-                {communities.map(
-                  (_, index) => (
-                    <div
-                      key={
-                        index
-                      }
+                      <p
+                        className="
+                          mt-7
+
+                          max-w-[480px]
+
+                          font-serif
+
+                          text-[15px]
+
+                          leading-[1.8]
+
+                          text-black/60
+
+                          lg:text-[16px]
+                        "
+                      >
+                        {community.description}
+                      </p>
+
+                      {/* CTA */}
+
+                      <Link
+                        href={community.linkHref}
+                        className="
+                          group
+
+                          mt-9
+
+                          inline-flex
+
+                          items-center
+
+                          gap-4
+
+                          rounded-lg
+
+                          bg-[#17231F]
+
+                          px-5
+                          py-3.5
+
+                          text-[10px]
+
+                          font-menu
+                          font-semibold
+
+                          uppercase
+
+                          tracking-[0.12em]
+
+                          text-white
+
+                          transition-all
+                          duration-300
+
+                          hover:-translate-y-0.5
+                          hover:bg-champagne
+                        "
+                      >
+                        {community.linkText}
+
+                        <ArrowRight
+                          size={14}
+                          className="
+                            transition-transform
+                            duration-300
+
+                            group-hover:translate-x-1
+                          "
+                        />
+                      </Link>
+                    </div>
+
+                    {/* LARGE DECORATIVE NUMBER */}
+
+                    <span
+                      aria-hidden="true"
                       className="
+                        pointer-events-none
+
+                        absolute
+
+                        -bottom-10
+                        -left-4
+
+                        hidden
+
+                        font-serif
+
+                        text-[190px]
+
+                        leading-none
+
+                        tracking-[-0.08em]
+
+                        text-black/[0.025]
+
+                        xl:block
+                      "
+                    >
+                      {community.number}
+                    </span>
+                  </div>
+
+                  {/* ===================================== */}
+                  {/* RIGHT MEDIA */}
+                  {/* ===================================== */}
+
+                  <div
+                    data-stack-gallery
+                    className="
+                      relative
+
+                      grid
+
+                      min-h-[520px]
+
+                      grid-cols-12
+                      overflow-hidden
+
+                      lg:col-span-6
+                      lg:min-h-full
+                    "
+                  >
+                    {/* BIG IMAGE */}
+
+                    <div
+                      data-stack-image
+                      className="
+                        group
+
                         relative
 
-                        h-px
-                        flex-1
+                        col-span-12
+
+                        min-h-[330px]
 
                         overflow-hidden
 
-                        bg-black/10
+                        bg-black/5
+
+                        sm:col-span-8
+                        sm:min-h-[520px]
+
+                        lg:min-h-full
+                      "
+                    >
+                      <Image
+                        src={community.images[0]}
+                        alt={`${community.title} primary view`}
+                        fill
+                        priority={index === 0}
+                        sizes="
+                          (max-width: 640px) 100vw,
+                          (max-width: 1024px) 66vw,
+                          40vw
+                        "
+                        className="
+                          object-cover
+
+                          transition-transform
+
+                          duration-[1600ms]
+
+                          ease-out
+
+                          group-hover:scale-[1.035]
+                        "
+                      />
+
+                      <div
+                        className="
+                          pointer-events-none
+
+                          absolute
+                          inset-0
+
+                          bg-gradient-to-t
+
+                          from-black/25
+
+                          via-transparent
+
+                          to-transparent
+                        "
+                      />
+                    </div>
+
+                    {/* SIDE GRID */}
+
+                    <div
+                      className="
+                        col-span-12
+
+                        grid
+
+                        grid-cols-3
+
+                        gap-[2px]
+
+                        sm:col-span-4
+                        sm:grid-cols-1
+                      "
+                    >
+                      {community.images
+                        .slice(1)
+                        .map(
+                          (
+                            image,
+                            imageIndex
+                          ) => (
+                            <div
+                              key={image}
+                              data-stack-image
+                              className="
+                                group
+
+                                relative
+
+                                min-h-[150px]
+
+                                overflow-hidden
+
+                                bg-black/5
+
+                                sm:min-h-[172px]
+
+                                lg:min-h-0
+                              "
+                            >
+                              <Image
+                                src={image}
+                                alt={`${community.title} view ${imageIndex + 2
+                                  }`}
+                                fill
+                                sizes="
+                                  (max-width: 640px) 33vw,
+                                  (max-width: 1024px) 34vw,
+                                  20vw
+                                "
+                                className="
+                                  object-cover
+
+                                  transition-transform
+
+                                  duration-[1400ms]
+
+                                  ease-out
+
+                                  group-hover:scale-[1.05]
+                                "
+                              />
+
+                              <div
+                                className="
+                                  pointer-events-none
+
+                                  absolute
+                                  inset-0
+
+                                  bg-black/[0.05]
+                                "
+                              />
+                            </div>
+                          )
+                        )}
+                    </div>
+
+                    {/* MEDIA LABEL */}
+
+                    <div
+                      className="
+                        pointer-events-none
+
+                        absolute
+
+                        bottom-6
+                        left-6
+
+                        z-10
+
+                        text-white
                       "
                     >
                       <span
-                        className={`
-                          absolute
-                          inset-y-0
-                          left-0
+                        className="
+                          text-[9px]
 
-                          bg-champagne
+                          font-menu
+                          font-medium
 
-                          transition-all
-                          duration-500
+                          uppercase
 
-                          ${index <=
-                            activeIndex
-                            ? "w-full"
-                            : "w-0"
-                          }
-                        `}
-                      />
+                          tracking-[0.18em]
+
+                          text-white/65
+                        "
+                      >
+                        New City Paradise
+                      </span>
+
+                      <p
+                        className="
+                          mt-1
+
+                          font-serif
+
+                          text-xl
+
+                          sm:text-2xl
+                        "
+                      >
+                        {community.title}
+                      </p>
                     </div>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* ================================ */}
-            {/* RIGHT IMAGE MOSAIC */}
-            {/* ================================ */}
-
-            <div
-              className="
-                lg:col-span-7
-              "
-            >
-              <div
-                ref={galleryRef}
-                key={
-                  activeCommunity.id
-                }
-                className="
-                  grid
-                  grid-cols-12
-
-                  gap-[3px]
-
-                  overflow-hidden
-
-                  rounded-[18px]
-                "
-              >
-                {/* IMAGE 1 */}
-
-                <div
-                  data-gallery-item
-                  className="
-                    group
-
-                    relative
-
-                    col-span-7
-
-                    min-h-[280px]
-
-                    overflow-hidden
-
-                    bg-black/5
-
-                    sm:min-h-[360px]
-
-                    lg:min-h-[390px]
-
-                    xl:min-h-[430px]
-                  "
-                >
-                  <Image
-                    src={
-                      activeCommunity
-                        .images[0]
-                    }
-                    alt={`${activeCommunity.title} primary view`}
-                    fill
-                    priority={
-                      activeIndex ===
-                      0
-                    }
-                    sizes="
-                      (max-width: 1024px) 60vw,
-                      35vw
-                    "
-                    className="
-                      object-cover
-
-                      transition-transform
-
-                      duration-[1400ms]
-
-                      ease-out
-
-                      group-hover:scale-[1.035]
-                    "
-                  />
-
-                  <div
-                    className="
-                      pointer-events-none
-
-                      absolute
-                      inset-0
-
-                      bg-gradient-to-t
-
-                      from-black/35
-
-                      via-transparent
-
-                      to-transparent
-                    "
-                  />
-
-                  {/* IMAGE TITLE */}
-
-                  <div
-                    className="
-                      absolute
-
-                      bottom-0
-                      left-0
-
-                      p-5
-
-                      text-white
-
-                      sm:p-6
-                    "
-                  >
-                    <span
-                      className="
-                        mb-1
-                        block
-
-                        text-[9px]
-
-                        font-menu
-
-                        uppercase
-
-                        tracking-[0.2em]
-
-                        text-white/60
-                      "
-                    >
-                      0
-                      {activeIndex +
-                        1}{" "}
-                      / 03
-                    </span>
-
-                    <p
-                      className="
-                        font-serif
-
-                        text-xl
-
-                        sm:text-2xl
-                      "
-                    >
-                      {
-                        activeCommunity.title
-                      }
-                    </p>
                   </div>
                 </div>
-
-                {/* IMAGE 2 */}
-
-                <div
-                  data-gallery-item
-                  className="
-                    group
-
-                    relative
-
-                    col-span-5
-
-                    min-h-[280px]
-
-                    overflow-hidden
-
-                    bg-black/5
-
-                    sm:min-h-[360px]
-
-                    lg:min-h-[390px]
-
-                    xl:min-h-[430px]
-                  "
-                >
-                  <Image
-                    src={
-                      activeCommunity
-                        .images[1]
-                    }
-                    alt={`${activeCommunity.title} secondary view`}
-                    fill
-                    sizes="
-                      (max-width: 1024px) 40vw,
-                      25vw
-                    "
-                    className="
-                      object-cover
-
-                      transition-transform
-
-                      duration-[1400ms]
-
-                      ease-out
-
-                      group-hover:scale-[1.04]
-                    "
-                  />
-                </div>
-
-                {/* IMAGE 3 */}
-
-                <div
-                  data-gallery-item
-                  className="
-                    group
-
-                    relative
-
-                    col-span-5
-
-                    min-h-[180px]
-
-                    overflow-hidden
-
-                    bg-black/5
-
-                    sm:min-h-[220px]
-
-                    lg:min-h-[230px]
-                  "
-                >
-                  <Image
-                    src={
-                      activeCommunity
-                        .images[2]
-                    }
-                    alt={`${activeCommunity.title} architectural view`}
-                    fill
-                    sizes="
-                      (max-width: 1024px) 40vw,
-                      25vw
-                    "
-                    className="
-                      object-cover
-
-                      transition-transform
-
-                      duration-[1400ms]
-
-                      ease-out
-
-                      group-hover:scale-[1.04]
-                    "
-                  />
-                </div>
-
-                {/* IMAGE 4 */}
-
-                <div
-                  data-gallery-item
-                  className="
-                    group
-                    relative
-                    col-span-7
-                    min-h-[180px]
-                    overflow-hidden
-                    bg-black/5
-                    sm:min-h-[220px]
-                    lg:min-h-[230px]
-                  "
-                >
-                  <Image
-                    src={
-                      activeCommunity
-                        .images[3]
-                    }
-                    alt={`${activeCommunity.title} panoramic view`}
-                    fill
-                    sizes="
-                      (max-width: 1024px) 60vw,
-                      35vw
-                    "
-                    className="
-                      object-cover
-                      transition-transform
-                      duration-[1400ms]
-                      ease-out
-                      group-hover:scale-[1.035]
-                    "
-                  />
-                </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

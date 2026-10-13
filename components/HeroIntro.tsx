@@ -4,218 +4,407 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { SITE_CONFIG } from "@/lib/siteConfig";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const highlights = [
-  {
-    label: "PHATA Approved",
-    value: "4,256+ Kanal",
-    detail: "NOC: 61/2022",
-    number: "01",
-  },
-  {
-    label: "Arterial Avenue",
-    value: "330-Ft Boulevard",
-    detail: "Direct GT Road access",
-    number: "02",
-  },
-  {
-    label: "Motorway Junction",
-    value: "0 KM Burhan",
-    detail: "M-1 & CPEC corridor",
-    number: "03",
-  },
-  {
-    label: "Established Legacy",
-    value: "New City Wah",
-    detail: "Developers of Phase 1 & 2",
-    number: "04",
-  },
-];
+/* =========================================================
+   HEADING WORDS
+========================================================= */
+
+function HighlightWords({
+  children,
+  tone = "white",
+}: {
+  children: string;
+  tone?: "white" | "champagne";
+}) {
+  const words = children.trim().split(/\s+/);
+
+  return (
+    <>
+      {words.map((word, index) => (
+        <span key={`${word}-${index}`}>
+          <span
+            data-heading-word
+            data-tone={tone}
+            className="inline-block"
+          >
+            {word}
+          </span>
+
+          {index < words.length - 1 && " "}
+        </span>
+      ))}
+    </>
+  );
+}
+
+/* =========================================================
+   DESCRIPTION WORDS
+========================================================= */
+
+function DescriptionWords({
+  children,
+}: {
+  children: string;
+}) {
+  const words = children.trim().split(/\s+/);
+
+  return (
+    <>
+      {words.map((word, index) => (
+        <span key={`${word}-${index}`}>
+          <span
+            data-description-word
+            className="inline "
+          >
+            {word}
+          </span>
+
+          {index < words.length - 1 && " "}
+        </span>
+      ))}
+    </>
+  );
+}
+
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 export default function HeroIntro() {
   const sectionRef = useRef<HTMLElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const descriptionRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const dividerRef = useRef<HTMLDivElement>(null);
-  const highlightsRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
+      /* =====================================================
+         DESKTOP
+      ===================================================== */
+
       mm.add(
-        "(prefers-reduced-motion: no-preference)",
+        "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
         () => {
-          const section = sectionRef.current;
-
-          if (!section) return;
-
-          const reveal = (
-            target: Element | null,
-            options: {
-              y?: number;
-              delay?: number;
-              duration?: number;
-            } = {}
-          ) => {
-            if (!target) return;
-
-            gsap.fromTo(
-              target,
-              {
-                autoAlpha: 0,
-                y: options.y ?? 45,
-              },
-              {
-                autoAlpha: 1,
-                y: 0,
-                duration: options.duration ?? 1,
-                delay: options.delay ?? 0,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: target,
-                  start: "top 92%",
-                  once: true,
-                },
-              }
+          const headingWords =
+            gsap.utils.toArray<HTMLElement>(
+              "[data-heading-word]",
+              section
             );
-          };
 
-          // Eyebrow
-          reveal(eyebrowRef.current, {
-            y: 22,
-            duration: 0.8,
+          const descriptionWords =
+            gsap.utils.toArray<HTMLElement>(
+              "[data-description-word]",
+              section
+            );
+
+          const buttons =
+            ctaRef.current?.querySelectorAll<HTMLElement>(
+              "[data-cta]"
+            );
+          gsap.set(headingWords, {
+            color: "rgba(255,255,255,0.18)",
           });
 
-          // Heading
-          reveal(headingRef.current, {
-            y: 65,
-            duration: 1.15,
+          gsap.set(descriptionWords, {
+            color: "rgba(255,255,255,0.18)",
           });
 
-          // Description
-          reveal(descriptionRef.current, {
-            y: 45,
-            delay: 0.08,
-            duration: 1,
+          if (buttons?.length) {
+            gsap.set(buttons, {
+              opacity: 0,
+              y: 24,
+            });
+          }
+
+          /*
+           * MASTER TIMELINE
+           *
+           * The entire animation is tied to:
+           * section top -> section bottom
+           *
+           * Because sticky viewport remains inside
+           * this 320vh section, it cannot release
+           * before timeline completion.
+           */
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+
+              start: "top top",
+              end: "bottom bottom",
+
+              scrub: 1,
+
+              invalidateOnRefresh: true,
+            },
           });
 
-          // CTAs
-          if (ctaRef.current) {
-            const buttons =
-              ctaRef.current.querySelectorAll("[data-cta]");
+          /*
+           * ==========================================
+           * PHASE 1
+           * HEADING WORDS
+           * ==========================================
+           */
 
-            gsap.fromTo(
+          headingWords.forEach((word, index) => {
+            const isChampagne =
+              word.dataset.tone === "champagne";
+
+            tl.to(
+              word,
+              {
+                color: isChampagne
+                  ? "#D9BD89"
+                  : "#FFFFFF",
+
+                duration: 0.7,
+                ease: "none",
+              },
+              index * 0.08
+            );
+          });
+
+          /*
+           * Small pause after heading
+           */
+
+          tl.to({}, { duration: 0.45 });
+
+          /*
+           * ==========================================
+           * PHASE 2
+           * DESCRIPTION WORDS
+           * ==========================================
+           */
+
+          descriptionWords.forEach((word) => {
+            tl.to(
+              word,
+              {
+                color: "rgba(255,255,255,0.84)",
+
+                duration: 0.4,
+                ease: "none",
+              },
+              ">-0.33"
+            );
+          });
+
+          /*
+           * ==========================================
+           * PHASE 3
+           * CTA REVEAL
+           * ==========================================
+           */
+
+          if (buttons?.length) {
+            tl.to(
               buttons,
               {
-                autoAlpha: 0,
-                y: 25,
+                opacity: 1,
+                y: 0,
+
+                stagger: 0.12,
+
+                duration: 0.7,
+
+                ease: "power2.out",
+              },
+              ">"
+            );
+          }
+
+          /*
+           * ==========================================
+           * PHASE 4
+           * FINAL HOLD
+           * ==========================================
+           *
+           * Keeps fully highlighted text visible
+           * before sticky section releases.
+           */
+
+          tl.to({}, { duration: 1.2 });
+
+          /*
+           * EYEBROW
+           */
+
+          if (eyebrowRef.current) {
+            gsap.fromTo(
+              eyebrowRef.current,
+              {
+                opacity: 0,
+                y: 18,
               },
               {
-                autoAlpha: 1,
+                opacity: 1,
                 y: 0,
-                stagger: 0.12,
+
                 duration: 0.8,
+
                 ease: "power3.out",
+
                 scrollTrigger: {
-                  trigger: ctaRef.current,
-                  start: "top 92%",
+                  trigger: section,
+                  start: "top 75%",
                   once: true,
                 },
               }
             );
           }
 
-          // Divider
-          if (dividerRef.current) {
-            gsap.fromTo(
-              dividerRef.current,
-              {
-                scaleX: 0,
-                transformOrigin: "left center",
-              },
-              {
-                scaleX: 1,
-                duration: 1.2,
-                ease: "power3.inOut",
-                scrollTrigger: {
-                  trigger: dividerRef.current,
-                  start: "top 95%",
-                  once: true,
-                },
-              }
-            );
-          }
+          /*
+           * BACKGROUND PARALLAX
+           */
 
-          // Highlight cards
-          if (highlightsRef.current) {
-            const cards =
-              highlightsRef.current.querySelectorAll(
-                "[data-highlight]"
-              );
-
-            gsap.fromTo(
-              cards,
-              {
-                autoAlpha: 0,
-                y: 55,
-              },
-              {
-                autoAlpha: 1,
-                y: 0,
-                stagger: 0.12,
-                duration: 0.9,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: highlightsRef.current,
-                  start: "top 88%",
-                  once: true,
-                },
-              }
-            );
-          }
-
-          // Background image parallax
           if (backgroundRef.current) {
             gsap.fromTo(
               backgroundRef.current,
               {
-                yPercent: -4,
+                yPercent: -3,
                 scale: 1.04,
               },
               {
-                yPercent: 4,
+                yPercent: 3,
                 scale: 1.08,
+
                 ease: "none",
+
                 scrollTrigger: {
                   trigger: section,
                   start: "top bottom",
                   end: "bottom top",
-                  scrub: 1,
+
+                  scrub: 1.2,
+
+                  invalidateOnRefresh: true,
                 },
+              }
+            );
+          }
+
+          return () => {
+            tl.scrollTrigger?.kill();
+            tl.kill();
+          };
+        }
+      );
+
+      /* =====================================================
+         TABLET / MOBILE
+      ===================================================== */
+
+      mm.add(
+        "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const headingWords =
+            gsap.utils.toArray<HTMLElement>(
+              "[data-heading-word]",
+              section
+            );
+
+          const descriptionWords =
+            gsap.utils.toArray<HTMLElement>(
+              "[data-description-word]",
+              section
+            );
+
+          gsap.set(headingWords, {
+            color: "#FFFFFF",
+          });
+
+          gsap.set(descriptionWords, {
+            color: "rgba(255,255,255,0.82)",
+          });
+
+          if (eyebrowRef.current) {
+            gsap.set(eyebrowRef.current, {
+              opacity: 1,
+              y: 0,
+            });
+          }
+
+          if (ctaRef.current) {
+            gsap.set(
+              ctaRef.current.querySelectorAll(
+                "[data-cta]"
+              ),
+              {
+                opacity: 1,
+                y: 0,
               }
             );
           }
         }
       );
 
-      return () => mm.revert();
-    }, sectionRef);
+      /* =====================================================
+         REDUCED MOTION
+      ===================================================== */
 
-    return () => ctx.revert();
+      mm.add(
+        "(prefers-reduced-motion: reduce)",
+        () => {
+          gsap.set(
+            section.querySelectorAll(
+              "[data-heading-word]"
+            ),
+            {
+              color: "#FFFFFF",
+            }
+          );
+
+          gsap.set(
+            section.querySelectorAll(
+              "[data-description-word]"
+            ),
+            {
+              color:
+                "rgba(255,255,255,0.84)",
+            }
+          );
+
+          gsap.set(
+            section.querySelectorAll(
+              "[data-cta]"
+            ),
+            {
+              opacity: 1,
+              y: 0,
+            }
+          );
+
+          if (eyebrowRef.current) {
+            gsap.set(eyebrowRef.current, {
+              opacity: 1,
+              y: 0,
+            });
+          }
+        }
+      );
+
+      return () => {
+        mm.revert();
+      };
+    }, section);
+
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -223,498 +412,353 @@ export default function HeroIntro() {
       ref={sectionRef}
       className="
         relative
-        z-20
         isolate
-        overflow-hidden
-        
-        py-10
+        min-h-screen
+        overflow-visible
         text-ink
-        sm:py-12
-        lg:py-14
-        xl:py-16
+bg-champagne
+        lg:h-[320vh]
       "
     >
-      {/* BACKGROUND IMAGE */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-30
-          overflow-hidden
-        "
-      >
-        <div
-          ref={backgroundRef}
-          className="
-            absolute
-            -inset-[6%]
-            bg-[url('/images/boulevard-loft.png')]
-            bg-cover
-            bg-center
-            bg-no-repeat
-            will-change-transform
-          "
-        />
-      </div>
-
-      {/* MAIN IVORY READABILITY OVERLAY */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-20
-          bg-gradient-to-br
-          from-ink/60
-          to-transparent
-        "
-      />
-
-      {/* SOFT VERTICAL WASH */}
-      {/* <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-10
-          bg-gradient-to-b
-          from-white/10
-          via-transparent
-          to-[#f7f4ed]/55
-        "
-      /> */}
-
-      {/* SUBTLE CHAMPAGNE GLOW */}
-     
+      {/* ================================================= */}
+      {/* STICKY VIEWPORT */}
+      {/* ================================================= */}
 
       <div
+        ref={stickyRef}
         className="
           relative
-          mx-auto
-          max-w-[1440px]
+          min-h-screen
+          overflow-hidden
+          lg:sticky
+          lg:top-0
+          lg:flex
+          lg:h-screen
+          lg:items-center
         "
       >
-        {/* TOP CONTENT */}
-        <div
+        {/* =============================================== */}
+        {/* BACKGROUND */}
+        {/* =============================================== */}
+
+        {/* <div
+          aria-hidden="true"
           className="
-            grid
-            grid-cols-1
-            gap-10
-            lg:grid-cols-12
-            lg:gap-x-12
-            xl:gap-x-10
+            pointer-events-none
+            absolute
+            inset-0
+            -z-30
+            overflow-hidden
           "
         >
-          {/* LEFT */}
-          <div className="lg:col-span-6">
-            {/* EYEBROW */}
-            <div
-              ref={eyebrowRef}
-              className="
-                mb-8
-                inline-flex
-                max-w-full
-                items-start
-                gap-3
-                sm:mb-4
-              "
-            >
-
-              <span
-                className="
-                  text-[10px]
-                  font-menu
-                  font-semibold
-                  uppercase
-                  leading-relaxed
-                  tracking-[0.15em]
-                  text-ink/60
-                  sm:text-xs
-                  sm:tracking-[0.1em]
-                "
-              >
-                PHATA NOC Approved ·
-                DG-PHATA/W-I/PHS/61/2022
-              </span>
-            </div>
-
-            {/* HEADING */}
-            <h1
-              ref={headingRef}
-              className="
-                max-w-[850px]
-                text-[clamp(2.35rem,3.6vw,4rem)]
-                font-medium
-                capitalize
-                leading-[1.1]
-                tracking-[-0.035em]
-                text-white
-              "
-            >
-              New City Paradise Wah — <br />
-              <span
-                className="
-                  font-light
-                  italic
-                  text-champagne/80
-                "
-              >
-                Residential &amp; Commercial Plots
-              </span>{" "} <br />
-              near Burhan Interchange.
-            </h1>
-
-            {/* <div
-              className="
-                mt-10
-                flex
-                items-center
-                gap-4
-                sm:mt-12
-              "
-              aria-hidden="true"
-            >
-              <span className="h-px w-16 bg-champagne" />
-              <span className="h-1.5 w-1.5 rotate-45 bg-champagne" />
-            </div> */}
-          </div>
-
-          {/* RIGHT */}
           <div
+            ref={backgroundRef}
             className="
-              flex
-              flex-col
-              justify-end
-              lg:col-span-6
-              lg:pb-1
-            "
-          >
-            <div ref={descriptionRef}>
-              {/* <div
-                className="
-                  mb-7
-                  hidden
-                  h-px
-                  w-12
-                  bg-champagne
-                  lg:block
-                "
-              /> */}
+              absolute
+              -inset-[6%]
 
-              <p
-                className="
-                  max-w-[calc(100%-2.5rem)]
-                  font-serif
-                  text-[15px]
-                  leading-[1.95]
-                  text-white/80
-                  sm:text-[17px]
-                  lg:text-[16px]
-                  xl:text-lg
-                "
-              >
-                A 20,000 Kanal master-planned community developed by the
-                makers of New City Wah, strategically located on the
-                330-ft GT Road adjacent to the Burhan Interchange
-                (M-1 Motorway) and the northern CPEC Route. Featuring
-                verified residential plots of 3.5 Marla, 5 Marla,
-                10 Marla, and 1 Kanal, alongside prime commercial sectors.
-              </p>
-            </div>
+              bg-[url('/images/boulevard-loft.png')]
+              bg-cover
+              bg-center
+              bg-no-repeat
 
-            {/* CTA */}
-            <div
-              ref={ctaRef}
-              className="
-                mt-9
-                flex
-                
-                items-center
-                gap-3
-                lg:mt-6
-              "
-            >
-              <Link
-                data-cta
-                href="#plots-overview"
-                className="
-                  group
-                  inline-flex
-                  min-h-12
-                  items-center
-                  justify-center
-                  gap-4
-                  rounded-xl
-                  bg-ink/70
-                  px-6
-                  py-3.5
-                  text-[10px]
-                  font-semibold
-                  text-white
-                  transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  hover:bg-champagne
-                  hover:shadow-lg
-                  sm:text-xs
-                "
-              >
-                <span>Explore Plot Options</span>
-
-                <ArrowRight
-                  size={15}
-                  className="
-                    transition-transform
-                    duration-300
-                    group-hover:translate-x-1
-                  "
-                />
-              </Link>
-
-              {/* <Link
-                data-cta
-                href="#location-connectivity"
-                className="
-                  group
-                  inline-flex
-                  min-h-12
-                  items-center
-                  justify-center
-                  gap-3
-                  rounded-full
-                  border
-                  border-black/15
-                  bg-white/70
-                  px-6
-                  py-3.5
-                  text-[10px]
-                  font-menu
-                  font-medium
-                  uppercase
-                  tracking-[0.12em]
-                  text-ink
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  hover:border-ink
-                  hover:bg-white
-                  sm:text-[11px]
-                "
-              >
-                <span>Location &amp; Routes</span>
-
-                <ArrowRight
-                  size={15}
-                  className="
-                    transition-transform
-                    duration-300
-                    group-hover:translate-x-1
-                  "
-                />
-              </Link> */}
-
-              <Link
-                data-cta
-                href={SITE_CONFIG.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  group
-                  inline-flex
-                  min-h-12
-                  items-center
-                  justify-center
-                  gap-3
-                  rounded-xl
-                  border
-                  border-champagne/40
-                  bg-champagne/[0.1]
-                  px-6
-                  py-3.5
-                  text-[10px]
-                  font-menu
-                  font-medium
-                  uppercase
-                  text-white
-                  backdrop-blur-md
-                  transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  hover:border-champagne
-                  hover:bg-champagne/20
-                  sm:text-xs
-                "
-              >
-                <span>Verified WhatsApp Desk</span>
-
-                <ArrowUpRight
-                  size={15}
-                  className="
-                    transition-transform
-                    duration-300
-                    group-hover:-translate-y-0.5
-                    group-hover:translate-x-0.5
-                  "
-                />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* DIVIDER */}
-        <div className="mt-20 sm:mt-24 lg:mt-28">
-          <div
-            ref={dividerRef}
-            className="
-              h-px
-              w-full
-              bg-white/15
+              will-change-transform
             "
           />
-        </div>
+        </div> */}
 
-        {/* HIGHLIGHTS */}
+        {/* =============================================== */}
+        {/* CHAMPAGNE GLOW */}
+        {/* =============================================== */}
+
         <div
-          ref={highlightsRef}
+          aria-hidden="true"
           className="
-            mt-8
-            grid
-            grid-cols-1
-            gap-4
-            sm:grid-cols-2
-            lg:grid-cols-4
-            lg:gap-5
+            pointer-events-none
+            absolute
+            -right-40
+            top-1/2
+            -z-10
+
+            h-[600px]
+            w-[600px]
+
+            -translate-y-1/2
+
+            rounded-full
+
+            bg-champagne/[0.08]
+
+            blur-[130px]
+          "
+        />
+
+        {/* ================================================= */}
+        {/* CONTENT */}
+        {/* ================================================= */}
+
+        <div
+          className="
+            relative
+            mx-auto
+            w-full
+            max-w-[1440px]
+
+            px-5
+            py-20
+
+            sm:px-8
+
+            lg:px-12
+            lg:py-16
+
+            xl:px-16
           "
         >
-          {highlights.map((item) => (
-            <div
-              key={item.number}
-              data-highlight
+          {/* =============================================== */}
+          {/* EYEBROW */}
+          {/* =============================================== */}
+
+          <div
+            ref={eyebrowRef}
+            className="
+              mb-7
+              text-center
+            "
+          >
+            <span
               className="
-                group
-                relative
-                flex
-                min-h-[190px]
-                flex-col
-                justify-between
-                overflow-hidden
-                rounded-xl
-                border
-                border-black/[0.08]
-                bg-white/15
-                p-6
-                backdrop-blur-md
-                transition-all
-                duration-500
-                hover:-translate-y-1.5
-                hover:border-champagne/40
-                hover:bg-white/80
-                hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)]
-                sm:min-h-[210px]
-                lg:p-7
+                text-[10px]
+                font-menu
+                text-white/55
+                sm:text-sm
               "
             >
-              <div
-                className="
-                  absolute
-                  left-0
-                  top-0
-                  h-[2px]
-                  w-0
-                  bg-champagne
-                  transition-all
-                  duration-500
-                  group-hover:w-full
-                "
-              />
+              PHATA NOC Approved ·
+              DG-PHATA/W-I/PHS/61/2022
+            </span>
+          </div>
 
-              <div
+          {/* =============================================== */}
+          {/* HEADING */}
+          {/* =============================================== */}
+
+          <div className="text-center">
+            <h1
+              className="
+                mx-auto
+                max-w-[1250px]
+                text-[clamp(2.35rem,3vw,3rem)]
+                font-medium
+                capitalize
+                leading-[1.08]
+                tracking-[-0.025em]
+              "
+            >
+              <span className="block">
+                <HighlightWords>
+                  New City Paradise Wah —
+                </HighlightWords>
+              </span>
+
+              <span
                 className="
-                  flex
-                  items-start
-                  justify-between
-                  gap-3
+                  mt-1
+                  block
+
+                  font-light
+                  italic
                 "
               >
-                <span
-                  className="
-                    text-[10px]
-                    font-menu
-                    font-medium
-                    uppercase
-                    leading-relaxed
-                    tracking-[0.10em]
-                    text-champagne
-                  "
-                >
-                  {item.label}
-                </span>
+                <HighlightWords >
+                  Residential & Commercial Plots
+                </HighlightWords>
+              </span>
 
-                {/* <span
-                  aria-hidden="true"
-                  className="
-                    font-serif
-                    text-xs
-                    italic
-                    text-champagne/70
-                  "
-                >
-                  {item.number}
-                </span> */}
-              </div>
+              <span className="mt-1 block">
+                <HighlightWords>
+                  near Burhan Interchange.
+                </HighlightWords>
+              </span>
+            </h1>
+          </div>
 
-              <div className="mt-8">
-                <p
-                  className="
-                    font-serif
-                    text-[clamp(1.3rem,1.7vw,1.7rem)]
-                    font-normal
-                    leading-tight
-                    tracking-[-0.025em]
-                    text-white
-                  "
-                >
-                  {item.value}
-                </p>
+          {/* =============================================== */}
+          {/* DESCRIPTION */}
+          {/* =============================================== */}
 
-                <p
-                  className="
-                    mt-3
-                    font-serif
-                    text-[12px]
-                    leading-relaxed
-                    text-white/55
-                    sm:text-[13px]
-                  "
-                >
-                  {item.detail}
-                </p>
-              </div>
+          <div
+            className="
+              mx-auto
+              mt-8
+              max-w-5xl
 
-              <div
-                aria-hidden="true"
+              text-center
+
+              sm:mt-10
+            "
+          >
+            <p
+              className="
+                text-[15px]
+                leading-[1.95]
+                font-light
+                sm:text-[17px]
+                lg:text-[17px]
+
+                xl:text-xl
+              "
+            >
+              <DescriptionWords>
+                A 20,000 Kanal master-planned community developed by the makers of New City Wah, strategically located on the 330-ft GT Road adjacent to the Burhan Interchange (M-1 Motorway) and the northern CPEC Route. Featuring verified residential plots of 3.5 Marla, 5 Marla, 10 Marla, and 1 Kanal, alongside prime commercial sectors.
+              </DescriptionWords>
+            </p>
+          </div>
+
+          {/* =============================================== */}
+          {/* CTA */}
+          {/* =============================================== */}
+
+          <div
+            ref={ctaRef}
+            className="
+              mt-9
+
+              flex
+              flex-wrap
+
+              items-center
+              justify-center
+
+              gap-3
+
+              sm:mt-10
+            "
+          >
+            <Link
+              data-cta
+              href="#plots-overview"
+              className="
+                group
+
+                inline-flex
+                min-h-12
+
+                items-center
+                justify-center
+
+                gap-4
+
+                rounded-xl
+
+                bg-white
+
+                px-6
+                py-3.5
+
+                text-[10px]
+
+                font-menu
+                font-semibold
+
+                uppercase
+                tracking-[0.12em]
+
+                text-[#17231F]
+
+                shadow-lg
+
+                transition-all
+                duration-300
+
+                hover:-translate-y-0.5
+                hover:bg-champagne
+                hover:text-white
+
+                sm:text-xs
+              "
+            >
+              <span>
+                Explore Plot Options
+              </span>
+
+              <ArrowRight
+                size={15}
                 className="
-                  pointer-events-none
-                  absolute
-                  -bottom-7
-                  -right-7
-                  h-24
-                  w-24
-                  rounded-full
-                  border
-                  border-champagne/10
                   transition-transform
-                  duration-500
-                  group-hover:scale-125
+                  duration-300
+                  group-hover:translate-x-1
                 "
               />
-            </div>
-          ))}
+            </Link>
+
+            <Link
+              data-cta
+              href={
+                SITE_CONFIG.whatsappLink
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                group
+
+                inline-flex
+                min-h-12
+
+                items-center
+                justify-center
+
+                gap-3
+
+                rounded-xl
+
+                border
+                border-white/25
+
+                bg-white/10
+
+                px-6
+                py-3.5
+
+                text-[10px]
+
+                font-menu
+                font-medium
+
+                uppercase
+                tracking-[0.1em]
+
+                text-white
+
+                backdrop-blur-md
+
+                transition-all
+                duration-300
+
+                hover:-translate-y-0.5
+                hover:border-champagne
+                hover:bg-champagne/20
+
+                sm:text-xs
+              "
+            >
+              <span>
+                Verified WhatsApp Desk
+              </span>
+
+              <ArrowUpRight
+                size={15}
+                className="
+                  transition-transform
+                  duration-300
+
+                  group-hover:-translate-y-0.5
+                  group-hover:translate-x-0.5
+                "
+              />
+            </Link>
+          </div>
+
         </div>
       </div>
     </section>

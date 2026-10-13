@@ -156,13 +156,11 @@ export default function Navbar({
           fixed
           left-0
           right-0
-          top-4
           z-50
           mx-auto
-          w-[calc(100%-2rem)]
+          w-[calc(100%-1rem)]
           max-w-[1600px]
-          sm:top-3
-          sm:w-[calc(100%-3rem)]
+          sm:w-full
         "
       >
         <div
@@ -172,10 +170,7 @@ export default function Navbar({
             h-[72px]
             items-center
             justify-between
-            rounded-2xl
-            border
             px-4
-            backdrop-blur-xl
             transition-[background-color,border-color,box-shadow]
             duration-300
             sm:px-6
@@ -183,16 +178,13 @@ export default function Navbar({
             xl:px-8
             ${isSolid
               ? `
-                  border-white/10
+                  border-white
                   bg-[#17231F]/95
                   shadow-[0_12px_40px_rgba(0,0,0,0.15)]
                   text-white
                 `
               : `
-                  border-white/20
-                  bg-[#17231F]/35
                   text-white
-                  shadow-[0_8px_30px_rgba(0,0,0,0.06)]
                 `
             }
           `}
@@ -256,11 +248,11 @@ export default function Navbar({
                     py-3
                     text-[10px]
                     font-medium
-                    uppercase
-                    tracking-[0.12em]
+                    capitalize
+                    tracking-normal
                     transition-colors
                     duration-200
-                    xl:text-[11px]
+                    xl:text-sm
                     ${isActive
                       ? "text-white"
                       : "text-white/75 hover:text-white"
@@ -293,7 +285,7 @@ export default function Navbar({
           {/* RIGHT: ACTIONS */}
           <div className="flex items-center gap-3 xl:gap-4">
             {/* Phone */}
-            <a
+            <Link
               href={`tel:${SITE_CONFIG.phoneTel}`}
               aria-label="Call New City Paradise"
               title="Call us"
@@ -305,9 +297,7 @@ export default function Navbar({
                 items-center
                 justify-center
                 rounded-full
-                border
-                border-white/15
-                bg-white/5
+                course-pointer                
                 text-white
                 transition-all
                 duration-300
@@ -317,7 +307,7 @@ export default function Navbar({
               "
             >
               <PhoneCall size={17} strokeWidth={1.7} />
-            </a>
+            </Link>
 
             {/* WhatsApp */}
             <a
@@ -334,9 +324,6 @@ export default function Navbar({
                 items-center
                 justify-center
                 rounded-full
-                border
-                border-white/15
-                bg-white/5
                 text-[#4ADE80]
                 transition-all
                 duration-300
@@ -359,20 +346,16 @@ export default function Navbar({
                 justify-center
                 gap-3
                 whitespace-nowrap
-                rounded-lg
                 border
-                border-[#D9BD89]
-                bg-[#D9BD89]
+                border-ivory
                 px-5
-                text-[10px]
+                text-sm
                 font-semibold
-                uppercase
-                tracking-[0.12em]
-                text-[#17231F]
+                text-ivory
                 transition-all
                 duration-300
                 hover:border-white
-                hover:bg-white
+                hover:bg-white/15
                 lg:inline-flex
               "
             >
