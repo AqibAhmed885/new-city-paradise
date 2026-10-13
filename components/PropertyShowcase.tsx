@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -107,54 +106,109 @@ export const DELIVERED_PROJECTS: DeliveredProject[] = [
 export default function PropertyShowcase() {
   const containerRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const shimmerRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const contentWrapperRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<ScrollTrigger | null>(null);
+
   const [activeIdx, setActiveIdx] = useState(0);
-  const [lightOffset, setLightOffset] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const activeIdxRef = useRef(0);
+
+  // Animate content smoothly on project index change
+  useEffect(() => {
+    if (!contentWrapperRef.current) return;
+
+    gsap.fromTo(
+      contentWrapperRef.current,
+      {
+        opacity: 0,
+        y: 14,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        clearProps: "transform,opacity",
+      }
+    );
+  }, [activeIdx]);
 
   useEffect(() => {
-    if (!containerRef.current || !frameRef.current) return;
+    const section = containerRef.current;
+    const frame = frameRef.current;
+    if (!section || !frame) return;
 
     const total = DELIVERED_PROJECTS.length;
 
-    // Track scroll progress purely across the container's natural scroll distance
-    const trigger = ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        setProgress(p);
+    const ctx = gsap.context(() => {
+      const trigger = ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const p = self.progress;
 
-        // Glass light shimmer parallax offset: -28px to +28px
-        const light = (p - 0.5) * 56;
-        setLightOffset(light);
+          // Directly update GPU-accelerated progress bar & shimmer without re-rendering React
+          if (progressBarRef.current) {
+            progressBarRef.current.style.transform = `scaleX(${p})`;
+          }
 
-        // Slide indexing across the delivered projects
-        const rawIdx = Math.min(total - 1, Math.floor(p * total));
-        setActiveIdx(rawIdx);
-      },
-    });
+          if (shimmerRef.current) {
+            const lightOffset = (p - 0.5) * 60;
+            shimmerRef.current.style.transform = `translate3d(${lightOffset}px, 0, 0)`;
+          }
+
+          // Guard active slide state updates so React only renders when the index changes
+          const rawIdx = Math.min(total - 1, Math.floor(p * total));
+          if (rawIdx !== activeIdxRef.current) {
+            activeIdxRef.current = rawIdx;
+            setActiveIdx(rawIdx);
+          }
+        },
+      });
+
+      triggerRef.current = trigger;
+    }, section);
+
+    // Refresh after next layout frame to sync with Lenis
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
 
     return () => {
-      trigger.kill();
+      clearTimeout(refreshTimer);
+      triggerRef.current = null;
+      ctx.revert();
     };
   }, []);
 
-  const selectProject = (index: number) => {
+  const selectProject = useCallback((index: number) => {
+    activeIdxRef.current = index;
     setActiveIdx(index);
-    if (!containerRef.current) return;
+
+    const trigger = triggerRef.current;
     const total = DELIVERED_PROJECTS.length;
-    const targetP = (index + 0.5) / total;
-    const box = containerRef.current.getBoundingClientRect();
-    const scrollY = window.scrollY || window.pageYOffset;
-    const distance = containerRef.current.offsetHeight - window.innerHeight;
-    window.scrollTo({
-      top: box.top + scrollY + distance * targetP,
-      behavior: "smooth",
-    });
-  };
+    const targetProgress = (index + 0.5) / total;
+
+    if (trigger && typeof trigger.start === "number" && typeof trigger.end === "number") {
+      const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
+      window.scrollTo({
+        top: targetScroll,
+        behavior: "smooth",
+      });
+    } else if (containerRef.current) {
+      const box = containerRef.current.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset;
+      const distance = containerRef.current.offsetHeight - window.innerHeight;
+      window.scrollTo({
+        top: box.top + scrollY + Math.max(0, distance * targetProgress),
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   const current = DELIVERED_PROJECTS[activeIdx] || DELIVERED_PROJECTS[0];
 
@@ -185,7 +239,7 @@ export default function PropertyShowcase() {
           </h2>
         </div>
 
-        {/* CINEMATIC ESSENCE CARD (Fill mobile screen naturally, eliminating empty white space) */}
+        {/* CINEMATIC ESSENCE CARD */}
         <div className="relative mx-auto w-full max-w-[1600px] flex-1 min-h-0 flex items-stretch justify-center pb-1 sm:pb-0">
           <div className="relative w-full h-full sm:max-h-[74vh] sm:aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-2xl bg-white shadow-2xl border border-black/10 [box-shadow:0_25px_70px_rgba(18,17,15,0.12),0_0_0_1px_rgba(182,155,108,0.2)]">
             
@@ -214,20 +268,21 @@ export default function PropertyShowcase() {
               ))}
             </div>
 
-            {/* PRISMATIC LIGHT REFRACTION STREAK (Azimute Glass Shimmer) */}
+            {/* PRISMATIC LIGHT REFRACTION STREAK (Glass Shimmer) */}
             <div
+              ref={shimmerRef}
               aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 left-0 w-[44%] z-20 opacity-35 transition-transform duration-300 ease-out"
+              className="pointer-events-none absolute inset-y-0 left-0 w-[44%] z-20 opacity-35 transition-transform duration-300 ease-out will-change-transform"
               style={{
                 background:
                   "linear-gradient(107deg, transparent 43%, rgba(231,199,139,0.08) 49%, rgba(249,232,197,0.22) 50%, rgba(172,191,200,0.08) 50.4%, transparent 53%)",
-                transform: `translate3d(${lightOffset}px, 0, 0)`,
+                transform: "translate3d(0, 0, 0)",
               }}
             />
 
-            {/* EDITORIAL OVERLAY COPY: PROJECT DETAILS (Centered on mobile, elegant left-aligned on desktop) */}
+            {/* EDITORIAL OVERLAY COPY: PROJECT DETAILS */}
             <div className="relative z-30 flex h-full w-full flex-col justify-center items-center sm:items-start text-center sm:text-left p-4 sm:p-8 lg:p-12 max-w-xl mx-auto sm:mx-0 text-white overflow-y-auto no-scrollbar pb-16 sm:pb-20">
-              <div className="space-y-2.5 sm:space-y-3.5 flex flex-col items-center sm:items-start max-w-md">
+              <div ref={contentWrapperRef} className="space-y-2.5 sm:space-y-3.5 flex flex-col items-center sm:items-start max-w-md">
                 <div className="flex items-center justify-center sm:justify-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
                   <p className="eyebrow text-champagne text-[9px] sm:text-xs uppercase tracking-[0.25em] font-semibold">
@@ -266,7 +321,7 @@ export default function PropertyShowcase() {
               </div>
             </div>
 
-            {/* FLOATING GLASS SWITCHER TABS - Horizontally scrollable on mobile */}
+            {/* FLOATING GLASS SWITCHER TABS */}
             <div
               role="group"
               aria-label="Our Delivered Projects"
@@ -313,8 +368,9 @@ export default function PropertyShowcase() {
 
             {/* BOTTOM PROGRESS LINE */}
             <div
-              className="absolute inset-x-0 bottom-0 h-[2px] bg-champagne z-40 transition-transform duration-100 ease-linear origin-left pointer-events-none"
-              style={{ transform: `scaleX(${progress})` }}
+              ref={progressBarRef}
+              className="absolute inset-x-0 bottom-0 h-[2px] bg-champagne z-40 transition-transform duration-75 ease-linear origin-left pointer-events-none will-change-transform"
+              style={{ transform: "scaleX(0)" }}
             />
           </div>
         </div>
@@ -322,4 +378,3 @@ export default function PropertyShowcase() {
     </section>
   );
 }
-

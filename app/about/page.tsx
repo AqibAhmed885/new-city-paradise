@@ -32,7 +32,7 @@ export default function AboutPage() {
   return (
     <SmoothScroll>
       <Navbar solid={false} />
-      <main className="overflow-hidden">
+      <main className="overflow-x-clip">
         <AboutClient />
         <PropertyShowcase />
       </main>
