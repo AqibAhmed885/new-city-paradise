@@ -25,6 +25,7 @@ const communities = [
       "/images/crystal-lakes.jpg",
       "/images/new-city-paradise-hero.png",
     ],
+    theme: "bg-[#FBF9F4]",
     linkText: "View Masterplan & Plots",
     linkHref: "/masterplan",
   },
@@ -42,6 +43,7 @@ const communities = [
       "/images/arcade3.png",
       "/images/newcityarcade.png",
     ],
+    theme: "bg-[#F5F2EC]",
     linkText: "Explore Commercial Sectors",
     linkHref: "/masterplan",
   },
@@ -59,6 +61,7 @@ const communities = [
       "/images/learning-campus.jpg",
       "/images/grand-estate.jpg",
     ],
+    theme: "bg-[#F1F3EF]",
     linkText: "Inquire About Awami Block",
     linkHref: "/contact",
   },
@@ -76,6 +79,7 @@ const communities = [
       "/images/garden-villa.jpg",
       "/images/garden-villa.jpg",
     ],
+    theme: "bg-[#F7F1E9]",
     linkText: "View District Specs",
     linkHref: "/masterplan",
   },
@@ -93,6 +97,7 @@ const communities = [
       "/images/amenities/water-front.jpg",
       "/images/amenities/water-front.jpg",
     ],
+    theme: "bg-[#EEF2F0]",
     linkText: "View District Specs",
     linkHref: "/masterplan",
   },
@@ -151,7 +156,7 @@ export default function Communities() {
       id="plots-overview"
       className="
         relative
-        bg-gray-200
+        bg-[#EDEBE6]
       "
     >
       {/* ================================================= */}
@@ -245,14 +250,14 @@ export default function Communities() {
 
               <div
                 data-stack-panel
-                className="
+                className={`
                   relative
                   border-t
                   overflow-hidden
-                  bg-[#F7F5EF]
                   lg:sticky
                   lg:min-h-[100svh]
-                "
+                  ${community.theme}
+                `}
                 style={{
                   top: `${desktopTop}px`,
                 }}

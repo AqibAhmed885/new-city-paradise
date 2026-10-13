@@ -33,7 +33,7 @@ export default function Home() {
         {/* <FeaturedDistricts /> */}
 
         {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
-        {/* <AzimutePerspectiveExperience /> */}
+        <AzimutePerspectiveExperience />
 
         {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
