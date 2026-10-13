@@ -441,7 +441,7 @@ bg-champagne
         {/* BACKGROUND */}
         {/* =============================================== */}
 
-        {/* <div
+        <div
           aria-hidden="true"
           className="
             pointer-events-none
@@ -465,7 +465,7 @@ bg-champagne
               will-change-transform
             "
           />
-        </div> */}
+        </div>
 
         {/* =============================================== */}
         {/* CHAMPAGNE GLOW */}
