@@ -179,7 +179,7 @@ export default function Navbar({
             ${isSolid
               ? `
                   border-white
-                  bg-[#17231F]/95
+                  bg-black/75
                   shadow-[0_12px_40px_rgba(0,0,0,0.15)]
                   text-white
                 `

@@ -5,7 +5,8 @@ import HeroIntro from "@/components/HeroIntro";
 import Communities from "@/components/Communities";
 import FeaturedDistricts from "@/components/FeaturedDistricts";
 import LocationMapSection from "@/components/LocationMapSection";
-import BookingAndFaq from "@/components/BookingAndFaq";
+import BookingProcess from "@/components/BookingProcess";
+import FaqSection from "@/components/FaqSection";
 import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -29,16 +30,19 @@ export default function Home() {
         <Communities />
 
         {/* 4. L Prime Block & Water Front District Featured Showcase */}
-        <FeaturedDistricts />
+        {/* <FeaturedDistricts /> */}
 
         {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
-        <AzimutePerspectiveExperience />
+        {/* <AzimutePerspectiveExperience /> */}
 
         {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
 
-        {/* 8. Booking Steps & Verified FAQs */}
-        <BookingAndFaq />
+        {/* 8. Booking Steps */}
+        <BookingProcess />
+
+        {/* 9. Verified FAQs */}
+        <FaqSection />
 
         {/* 9. Direct Contact & Confirmed Sales CTA */}
         <HomeCTA />

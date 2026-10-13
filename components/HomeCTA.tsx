@@ -4,9 +4,11 @@ import Image from "next/image";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight } from "lucide-react";
 import { useGsap } from "@/hooks/useGsap";
 import SectionHeading from "./SectionHeading";
 import Link from "next/link";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,7 +89,7 @@ export default function HomeCTA() {
               </div>
             </div>
 
-            <div className="mt-auto grid gap-3 pt-16 lg:grid-cols-3">
+            <div className="mt-auto grid items-stretch gap-3 pt-16 lg:grid-cols-4">
               {[
                 {
                   title: "Address",
@@ -106,17 +108,22 @@ export default function HomeCTA() {
                     "M-40 | New City Arcade, New City Housing Project Phase II",
                   href: "/contact",
                 },
+                {
+                  title: "Phone & WhatsApp",
+                  description: SITE_CONFIG.phoneDisplay,
+                  href: SITE_CONFIG.whatsappLink,
+                }
               ].map((item) => (
                 <Link
                   data-cta-reveal
                   key={item.title}
                   href={item.href}
-                  className="group rounded-2xl border border-white/25 bg-black/25 p-5 shadow-2xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 sm:p-6"
+                  className="group flex h-full flex-col rounded-2xl border border-white/25 bg-black/25 p-5 shadow-2xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 sm:p-6"
                 >
                   <div className="flex items-start justify-between gap-5">
                     <h3 className="font-medium text-lg leading-tight sm:text-xl">{item.title}</h3>
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white text-sm text-ink transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                      ↗
+                      <ArrowUpRight size={16} />
                     </span>
                   </div>
                   <p className="mt-5 max-w-sm text-xs leading-5 text-white/60 sm:text-sm sm:leading-6">
@@ -124,6 +131,7 @@ export default function HomeCTA() {
                   </p>
                 </Link>
               ))}
+
             </div>
           </div>
         </div>

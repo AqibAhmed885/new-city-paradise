@@ -1,193 +1,226 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { ArrowUpRight, MapPin, Navigation, Circle } from "lucide-react";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { SITE_CONFIG } from "@/lib/siteConfig";
 
+gsap.registerPlugin(ScrollTrigger);
+
+/* =========================================================
+   DATA
+========================================================= */
 const stats = [
   {
+    number: "01",
     category: "GATEWAY",
     value: "0 KM",
     label: "CPEC Motorway",
     desc: "Immediate corridor slip",
-    icon: (
-      <svg className="w-5 h-5 text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-      </svg>
-    ),
   },
   {
+    number: "02",
     category: "INTERCHANGE",
     value: "0 MIN",
     label: "Burhan Junction",
     desc: "Direct M-1 exit ramp",
-    icon: (
-      <svg className="w-5 h-5 text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-      </svg>
-    ),
   },
   {
+    number: "03",
     category: "COMMERCIAL",
     value: "5 MIN",
     label: "New City Phase II",
     desc: "Arcade & Financial hub",
-    icon: (
-      <svg className="w-5 h-5 text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect width="16" height="20" x="4" y="2" rx="2" />
-        <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
-      </svg>
-    ),
   },
   {
+    number: "04",
     category: "AVIATION",
     value: "20 MIN",
     label: "Islamabad Airport",
     desc: "Signal-free Motorway drive",
-    icon: (
-      <svg className="w-5 h-5 text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
-      </svg>
-    ),
   },
 ];
 
+/* =========================================================
+   COMPONENT
+========================================================= */
 export default function LocationMapSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      /* =====================================================
+         DESKTOP ANIMATION
+      ===================================================== */
+      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+        const timelineNodes = gsap.utils.toArray<HTMLElement>("[data-timeline-node]", section);
+        const heading = section.querySelector("[data-heading]");
+
+        // Heading Animation
+        if (heading) {
+          gsap.fromTo(heading,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1, y: 0, duration: 1, ease: "power3.out",
+              scrollTrigger: {
+                trigger: heading,
+                start: "top 85%",
+              }
+            }
+          );
+        }
+
+        // Timeline Nodes Scroll Animation (Slide from left slightly & fade in)
+        timelineNodes.forEach((node) => {
+          gsap.fromTo(node,
+            { opacity: 0, x: -30 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: node,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+      });
+
+      return () => {
+        mm.revert();
+      };
+    }, section);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="location-connectivity"
-      className="relative z-20 bg-white py-20 sm:py-28 text-ink border-b border-black/10"
+      // Soft light background
+      className="relative bg-[#FAFAFA] text-[#2C302E]"
     >
-      <div className="container-pad max-w-7xl mx-auto">
-        
-        {/* Editorial Top Heading */}
-        <div className="grid lg:grid-cols-12 gap-8 items-end mb-12 sm:mb-16">
-          <div className="lg:col-span-7">
-            <p className="text-[11px] font-menu uppercase tracking-[0.28em] text-champagne font-semibold mb-3">
-              STRATEGIC POSITION
-            </p>
-            <h2 className="text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[1.05] tracking-tight uppercase text-ink font-normal">
-              MINUTES AWAY FROM{" "}
-              <span className="italic font-light text-champagne lowercase first-letter:uppercase">
-                MAJOR
+      <div className="flex flex-col-reverse lg:flex-row w-full max-w-[1920px] mx-auto">
+
+        {/* ================================================= */}
+        {/* LEFT SIDE: SCROLLING CONTENT (Timeline) */}
+        {/* ================================================= */}
+        <div className="relative w-full lg:w-1/2 px-6 py-16 lg:px-16 lg:py-24 xl:px-24">
+
+          {/* Heading Section */}
+          <div data-heading className="mb-16 lg:mb-12 lg:mt-[2vh]">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-[10px] font-menu  uppercase tracking-[0.5em] text-champagne">
+                Strategic Position
               </span>
-              <br />
-              <span className="italic font-light text-champagne lowercase first-letter:uppercase">
-                LANDMARKS
-              </span>
+            </div>
+            <h2 className="text-[clamp(2.2rem,4vw,4rem)] font-normal leading-[1.2] tracking-tight text-[#1A1C1B]">
+              Minutes away from <br className="hidden lg:block" />
+              <span className="font-light italic text-champagne">major landmarks.</span>
             </h2>
           </div>
 
-          <div className="lg:col-span-5">
-            <p className="font-serif text-sm sm:text-base leading-relaxed text-black/65 max-w-lg">
-              Situated at the confluence of the M-1 Motorway, Grand Trunk (GT) Road, and the CPEC Northern Highway, offering rapid connectivity across the Capital Region.
-            </p>
-          </div>
-        </div>
+          {/* Timeline List (Clean & Minimal, No Cards) */}
+          <div className="relative flex flex-col gap-12 lg:gap-20 lg:pb-[15vh]">
+            {/* The vertical line running through the timeline */}
+            <div className="absolute left-[7px] top-2 bottom-0 w-[1px] bg-gray-200" />
 
-        {/* Main 2-Column Content Layout (As in Screenshot) */}
-        <div className="grid lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Stylized Map Card */}
-          <div className="lg:col-span-7 relative rounded-[1.75rem] overflow-hidden border border-black/10 bg-[#e5e3df] shadow-md min-h-[460px] sm:min-h-[520px] flex flex-col justify-between p-4 sm:p-6">
-            
-            {/* Map Iframe */}
-            <iframe
-              title="Verified Location Map of New City Paradise near Burhan Interchange"
-              src="https://www.google.com/maps?q=New%20City%20Paradise%20Burhan%20Interchange&output=embed"
-              className="absolute inset-0 w-full h-full border-0 object-cover"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-
-            {/* Top Badge: CPEC NORTHERN GATEWAY */}
-            <div className="relative z-10 self-start">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md shadow-md border border-black/10 text-[10px] sm:text-xs font-menu uppercase tracking-wider font-semibold text-ink">
-                <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-                <span>CPEC NORTHERN GATEWAY</span>
-              </div>
-            </div>
-
-            {/* Bottom Overlay Card: Zero-Signal Transit & Google Maps */}
-            <div className="relative z-10 mt-auto rounded-2xl bg-white/95 backdrop-blur-md p-4 sm:p-5 border border-black/10 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h3 className="font-serif text-base sm:text-lg font-semibold text-ink">
-                  Zero–Signal Transit
-                </h3>
-                <p className="text-xs font-serif text-black/65 mt-0.5">
-                  Direct dedicated high-speed slip-roads from M-1 Motorway
-                </p>
-              </div>
-
-              <a
-                href="https://maps.google.com/?q=New+City+Paradise+Pakistan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black/[0.04] hover:bg-champagne hover:text-white border border-black/15 text-[11px] font-menu uppercase tracking-wider text-ink font-semibold transition-all"
+            {stats.map((item, index) => (
+              <div
+                key={item.label}
+                data-timeline-node
+                className="relative pl-10 lg:pl-16 group"
               >
-                <span>GOOGLE MAPS</span>
-                <span>↗</span>
-              </a>
-            </div>
-          </div>
+                {/* Timeline Dot */}
+                <div className="absolute left-0 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white border border-[#A89F91] shadow-sm transition-transform duration-300 group-hover:scale-125">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#8C8273]" />
+                </div>
 
-          {/* Right Column: 2x2 Landmark Grid + Wide Full-Width Bar */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            
-            {/* 2x2 Grid of Stat Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {stats.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-black/10 bg-[#faf9f6] p-5 sm:p-6 transition-all duration-300 hover:border-champagne/50 hover:shadow-md flex flex-col justify-between min-h-[165px]"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-lg bg-champagne/10 flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    <span className="text-[9px] font-menu uppercase tracking-widest text-black/50 font-semibold">
+                {/* Content */}
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    {/* <span className="text-[10px] font-menu text-gray-400 tracking-widest">{item.number}</span> */}
+                    <span className="text-[10px] font-menu font-semibold uppercase tracking-[0.15em] text-[#8C8273]">
                       {item.category}
                     </span>
                   </div>
 
-                  <div className="mt-4">
-                    <p className="font-serif text-3xl sm:text-[34px] font-normal tracking-tight text-ink leading-none">
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-6">
+                    <div>
+                      <h3 className="font-serif text-[22px] lg:text-[26px] font-normal leading-tight text-[#1A1C1B] mb-1.5">
+                        {item.label}
+                      </h3>
+                      <p className="font-serif text-[14px] text-gray-500">
+                        {item.desc}
+                      </p>
+                    </div>
+                    <span className="font-serif text-[28px] lg:text-[36px] font-light leading-none text-[#8C8273] shrink-0">
                       {item.value}
-                    </p>
-                    <p className="font-serif text-sm font-semibold text-ink mt-2">
-                      {item.label}
-                    </p>
-                    <p className="text-[11px] font-serif text-black/55 mt-0.5">
-                      {item.desc}
-                    </p>
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Wide Bottom Card: Khanpur Dam & Leisure Belt */}
-            <div className="rounded-2xl border border-black/10 bg-[#faf9f6] p-5 sm:p-6 transition-all duration-300 hover:border-champagne/50 hover:shadow-md flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-champagne/10 border border-champagne/20 flex items-center justify-center shrink-0">
-                  <svg className="w-5 h-5 text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-serif text-base font-semibold text-ink">
-                    Khanpur Dam &amp; Leisure Belt
-                  </p>
-                  <p className="text-xs font-serif text-black/60 mt-0.5">
-                    20 mins to eco-resorts &amp; water sports
-                  </p>
-                </div>
               </div>
-
-              <span className="font-serif text-2xl sm:text-3xl text-champagne font-light shrink-0">
-                20m
-              </span>
-            </div>
-
+            ))}
           </div>
 
+          {/* Mobile Actions */}
+          <div className="mt-16 flex flex-wrap gap-4 lg:hidden">
+            <Link href="#booking" className="inline-flex items-center gap-2 rounded-xl bg-[#1A1C1B] px-6 py-3.5 text-[10px] font-menu font-semibold uppercase tracking-widest text-white">
+              Book Site Visit <ArrowUpRight size={14} />
+            </Link>
+            <a href={SITE_CONFIG.whatsappLink} className="inline-flex items-center rounded-xl border border-gray-300 px-6 py-3.5 text-[10px] font-menu font-semibold uppercase tracking-widest text-[#1A1C1B] bg-white">
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        {/* ================================================= */}
+        {/* RIGHT SIDE: STICKY MAP */}
+        {/* ================================================= */}
+        <div className="relative w-full lg:w-1/2 h-[45vh] lg:h-screen lg:sticky lg:top-0 overflow-hidden bg-gray-100">
+          {/* Map borders for clean separation on desktop */}
+          <div className="absolute inset-y-0 left-0 w-[1px] bg-gray-200 z-30 hidden lg:block" />
+
+          <iframe
+            title="Satellite Map of New City Paradise near Burhan Interchange"
+            src="https://www.google.com/maps?q=New%20City%20Paradise%20Burhan%20Interchange&t=m&z=14&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-full w-full border-0 filter grayscale opacity-90 mix-blend-multiply"
+          />
+
+          {/* Center Marker on Map */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+            <div className="relative flex items-center justify-center">
+              <span className="absolute h-16 w-16 animate-ping rounded-full bg-[#8C8273]/20" />
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-lg border border-gray-100">
+                <MapPin size={18} className="text-[#8C8273]" />
+              </div>
+            </div>
+          </div>
+
+          {/* Map Badge */}
+          <div className="absolute bottom-6 right-6 z-40 hidden lg:flex items-center gap-3">
+            <div className="flex items-center gap-2 rounded-full bg-white/90 backdrop-blur-md px-4 py-2 border border-gray-200 shadow-sm text-[#1A1C1B]">
+              <Navigation size={14} className="text-[#8C8273]" />
+              <span className="text-[10px] font-menu uppercase tracking-wider">Burhan Interchange</span>
+            </div>
+          </div>
         </div>
 
       </div>
