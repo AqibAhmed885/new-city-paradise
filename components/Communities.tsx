@@ -2,12 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Plus } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGsap } from "@/hooks/useGsap";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const communities = [
   {
@@ -23,8 +20,6 @@ const communities = [
       "/images/crystal-lakes.jpg",
       "/images/new-city-paradise-hero.png",
     ],
-    reverse: false,
-    theme: "bg-[#F7F6F2]",
     linkText: "View Masterplan & Plots",
     linkHref: "/masterplan",
   },
@@ -41,8 +36,6 @@ const communities = [
       "/images/arcade3.png",
       "/images/newcityarcade.png",
     ],
-    reverse: true,
-    theme: "bg-[#F0EDE6]",
     linkText: "Explore Commercial Sectors",
     linkHref: "/masterplan",
   },
@@ -59,169 +52,731 @@ const communities = [
       "/images/learning-campus.jpg",
       "/images/grand-estate.jpg",
     ],
-    reverse: false,
-    theme: "bg-[#F7F6F2]",
     linkText: "Inquire About Awami Block",
     linkHref: "/contact",
   },
 ];
 
 export default function Communities() {
-  const containerRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
-  useGsap(() => {
-    if (!containerRef.current) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const activeCommunity = communities[activeIndex];
 
-    const mm = gsap.matchMedia();
+  useEffect(() => {
+    if (!galleryRef.current) return;
 
-    mm.add("(min-width: 1024px)", () => {
-      const cards = gsap.utils.toArray<HTMLElement>("[data-stack-card]");
+    const ctx = gsap.context(() => {
+      const images =
+        galleryRef.current?.querySelectorAll("[data-gallery-item]");
 
-      cards.forEach((card, i) => {
-        // Sticky Pinning only for cards before the last one
-        // The last card does NOT pin and natural scroll flows directly into the next section
-        if (i < cards.length - 1) {
-          const nextCard = cards[i + 1];
+      if (!images) return;
 
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            pin: true,
-            pinSpacing: false,
-            endTrigger: nextCard,
-            end: "top top",
-          });
-
-          // Subtle scale and soft brightness dim as the next card stacks over it
-          gsap.to(card.querySelector("[data-card-inner]"), {
-            scale: 0.94,
-            filter: "brightness(0.8)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: nextCard,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          });
+      gsap.fromTo(
+        images,
+        {
+          opacity: 0,
+          y: 22,
+          scale: 1.02,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.08,
+          ease: "power3.out",
         }
-      });
-    });
+      );
+    }, galleryRef);
 
-    return () => mm.revert();
-  }, []);
+    return () => ctx.revert();
+  }, [activeIndex]);
 
   return (
-    <section ref={containerRef} id="plots-overview" className="relative bg-[#0d0c0a] w-full z-10">
-      {communities.map((community, index) => {
-        const isLast = index === communities.length - 1;
-        return (
-          <div
-            key={community.id}
-            data-stack-card
-            className={`min-h-screen w-full flex items-center justify-center overflow-hidden ${
-              isLast ? "relative" : "sticky top-0"
-            }`}
-            style={{ zIndex: index + 1 }}
-          >
-            <div
-              data-card-inner
-              className={`w-full min-h-screen ${community.theme} flex items-center py-20 lg:py-24 shadow-[0_-15px_40px_rgba(0,0,0,0.18)] transition-all duration-300 origin-top`}
+    <section
+      id="plots-overview"
+      className="
+        relative
+        overflow-hidden
+        bg-white
+        py-10
+        text-ink
+        sm:py-12
+        lg:py-14
+        xl:py-16
+      "
+    >
+
+      <div
+        className="
+          relative
+          mx-auto
+          w-full
+          max-w-[1440px]
+          px-4
+          xl:px-4
+        "
+      >
+        {/* ========================================= */}
+        {/* SECTION INTRO */}
+        {/* ========================================= */}
+
+        <div
+          className="
+            mb-4
+            grid
+            grid-cols-1
+            gap-8
+            pb-12
+            lg:grid-cols-12
+            lg:items-end
+            lg:gap-12
+          "
+        >
+          <div className="lg:col-span-7">
+            {/* <div
+              className="
+                mb-5
+                flex
+                items-center
+                gap-3
+              "
             >
-              <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-16">
-                <div
-                  className={`flex flex-col ${
-                    community.reverse ? "lg:flex-row-reverse" : "lg:flex-row"
-                  } items-center gap-12 lg:gap-20`}
-                >
-                  {/* 4-Image Luxury Mosaic Grid */}
-                  <div className="w-full lg:w-3/5 grid grid-cols-3 gap-2 sm:gap-3">
-                    <div className="col-span-2 aspect-[4/3] relative overflow-hidden group shadow-md">
-                      <Image
-                        src={community.images[0]}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 40vw"
-                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                        alt={`${community.title} exterior view`}
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-                    <div className="col-span-1 aspect-[4/3] relative overflow-hidden group shadow-md">
-                      <Image
-                        src={community.images[1]}
-                        fill
-                        sizes="(max-width: 1024px) 50vw, 20vw"
-                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                        alt={`${community.title} interior detail`}
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-                    <div className="col-span-1 aspect-[3/4] relative overflow-hidden group shadow-md">
-                      <Image
-                        src={community.images[2]}
-                        fill
-                        sizes="(max-width: 1024px) 50vw, 20vw"
-                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                        alt={`${community.title} architecture perspective`}
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-                    <div className="col-span-2 aspect-[16/10] relative overflow-hidden group shadow-md">
-                      <Image
-                        src={community.images[3]}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 40vw"
-                        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                        alt={`${community.title} panoramic view`}
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-                  </div>
+              <span className="h-px w-10 bg-champagne" />
 
-                  {/* Editorial Content Block */}
-                  <div className="w-full lg:w-2/5 flex flex-col items-start max-w-lg">
-                    {/* Category Tracker */}
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="text-[10px] tracking-[0.28em] uppercase font-menu font-semibold text-champagne">
-                        0{index + 1} / 03
-                      </span>
-                      <span className="w-6 h-[1px] bg-champagne/40" />
-                      <span className="text-[10px] tracking-[0.24em] uppercase font-menu text-gray-500 font-semibold">
-                        {community.tag}
-                      </span>
-                    </div>
+              <span
+                className="
+                  text-[10px]
+                  font-menu
+                  font-semibold
+                  uppercase
+                  tracking-[0.24em]
+                  text-champagne
+                "
+              >
+                Explore New City Paradise
+              </span>
+            </div> */}
 
-                    <h2 className="text-4xl lg:text-[46px] leading-[1.08] text-ink mb-3 tracking-tight font-normal">
-                      {community.title}
-                    </h2>
+            {/* KEEPING PREVIOUS HEADING */}
+            <h2
+              className="
+                capitalize
+                text-[clamp(2.4rem,3.2vw,4rem)]
+                font-normal
+                leading-[1.05]
+                tracking-[-0.04em]
+                text-ink
+              "
+            >
+              Find the right place
+              <br />
 
-                    <div className="mb-6 inline-flex items-center gap-2 rounded-md bg-champagne/15 border border-champagne/30 px-3 py-1 text-xs font-menu font-medium text-ink">
-                      <span className="text-black/60">Plot sizes:</span>
-                      <strong className="font-semibold text-ink">{community.sizes}</strong>
-                    </div>
+              <span
+                className="
+                  font-light
+                  italic
+                  text-champagne
+                "
+              >
+                for your future.
+              </span>
+            </h2>
+          </div>
 
-                    <p className="text-[14px] leading-relaxed text-gray-600 mb-8 font-serif">
-                      {community.description}
-                    </p>
+          {/* <div
+            className="
+              lg:col-span-5
+              lg:pb-2
+            "
+          >
+            <p
+              className="
+                max-w-[520px]
+                font-serif
+                text-[15px]
+                leading-[1.85]
+                text-black/60
+                sm:text-[16px]
+              "
+            >
+              Explore residential, commercial and community-focused
+              opportunities within New City Paradise — thoughtfully planned
+              around connectivity, lifestyle and long-term value.
+            </p>
+          </div> */}
+        </div>
 
-                    <Link
-                      href={community.linkHref}
-                      className="group flex items-center gap-4 text-[11px] tracking-[0.24em] uppercase font-menu font-semibold text-ink"
+        {/* ========================================= */}
+        {/* ACCORDION + GALLERY */}
+        {/* ========================================= */}
+
+        <div
+          className="
+            grid
+            grid-cols-1
+            gap-12
+            lg:grid-cols-12
+            lg:gap-14
+            xl:gap-20
+          "
+        >
+          {/* ========================================= */}
+          {/* LEFT SIDE */}
+          {/* ========================================= */}
+
+          <div
+            className="
+              lg:col-span-5
+            "
+          >
+            <div className="border-t border-black/15">
+              {communities.map((community, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <div
+                    key={community.id}
+                    className="
+                      border-b
+                      border-black/15
+                    "
+                  >
+                    {/* HEADER ONLY WHEN CLOSED */}
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveIndex(index)}
+                      aria-expanded={isActive}
+                      aria-controls={`${community.id}-panel`}
+                      className="
+                        group
+                        flex
+                        w-full
+                        items-center
+                        justify-between
+                        gap-5
+                        py-7
+                        text-left
+                        sm:py-4
+                      "
                     >
-                      <span className="w-8 h-[1px] bg-ink group-hover:w-16 transition-all duration-300 ease-out"></span>
-                      {community.linkText}
-                      <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">
-                        &rarr;
+                      <div
+                        className="
+                          flex
+                          min-w-0
+                          items-start
+                          gap-2
+                        "
+                      >
+                        
+
+                        <h3
+                          className={`
+                            text-[clamp(1.65rem,2vw,2rem)]
+                            font-normal
+                            leading-[1.08]
+                            tracking-[-0.035em]
+                            transition-all
+                            duration-300
+
+                            ${isActive
+                              ? "text-ink"
+                              : "text-black/45 group-hover:text-ink"
+                            }
+                          `}
+                        >
+                          {community.title}
+                        </h3>
+                      </div>
+
+                      <span
+                        className={`
+                          flex
+                          h-10
+                          w-10
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          transition-all
+                          duration-500
+
+                          ${isActive
+                            ? "rotate-45 border-champagne bg-champagne text-white"
+                            : "border-black/15 bg-transparent text-ink group-hover:border-black/50"
+                          }
+                        `}
+                      >
+                        <Plus size={17} strokeWidth={1.6} />
                       </span>
-                    </Link>
+                    </button>
+
+                    {/* ================================= */}
+                    {/* OPEN CONTENT */}
+                    {/* ================================= */}
+
+                    <div
+                      id={`${community.id}-panel`}
+                      className={`
+                        grid
+                        transition-[grid-template-rows,opacity]
+                        duration-500
+                        ease-[cubic-bezier(.16,1,.3,1)]
+
+                        ${isActive
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
+                        }
+                      `}
+                    >
+                      <div className="overflow-hidden">
+                        <div
+                          className="
+                            pb-9
+                            pl-[6px]
+                            sm:pl-[8px]
+                          "
+                        >
+                          {/* TAG */}
+
+                          {/* <div
+                            className="
+                              mb-4
+                              flex
+                              items-center
+                              gap-3
+                            "
+                          >
+                            
+                            <span
+                              className="
+                                text-[9px]
+                                font-menu
+                                font-semibold
+                                uppercase
+                                tracking-[0.12em]
+                                text-black/45
+                              "
+                            >
+                              {community.tag}
+                            </span>
+                          </div> */}
+
+                          {/* SIZES */}
+
+                          <div
+                            className="
+                              mb-2
+                              inline-flex
+                              flex-wrap
+                              items-center
+                              gap-2
+                              
+                              py-2
+
+                              text-xs
+                            "
+                          >
+                            <span className="text-black/50">
+                              Plot sizes
+                            </span>
+
+                            <span
+                              className="
+                                h-3
+                                w-px
+                                bg-black/15
+                              "
+                            />
+
+                            <strong
+                              className="
+                                font-menu
+                                font-medium
+                                text-ink
+                              "
+                            >
+                              {community.sizes}
+                            </strong>
+                          </div>
+
+                          {/* DESCRIPTION */}
+
+                          <p
+                            className="
+                              max-w-[520px]
+                              font-serif
+                              text-[14px]
+                              leading-[1.85]
+                              text-black/60
+                              sm:text-[15px]
+                            "
+                          >
+                            {community.description}
+                          </p>
+
+                          {/* CTA */}
+
+                          <Link
+                            href={community.linkHref}
+                            className="
+                              group/link
+                              mt-7
+                              inline-flex
+                              items-center
+                              gap-4
+
+                              text-[10px]
+                              font-menu
+                              font-semibold
+                              uppercase
+                              tracking-[0.12em]
+                              text-ink
+                            "
+                          >
+
+                            {community.linkText}
+
+                            <ArrowRight
+                              size={14}
+                              className="
+                                transition-transform
+                                duration-300
+                                group-hover/link:translate-x-1
+                              "
+                            />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
-        );
-      })}
+
+          {/* ========================================= */}
+          {/* RIGHT SIDE — MULTIPLE IMAGE MOSAIC */}
+          {/* ========================================= */}
+
+          <div
+            className="
+              lg:col-span-7
+            "
+          >
+            <div
+              className="
+                lg:sticky
+                lg:top-24
+              "
+            >
+              <div
+                ref={galleryRef}
+                key={activeCommunity.id}
+                className="
+                  grid
+                  grid-cols-12
+                "
+              >
+                {/* MAIN IMAGE */}
+
+                <div
+                  data-gallery-item
+                  className="
+                    group
+                    relative
+                    col-span-4
+                    row-span-1
+                    min-h-[290px]
+                    overflow-hidden
+                    bg-black/5
+
+                    sm:min-h-[280px]
+                    lg:min-h-[380px]
+                  "
+                >
+                  <Image
+                    src={activeCommunity.images[0]}
+                    alt={`${activeCommunity.title} primary view`}
+                    fill
+                    priority={activeIndex === 0}
+                    sizes="
+                      (max-width: 1024px) 70vw,
+                      42vw
+                    "
+                    className="
+                      object-cover
+                      transition-transform
+                      duration-[1400ms]
+                      ease-out
+                      group-hover:scale-[1.035]
+                    "
+                  />
+
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      bg-gradient-to-t
+                      from-black/35
+                      via-transparent
+                      to-transparent
+                    "
+                  />
+
+                  {/* Label */}
+
+                  <div
+                    className="
+                      absolute
+                      bottom-0
+                      left-0
+                      p-6
+                      text-white
+                      sm:p-8
+                    "
+                  >
+                    <span
+                      className="
+                        mb-2
+                        block
+                        text-[9px]
+                        font-menu
+                        font-semibold
+                        uppercase
+                        tracking-[0.23em]
+                        text-white/65
+                      "
+                    >
+                      0{activeIndex + 1} / 03
+                    </span>
+
+                    <p
+                      className="
+                        font-serif
+                        text-2xl
+                        sm:text-3xl
+                      "
+                    >
+                      {activeCommunity.title}
+                    </p>
+                  </div>
+                </div>
+
+                {/* IMAGE TWO */}
+
+                <div
+                  data-gallery-item
+                  className="
+                    group
+                    relative
+                    col-span-4
+                    min-h-[190px]
+                    overflow-hidden
+                    bg-black/5
+
+                    sm:min-h-[245px]
+                    lg:min-h-[285px]
+                  "
+                >
+                  <Image
+                    src={activeCommunity.images[1]}
+                    alt={`${activeCommunity.title} detail view`}
+                    fill
+                    sizes="
+                      (max-width: 1024px) 30vw,
+                      20vw
+                    "
+                    className="
+                      object-cover
+                      transition-transform
+                      duration-[1400ms]
+                      ease-out
+                      group-hover:scale-105
+                    "
+                  />
+
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      bg-black/[0.08]
+                    "
+                  />
+                </div>
+
+                {/* IMAGE THREE */}
+
+                <div
+                  data-gallery-item
+                  className="
+                    group
+                    relative
+                    col-span-4
+                    min-h-[190px]
+                    overflow-hidden
+                    bg-black/5
+
+                    sm:min-h-[245px]
+                    lg:min-h-[285px]
+                  "
+                >
+                  <Image
+                    src={activeCommunity.images[2]}
+                    alt={`${activeCommunity.title} architectural view`}
+                    fill
+                    sizes="
+                      (max-width: 1024px) 30vw,
+                      20vw
+                    "
+                    className="
+                      object-cover
+                      transition-transform
+                      duration-[1400ms]
+                      ease-out
+                      group-hover:scale-105
+                    "
+                  />
+
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      bg-black/[0.08]
+                    "
+                  />
+                </div>
+
+                {/* IMAGE FOUR */}
+
+                <div
+                  data-gallery-item
+                  className="
+                    group
+                    relative
+                    col-span-12
+                    min-h-[170px]
+                    overflow-hidden
+                    bg-black/5
+                    sm:min-h-[210px]
+                  "
+                >
+                  <Image
+                    src={activeCommunity.images[3]}
+                    alt={`${activeCommunity.title} panoramic view`}
+                    fill
+                    sizes="
+                      (max-width: 1024px) 100vw,
+                      58vw
+                    "
+                    className="
+                      object-cover
+                      transition-transform
+                      duration-[1400ms]
+                      ease-out
+                      group-hover:scale-[1.035]
+                    "
+                  />
+
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      bg-gradient-to-r
+                      from-black/15
+                      via-transparent
+                      to-transparent
+                    "
+                  />
+                </div>
+              </div>
+
+              {/* ================================= */}
+              {/* CATEGORY PROGRESS */}
+              {/* ================================= */}
+
+              {/* <div
+                className="
+                  mt-5
+                  grid
+                  grid-cols-3
+                  gap-2
+                "
+              >
+                {communities.map((community, index) => {
+                  const selected = index === activeIndex;
+
+                  return (
+                    <button
+                      key={community.id}
+                      type="button"
+                      onClick={() => setActiveIndex(index)}
+                      aria-label={`Show ${community.title}`}
+                      className="
+                        group
+                        text-left
+                      "
+                    >
+                      <div
+                        className="
+                          relative
+                          h-px
+                          overflow-hidden
+                          bg-black/15
+                        "
+                      >
+                        <span
+                          className={`
+                            absolute
+                            inset-y-0
+                            left-0
+                            bg-champagne
+                            transition-all
+                            duration-500
+
+                            ${selected
+                              ? "w-full"
+                              : "w-0 group-hover:w-1/3"
+                            }
+                          `}
+                        />
+                      </div>
+
+                      <span
+                        className={`
+                          mt-2
+                          hidden
+                          text-[9px]
+                          font-menu
+                          uppercase
+                          tracking-[0.12em]
+                          transition-colors
+                          sm:block
+
+                          ${selected
+                            ? "text-ink"
+                            : "text-black/35"
+                          }
+                        `}
+                      >
+                        0{index + 1} &nbsp;
+                        {community.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div> */}
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
