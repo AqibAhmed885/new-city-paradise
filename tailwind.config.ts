@@ -15,10 +15,10 @@ const config: Config = {
         smoke: "#d8d4ce",
       },
       fontFamily: {
-        heading: ["var(--font-helvetica)", '"helvetica Fallback"', "Arial", "sans-serif"],
-        sans: ["var(--font-helvetica)", '"helvetica Fallback"', "Arial", "sans-serif"],
-        serif: ["Adobe Garamond Pro", "Georgia", "serif"],
-        menu: ["var(--font-source-sans)", "Source Sans 3", "Segoe UI", "system-ui"],
+        heading: ["var(--font-optima)", "Georgia", "serif"],
+        sans: ["var(--font-segoe)", '"Segoe UI"', "system-ui", "sans-serif"],
+        serif: ["var(--font-segoe)", '"Segoe UI"', "system-ui", "sans-serif"],
+        menu: ["var(--font-segoe)", '"Segoe UI"', "system-ui", "sans-serif"],
       },
       boxShadow: {
         luxe: "0 30px 80px rgba(17, 15, 12, 0.13)",

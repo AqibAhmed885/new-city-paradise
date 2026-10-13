@@ -1,8 +1,38 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Source_Sans_3 } from "next/font/google";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 import "./globals.css";
+
+const optimaNova = localFont({
+  src: [
+    { path: "./fonts/optima-nova/OptimaNovaLTProLight.otf", weight: "300", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProRegular.otf", weight: "400", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProMedium.otf", weight: "500", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProDemi.otf", weight: "600", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProBold.otf", weight: "700", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProHeavy.otf", weight: "800", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProBlack.otf", weight: "900", style: "normal" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProItalic.otf", weight: "400", style: "italic" },
+    { path: "./fonts/optima-nova/OptimaNovaLTProBoldItalic.otf", weight: "700", style: "italic" },
+  ],
+  variable: "--font-optima",
+  display: "swap",
+  preload: true,
+  fallback: ["Georgia", "serif"],
+});
+
+const segoeUi = localFont({
+  src: [
+    { path: "./fonts/segoe-ui/segoeuithis.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/segoe-ui/segoeuithibd.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/segoe-ui/segoeuithisi.ttf", weight: "400", style: "italic" },
+    { path: "./fonts/segoe-ui/segoeuithisz.ttf", weight: "700", style: "italic" },
+  ],
+  variable: "--font-segoe",
+  display: "swap",
+  preload: true,
+  fallback: ["Segoe UI", "system-ui", "sans-serif"],
+});
 
 const helvetica = localFont({
   src: [
@@ -46,12 +76,6 @@ const azonix = localFont({
   display: "swap",
   preload: true,
   fallback: ["Arial", "sans-serif"],
-});
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans",
-  display: "swap",
 });
 
 const isProduction =
@@ -175,7 +199,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${helvetica.variable} ${azonix.variable} ${sourceSans.variable}`}
+      className={`${optimaNova.variable} ${segoeUi.variable} ${helvetica.variable} ${azonix.variable}`}
     >
       <head>
         <script
@@ -183,7 +207,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-serif">{children}</body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }
