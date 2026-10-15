@@ -112,8 +112,8 @@ export default function LocationMapSection() {
     <section
       ref={sectionRef}
       id="location-connectivity"
-      // Soft light background
-      className="relative bg-[#FAFAFA] text-[#2C302E]"
+      // Soft light background stacked on top of previous section
+      className="relative z-30 bg-[#FAFAFA] text-[#2C302E] shadow-[0_-25px_60px_rgba(0,0,0,0.07)] border-t border-black/[0.06]"
     >
       <div className="flex flex-col-reverse lg:flex-row w-full max-w-[1920px] mx-auto">
 

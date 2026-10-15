@@ -607,7 +607,7 @@ export default function Communities() {
                             imageIndex
                           ) => (
                             <div
-                              key={image}
+                              key={`${community.id}-image-${imageIndex}`}
                               data-stack-image
                               className="
                                 group

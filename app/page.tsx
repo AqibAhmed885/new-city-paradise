@@ -10,6 +10,7 @@ import FaqSection from "@/components/FaqSection";
 import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
+import VisionLegacy from "@/components/VisionLegacy";
 
 const AzimutePerspectiveExperience = dynamic(
   () => import("@/components/AzimutePerspectiveExperience")
@@ -31,6 +32,9 @@ export default function Home() {
 
         {/* 4. L Prime Block & Water Front District Featured Showcase */}
         {/* <FeaturedDistricts /> */}
+
+        {/* 5. A Legacy Built on Vision - Project Scale & Milestones */}
+        <VisionLegacy />
 
         {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />

@@ -191,9 +191,7 @@ export default function Navbar({
         >
           {/* LEFT: LOGO */}
           <div className="flex min-w-0 items-center">
-            <Link
-              href="/"
-              aria-label="New City Paradise - Home"
+            <div
               className="
                 relative
                 z-10
@@ -205,7 +203,7 @@ export default function Navbar({
               "
             >
               <BrandMark light />
-            </Link>
+            </div>
 
             <span
               className="

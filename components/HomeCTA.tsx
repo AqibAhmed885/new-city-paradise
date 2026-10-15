@@ -63,11 +63,7 @@ export default function HomeCTA() {
 
           <div className="relative z-10 flex min-h-[46rem] flex-col px-5 py-10 sm:min-h-[25rem] sm:px-8 sm:py-12 lg:px-14">
             <SectionHeading
-              title={
-                <h2 className="text-white text-[clamp(2.5rem,6vw,3.5rem)] leading-[1.1] sm:text-[clamp(3rem,6vw,4rem)]">
-                  Your Place in Paradise Awaits
-                </h2>
-              }
+              title="Your Place in Paradise Awaits"
             />
             <div className="mx-auto max-w-5xl text-center">
               
