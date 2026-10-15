@@ -36,7 +36,7 @@ export default function Home() {
         <LocationMapSection />
 
         {/* 8. Booking Steps */}
-        <BookingProcess />
+        {/* <BookingProcess /> */}
 
         {/* 9. Verified FAQs */}
         <FaqSection />
