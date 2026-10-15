@@ -32,9 +32,6 @@ export default function Home() {
         {/* 4. L Prime Block & Water Front District Featured Showcase */}
         {/* <FeaturedDistricts /> */}
 
-        {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
-        <AzimutePerspectiveExperience />
-
         {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
 

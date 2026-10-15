@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { AMENITIES_DATA, AmenityItem } from "@/lib/amenitiesData";
 import { SITE_CONFIG } from "@/lib/siteConfig";
+import AzimutePerspectiveExperience from "./AzimutePerspectiveExperience";
 
 const categories = [
   "All Amenities",
@@ -244,6 +245,9 @@ export default function AmenitiesClient() {
           </AnimatePresence>
         </motion.div>
       </section>
+
+      {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
+      <AzimutePerspectiveExperience />
 
       {/* Modal Lightbox for Deep-dive into an amenity */}
       <AnimatePresence>
