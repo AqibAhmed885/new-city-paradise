@@ -308,24 +308,26 @@ export default function Hero() {
           items-center
           overflow-hidden
           rounded-xl
-          bg-gray-100
+          bg-[#F9F7F2]
+          border
+          border-black/[0.06]
           px-8
           py-20
-
           sm:px-12
-
           lg:absolute
           lg:mt-0
           lg:min-h-0
-          lg:px-8
-
-          xl:px-10
+          lg:px-10
+          xl:px-16
         "
       >
         <div className="max-w-xl">
+          {/* Eyebrow */}
+          <span className="inline-block text-[10.5px] font-sans font-medium uppercase tracking-[0.24em] text-[#8C7A58] mb-3">
+            Burhan Interchange · M-1 & CPEC Route
+          </span>
 
           {/* Heading */}
-
           <h1
             className="
               text-3xl
@@ -334,76 +336,78 @@ export default function Hero() {
               leading-[1.12]
               tracking-[-0.03em]
               text-[#12110f]
-
               sm:text-4xl
-              xl:text-5xl
+              xl:text-[46px]
             "
           >
-            A New Address.
-
-            <br />
-
-            <span
-              className="
-                font-light
-                italic
-                text-champagne
-              "
-            >
+            A New Address. <br />
+            <span className="font-light italic text-[#8C7A58]">
               A Better Tomorrow.
             </span>
           </h1>
 
           {/* Description */}
-
           <p
             className="
-              mt-7
+              mt-6
               max-w-lg
-              text-lg
+              text-[15px]
               leading-relaxed
-              text-[#514b42]
-
-              sm:text-xl
+              text-[#514b42]/85
+              sm:text-[16px]
             "
           >
-            PHATA-approved living near Burhan
-            Interchange, M-1 and the CPEC Route.
-            Discover a thoughtfully planned
-            community built for your next chapter.
+            PHATA-approved living near Burhan Interchange, M-1 and the CPEC Route. Discover a thoughtfully planned community built for your next chapter.
           </p>
 
-          {/* CTA */}
+          {/* Actions */}
+          <div className="mt-8 flex flex-wrap items-center gap-3.5">
+            <a
+              href="#location-connectivity"
+              className="
+                inline-flex
+                items-center
+                rounded-full
+                border
+                border-[#12110f]
+                px-6
+                py-3
+                text-[11px]
+                font-semibold
+                uppercase
+                tracking-[0.16em]
+                text-[#12110f]
+                transition-all
+                duration-300
+                hover:bg-[#12110f]
+                hover:text-white
+              "
+            >
+              Explore The Location
+            </a>
 
-          <a
-            href="#location-connectivity"
-            className="
-              mt-9
-              inline-flex
-              items-center
-
-              border
-              border-[#12110f]
-
-              px-7
-              py-3
-
-              text-sm
-              font-semibold
-              uppercase
-              tracking-[0.18em]
-
-              text-[#12110f]
-
-              transition-colors
-              duration-300
-
-              hover:bg-[#12110f]
-              hover:text-white
-            "
-          >
-            Explore the location
-          </a>
+            <a
+              href="/contact"
+              className="
+                inline-flex
+                items-center
+                rounded-full
+                bg-[#12110F]
+                px-6
+                py-3
+                text-[11px]
+                font-semibold
+                uppercase
+                tracking-[0.16em]
+                text-white
+                transition-all
+                duration-300
+                hover:bg-[#8C7A58]
+              "
+            >
+              Inquire Inventory
+            </a>
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SITE_CONFIG } from "@/lib/siteConfig";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 const optimaNova = localFont({
@@ -207,7 +208,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <Preloader />
+        {children}
+      </body>
     </html>
   );
 }

@@ -22,9 +22,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import BrandMark from "./BrandMark";
+import CitySwitcher from "./CitySwitcher";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 
-const links = [
+const islamabadLinks = [
   ["About Us", "/about"],
   ["Location", "/#location-connectivity"],
   ["Plots & Plans", "/#plots-overview"],
@@ -32,6 +33,16 @@ const links = [
   ["Amenities", "/amenities"],
   ["FAQs", "/#faqs"],
   ["Contact", "/contact"],
+] as const;
+
+const lahoreLinks = [
+  ["About Us", "/lahore/about"],
+  ["Location", "/lahore#lahore-location"],
+  ["Sectors & Plots", "/lahore#lahore-sectors"],
+  ["Masterplan", "/lahore/masterplan"],
+  ["Amenities", "/lahore/amenities"],
+  ["FAQs", "/lahore#lahore-faqs"],
+  ["Contact", "/lahore/contact"],
 ] as const;
 
 export default function Navbar({
@@ -47,6 +58,8 @@ export default function Navbar({
   const ticking = useRef(false);
 
   const pathname = usePathname();
+  const isLahore = pathname.startsWith("/lahore");
+  const links = isLahore ? lahoreLinks : islamabadLinks;
   const shouldReduceMotion = useReducedMotion();
 
   const isSolid = scrolled || solid || open;
@@ -154,43 +167,47 @@ export default function Navbar({
         }}
         className="
           fixed
+          top-0
           left-0
           right-0
           z-50
-          mx-auto
-          w-[calc(100%-1rem)]
-          max-w-[1600px]
-          sm:w-full
+          w-full
         "
       >
         <div
           className={`
             relative
             flex
-            h-[72px]
+            h-[68px]
             items-center
             justify-between
             px-4
-            transition-[background-color,border-color,box-shadow]
-            duration-300
-            sm:px-6
-            lg:h-[60px]
-            xl:px-8
+            transition-all
+            duration-500
+            sm:px-8
+            lg:h-[72px]
+            xl:px-12
             ${isSolid
               ? `
-                  border-white
-                  bg-black/75
-                  shadow-[0_12px_40px_rgba(0,0,0,0.15)]
+                  bg-[#0C0B0A]/85
+                  backdrop-blur-xl
+                  border-b
+                  border-white/[0.08]
+                  shadow-[0_10px_30px_rgba(0,0,0,0.2)]
                   text-white
                 `
               : `
+                  bg-gradient-to-b
+                  from-black/60
+                  via-black/25
+                  to-transparent
                   text-white
                 `
             }
           `}
         >
-          {/* LEFT: LOGO */}
-          <div className="flex min-w-0 items-center">
+          {/* LEFT: LOGO & CITY SWITCHER */}
+          <div className="flex min-w-0 items-center gap-3 sm:gap-5 xl:gap-6">
             <div
               className="
                 relative
@@ -205,17 +222,9 @@ export default function Navbar({
               <BrandMark light />
             </div>
 
-            <span
-              className="
-                ml-5
-                hidden
-                h-7
-                w-px
-                bg-white/20
-                lg:block
-                xl:ml-7
-              "
-            />
+            <div className="hidden sm:flex items-center shrink-0">
+              <CitySwitcher />
+            </div>
           </div>
 
           {/* CENTER: DESKTOP NAVIGATION */}
@@ -223,10 +232,10 @@ export default function Navbar({
             className="
               hidden
               items-center
-              gap-4
+              gap-3.5
               lg:flex
-              xl:gap-6
-              2xl:gap-8
+              xl:gap-5
+              2xl:gap-7
             "
             aria-label="Primary navigation"
           >
@@ -243,30 +252,29 @@ export default function Navbar({
                     group
                     relative
                     whitespace-nowrap
-                    py-3
-                    text-[10px]
+                    py-2
+                    text-[11.5px]
                     font-medium
-                    capitalize
-                    tracking-normal
+                    uppercase
+                    tracking-[0.16em]
                     transition-colors
                     duration-200
-                    xl:text-sm
                     ${isActive
                       ? "text-white"
-                      : "text-white/75 hover:text-white"
+                      : "text-white/70 hover:text-white"
                     }
                   `}
                 >
                   {label}
 
-                  {/* Animated underline */}
+                  {/* Animated minimal underline */}
                   <span
                     className={`
                       absolute
-                      bottom-1
+                      bottom-0
                       left-0
-                      h-px
-                      bg-[#D9BD89]
+                      h-[1px]
+                      bg-[#B69B6C]
                       transition-all
                       duration-300
                       ${isActive
@@ -281,7 +289,7 @@ export default function Navbar({
           </nav>
 
           {/* RIGHT: ACTIONS */}
-          <div className="flex items-center gap-3 xl:gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
             {/* Phone */}
             <Link
               href={`tel:${SITE_CONFIG.phoneTel}`}
@@ -289,86 +297,54 @@ export default function Navbar({
               title="Call us"
               className="
                 hidden
-                h-10
-                w-10
+                h-9
+                w-9
                 shrink-0
                 items-center
                 justify-center
                 rounded-full
-                course-pointer                
-                text-white
+                border
+                border-white/15
+                text-white/80
                 transition-all
                 duration-300
-                hover:border-white/40
-                hover:bg-white/15
-                xl:flex
+                hover:border-white/50
+                hover:text-white
+                hover:bg-white/10
+                lg:flex
               "
             >
-              <PhoneCall size={17} strokeWidth={1.7} />
+              <PhoneCall size={14} strokeWidth={1.5} />
             </Link>
 
             {/* WhatsApp */}
             <a
-              href={SITE_CONFIG.whatsappLink}
+              href={isLahore ? "https://wa.me/923335252870?text=Hi%20New%20City%20Paradise%20Lahore,%20I%20am%20interested%20in%20learning%20more." : SITE_CONFIG.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat on WhatsApp"
               title="WhatsApp"
               className="
                 hidden
-                h-10
-                w-10
+                h-9
+                w-9
                 shrink-0
                 items-center
                 justify-center
                 rounded-full
-                text-[#4ADE80]
-                transition-all
-                duration-300
-                hover:border-[#4ADE80]/50
-                hover:bg-[#4ADE80]/10
-                xl:flex
-              "
-            >
-              <BsWhatsapp size={18} />
-            </a>
-
-            {/* Premium CTA */}
-            <Link
-              href="/contact"
-              className="
-                group
-                hidden
-                h-11
-                items-center
-                justify-center
-                gap-3
-                whitespace-nowrap
                 border
-                border-ivory
-                px-5
-                text-sm
-                font-semibold
-                text-ivory
+                border-white/15
+                text-white/80
                 transition-all
                 duration-300
-                hover:border-white
-                hover:bg-white/15
-                lg:inline-flex
+                hover:border-white/50
+                hover:text-white
+                hover:bg-white/10
+                lg:flex
               "
             >
-              Get in Touch
-
-              <ArrowUpRight
-                size={15}
-                className="
-                  transition-transform
-                  duration-300
-                  group-hover:-translate-y-0.5
-                  group-hover:translate-x-0.5
-                "
-              />
-            </Link>
+              <BsWhatsapp size={14} />
+            </a>
 
             {/* MOBILE / TABLET MENU BUTTON */}
             <button
@@ -452,6 +428,11 @@ export default function Navbar({
               >
                 <X size={22} strokeWidth={1.5} />
               </button>
+            </div>
+
+            {/* Mobile City Switcher */}
+            <div className="mt-6 mb-2">
+              <CitySwitcher size="mobile" />
             </div>
 
             {/* Menu */}

@@ -11,6 +11,7 @@ import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
 import VisionLegacy from "@/components/VisionLegacy";
+import LahoreTeaser from "@/components/LahoreTeaser";
 
 const AzimutePerspectiveExperience = dynamic(
   () => import("@/components/AzimutePerspectiveExperience")
@@ -38,6 +39,9 @@ export default function Home() {
 
         {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
+
+        {/* 7. Dual-City Portfolio Discovery: New City Paradise Lahore */}
+        <LahoreTeaser />
 
         {/* 8. Booking Steps */}
         {/* <BookingProcess /> */}
