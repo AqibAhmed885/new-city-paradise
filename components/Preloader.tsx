@@ -19,7 +19,7 @@ export default function Preloader() {
     const timer = setTimeout(() => {
       setLoading(false);
       sessionStorage.setItem("ncp_preloader_shown", "true");
-    }, 2200);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -33,7 +33,7 @@ export default function Preloader() {
           exit={{
             y: "-100%",
             transition: {
-              duration: 0.85,
+              duration: 0.65,
               ease: [0.76, 0, 0.24, 1],
             },
           }}
