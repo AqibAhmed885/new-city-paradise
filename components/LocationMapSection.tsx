@@ -65,37 +65,44 @@ export default function LocationMapSection() {
         const timelineNodes = gsap.utils.toArray<HTMLElement>("[data-timeline-node]", section);
         const heading = section.querySelector("[data-heading]");
 
-        // Heading Animation
+        // Smooth Heading Reveal
         if (heading) {
-          gsap.fromTo(heading,
-            { opacity: 0, y: 30 },
+          gsap.fromTo(
+            heading,
+            { opacity: 0, y: 24 },
             {
-              opacity: 1, y: 0, duration: 1, ease: "power3.out",
+              opacity: 1,
+              y: 0,
+              duration: 1.1,
+              ease: "power2.out",
               scrollTrigger: {
-                trigger: heading,
-                start: "top 85%",
-              }
+                trigger: section,
+                start: "top 80%",
+                once: true,
+              },
             }
           );
         }
 
-        // Timeline Nodes Scroll Animation (Slide from left slightly & fade in)
-        timelineNodes.forEach((node) => {
-          gsap.fromTo(node,
-            { opacity: 0, x: -30 },
+        // Staggered Timeline Nodes Reveal - buttery smooth, no jumpy snap back
+        if (timelineNodes.length > 0) {
+          gsap.fromTo(
+            timelineNodes,
+            { opacity: 0, y: 28 },
             {
               opacity: 1,
-              x: 0,
-              duration: 0.8,
+              y: 0,
+              duration: 0.9,
+              stagger: 0.14,
               ease: "power2.out",
               scrollTrigger: {
-                trigger: node,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
+                trigger: section,
+                start: "top 72%",
+                once: true,
               },
             }
           );
-        });
+        }
       });
 
       return () => {
@@ -123,15 +130,15 @@ export default function LocationMapSection() {
         <div className="relative w-full lg:w-1/2 px-6 py-16 lg:px-16 lg:py-24 xl:px-24">
 
           {/* Heading Section */}
-          <div data-heading className="mb-16 lg:mb-12 lg:mt-[2vh]">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-[10px] font-menu  uppercase tracking-[0.5em] text-champagne">
+          <div data-heading className="mb-14 lg:mb-10 lg:mt-[2vh]">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-[10px] font-menu uppercase tracking-[0.35em] text-[#8C7A58]">
                 Strategic Position
               </span>
             </div>
-            <h2 className="text-[clamp(2.2rem,4vw,4rem)] font-normal leading-[1.2] tracking-tight text-[#1A1C1B]">
+            <h2 className="text-[clamp(1.85rem,3.2vw,3rem)] font-normal leading-[1.18] tracking-tight text-[#1A1C1B]">
               Minutes away from <br className="hidden lg:block" />
-              <span className="font-light italic text-champagne">major landmarks.</span>
+              <span className="font-light italic text-[#8C7A58]">major landmarks.</span>
             </h2>
           </div>
 

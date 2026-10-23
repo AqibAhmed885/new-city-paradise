@@ -4,10 +4,14 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { LAHORE_CONFIG } from "@/lib/lahoreConfig";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* =========================================================
+   HEADING WORDS
+========================================================= */
 
 function HighlightWords({
   children,
@@ -23,7 +27,7 @@ function HighlightWords({
       {words.map((word, index) => (
         <span key={`${word}-${index}`}>
           <span
-            data-lahore-heading-word
+            data-heading-word
             data-tone={tone}
             className="inline-block"
           >
@@ -36,7 +40,15 @@ function HighlightWords({
   );
 }
 
-function DescriptionWords({ children }: { children: string }) {
+/* =========================================================
+   DESCRIPTION WORDS
+========================================================= */
+
+function DescriptionWords({
+  children,
+}: {
+  children: string;
+}) {
   const words = children.trim().split(/\s+/);
 
   return (
@@ -44,8 +56,8 @@ function DescriptionWords({ children }: { children: string }) {
       {words.map((word, index) => (
         <span key={`${word}-${index}`}>
           <span
-            data-lahore-desc-word
-            className="inline-block transition-colors duration-150"
+            data-description-word
+            className="inline"
           >
             {word}
           </span>
@@ -56,39 +68,49 @@ function DescriptionWords({ children }: { children: string }) {
   );
 }
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 export default function LahoreIntro() {
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const backgroundRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const sticky = stickyRef.current;
-    if (!section || !sticky) return;
+    if (!section) return;
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
+      /* =====================================================
+         DESKTOP
+      ===================================================== */
       mm.add(
         "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
         () => {
           const headingWords = gsap.utils.toArray<HTMLElement>(
-            "[data-lahore-heading-word]",
+            "[data-heading-word]",
             section
           );
-          const descriptionWords = gsap.utils.toArray<HTMLElement>(
-            "[data-lahore-desc-word]",
-            section
-          );
-          const buttons = section.querySelectorAll("[data-lahore-cta]");
 
-          // Initial dimmed state
+          const descriptionWords = gsap.utils.toArray<HTMLElement>(
+            "[data-description-word]",
+            section
+          );
+
+          const buttons = ctaRef.current?.querySelectorAll<HTMLElement>(
+            "[data-cta]"
+          );
+
           gsap.set(headingWords, {
-            color: "rgba(255,255,255,0.22)",
+            color: "rgba(18, 17, 15, 0.22)",
           });
+
           gsap.set(descriptionWords, {
-            color: "rgba(255,255,255,0.18)",
+            color: "rgba(18, 17, 15, 0.22)",
           });
 
           if (buttons?.length) {
@@ -98,7 +120,9 @@ export default function LahoreIntro() {
             });
           }
 
-          // Master Timeline scrubbed across 300vh
+          /*
+           * MASTER TIMELINE
+           */
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: section,
@@ -109,13 +133,18 @@ export default function LahoreIntro() {
             },
           });
 
-          // Phase 1: Heading Words illumination
+          /*
+           * ==========================================
+           * PHASE 1: HEADING WORDS
+           * ==========================================
+           */
           headingWords.forEach((word, index) => {
             const isChampagne = word.dataset.tone === "champagne";
+
             tl.to(
               word,
               {
-                color: isChampagne ? "#D9BD89" : "#FFFFFF",
+                color: isChampagne ? "#8C7A58" : "#12110F",
                 duration: 0.7,
                 ease: "none",
               },
@@ -123,15 +152,18 @@ export default function LahoreIntro() {
             );
           });
 
-          // Pause
           tl.to({}, { duration: 0.45 });
 
-          // Phase 2: Description Words illumination
+          /*
+           * ==========================================
+           * PHASE 2: DESCRIPTION WORDS
+           * ==========================================
+           */
           descriptionWords.forEach((word) => {
             tl.to(
               word,
               {
-                color: "rgba(255,255,255,0.84)",
+                color: "rgba(18, 17, 15, 0.78)",
                 duration: 0.4,
                 ease: "none",
               },
@@ -139,7 +171,11 @@ export default function LahoreIntro() {
             );
           });
 
-          // Phase 3: CTA buttons reveal
+          /*
+           * ==========================================
+           * PHASE 3: CTA REVEAL
+           * ==========================================
+           */
           if (buttons?.length) {
             tl.to(
               buttons,
@@ -154,67 +190,90 @@ export default function LahoreIntro() {
             );
           }
 
-          // Phase 4: Final hold
+          /*
+           * ==========================================
+           * PHASE 4: FINAL HOLD
+           * ==========================================
+           */
           tl.to({}, { duration: 1.2 });
 
-          // Background subtle zoom
-          if (backgroundRef.current) {
-            gsap.to(backgroundRef.current, {
-              scale: 1.14,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1.4,
-              },
-            });
-          }
-
-          // Eyebrow entrance
+          /*
+           * EYEBROW
+           */
           if (eyebrowRef.current) {
             gsap.fromTo(
               eyebrowRef.current,
-              { opacity: 0, y: -16 },
+              {
+                opacity: 0,
+                y: 18,
+              },
               {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
-                ease: "power2.out",
+                ease: "power3.out",
                 scrollTrigger: {
                   trigger: section,
-                  start: "top 80%",
+                  start: "top 75%",
+                  once: true,
                 },
               }
             );
           }
-
-          return () => {
-            tl.scrollTrigger?.kill();
-            tl.kill();
-          };
         }
       );
 
-      // Mobile fallback
-      mm.add("(max-width: 1023px), (prefers-reduced-motion: reduce)", () => {
-        gsap.set("[data-lahore-heading-word]", {
-          color: (i, target) =>
-            target.dataset.tone === "champagne" ? "#D9BD89" : "#FFFFFF",
-        });
-        gsap.set("[data-lahore-desc-word]", {
-          color: "rgba(255,255,255,0.85)",
-        });
-        gsap.set(section.querySelectorAll("[data-lahore-cta]"), {
-          opacity: 1,
-          y: 0,
-        });
-      });
+      /* =====================================================
+         MOBILE & REDUCED MOTION FALLBACK
+      ===================================================== */
+      mm.add(
+        "(max-width: 1023px), (prefers-reduced-motion: reduce)",
+        () => {
+          const headingWords = gsap.utils.toArray<HTMLElement>(
+            "[data-heading-word]",
+            section
+          );
 
-      return () => mm.revert();
+          const descriptionWords = gsap.utils.toArray<HTMLElement>(
+            "[data-description-word]",
+            section
+          );
+
+          gsap.set(headingWords, {
+            color: "#12110F",
+          });
+
+          gsap.set(descriptionWords, {
+            color: "rgba(18, 17, 15, 0.78)",
+          });
+
+          if (eyebrowRef.current) {
+            gsap.set(eyebrowRef.current, {
+              opacity: 1,
+              y: 0,
+            });
+          }
+
+          if (ctaRef.current) {
+            gsap.set(
+              ctaRef.current.querySelectorAll("[data-cta]"),
+              {
+                opacity: 1,
+                y: 0,
+              }
+            );
+          }
+        }
+      );
+
+      return () => {
+        mm.revert();
+      };
     }, section);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -223,21 +282,28 @@ export default function LahoreIntro() {
       id="lahore-intro"
       className="
         relative
+        z-20
         isolate
         min-h-screen
         overflow-visible
-        text-ink
-        bg-[#111A17]
-        lg:h-[300vh]
+        text-[#12110F]
+        bg-[#FAF8F5]
+        border-t
+        border-black/[0.08]
+        shadow-[0_-30px_70px_rgba(0,0,0,0.35)]
+        lg:h-[260vh]
       "
     >
-      {/* Sticky Viewport */}
+      {/* ================================================= */}
+      {/* STICKY VIEWPORT */}
+      {/* ================================================= */}
       <div
         ref={stickyRef}
         className="
           relative
           min-h-screen
           overflow-hidden
+          bg-[#FAF8F5]
           lg:sticky
           lg:top-0
           lg:flex
@@ -245,29 +311,9 @@ export default function LahoreIntro() {
           lg:items-center
         "
       >
-        {/* Background visual with parallax scale */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-30 overflow-hidden"
-        >
-          <div
-            ref={backgroundRef}
-            className="
-              absolute
-              -inset-[6%]
-              bg-[url('/images/delivered/lahore-hero.jpg')]
-              bg-cover
-              bg-center
-              bg-no-repeat
-              filter
-              brightness-[0.24]
-              contrast-[1.1]
-              will-change-transform
-            "
-          />
-        </div>
-
-        {/* Champagne Glow */}
+        {/* =============================================== */}
+        {/* AMBIENT ARCHITECTURAL GLOW (Subtle Warmth) */}
+        {/* =============================================== */}
         <div
           aria-hidden="true"
           className="
@@ -280,66 +326,215 @@ export default function LahoreIntro() {
             w-[600px]
             -translate-y-1/2
             rounded-full
-            bg-champagne/[0.12]
-            blur-[130px]
+            bg-[#E8DFC8]/40
+            blur-[140px]
           "
         />
 
-        {/* Content Container */}
-        <div className="relative mx-auto w-full max-w-[1440px] px-6 py-20 sm:px-10 lg:px-14 lg:py-16 text-center">
-          {/* Eyebrow */}
-          <div ref={eyebrowRef} className="mb-7">
-            <span className="text-[10px] font-sans font-semibold tracking-[0.26em] uppercase text-champagne sm:text-xs">
+        {/* ================================================= */}
+        {/* CONTENT */}
+        {/* ================================================= */}
+        <div
+          className="
+            relative
+            mx-auto
+            w-full
+            max-w-[1440px]
+            px-6
+            py-20
+            sm:px-10
+            lg:px-14
+            lg:py-16
+          "
+        >
+          {/* =============================================== */}
+          {/* EYEBROW */}
+          {/* =============================================== */}
+          <div
+            ref={eyebrowRef}
+            className="
+              mb-7
+              text-center
+            "
+          >
+            <span
+              className="
+                text-[10px]
+                font-menu
+                tracking-[0.24em]
+                uppercase
+                text-[#8C7A58]
+                font-medium
+                sm:text-xs
+              "
+            >
               RUDA Phase 1 Urban Basin · Eastern Bypass M-11
             </span>
           </div>
 
-          {/* Golden Highlight Heading */}
-          <h2 className="mx-auto max-w-[1250px] text-[clamp(2.4rem,4.2vw,4.6rem)] font-heading font-medium leading-[1.08] tracking-[-0.03em] text-white">
-            <span className="block">
-              <HighlightWords>
-                New City Paradise Lahore —
-              </HighlightWords>
-            </span>
-            <span className="mt-2 block font-light italic text-champagne">
-              <HighlightWords tone="champagne">
-                Pakistan’s Largest Riverfront Development
-              </HighlightWords>
-            </span>
-            <span className="mt-2 block">
-              <HighlightWords>
-                in the heart of RUDA.
-              </HighlightWords>
-            </span>
-          </h2>
+          {/* =============================================== */}
+          {/* HEADING */}
+          {/* =============================================== */}
+          <div className="text-center">
+            <h2
+              className="
+                mx-auto
+                max-w-[1050px]
+                text-[clamp(1.9rem,3.4vw,3.3rem)]
+                font-normal
+                capitalize
+                leading-[1.12]
+                tracking-[-0.03em]
+              "
+            >
+              <span className="block">
+                <HighlightWords>
+                  Mastery in Riverfront Living.
+                </HighlightWords>
+              </span>
 
-          {/* Golden Highlight Description */}
-          <div className="mx-auto mt-8 sm:mt-10 max-w-4xl">
-            <p className="text-[17px] sm:text-[20px] lg:text-[23px] font-sans font-light leading-[1.75] text-white/40">
+              <span
+                className="
+                  mt-1.5
+                  block
+                  font-light
+                  italic
+                "
+              >
+                <HighlightWords tone="champagne">
+                  Enduring in Heritage.
+                </HighlightWords>
+              </span>
+            </h2>
+          </div>
+
+          {/* =============================================== */}
+          {/* DESCRIPTION */}
+          {/* =============================================== */}
+          <div
+            className="
+              mx-auto
+              mt-6
+              max-w-2xl
+              text-center
+              sm:mt-8
+            "
+          >
+            <p
+              className="
+                text-[14px]
+                leading-[1.8]
+                font-light
+                sm:text-[16px]
+                lg:text-[17px]
+              "
+            >
               <DescriptionWords>
-                Spanning the prime waterfront contours of the Ravi River, New City Paradise Lahore introduces smart sustainable urban planning, direct Eastern Bypass motorway access, high-street commercial arcades, and international lifestyle amenities built for enduring multigenerational value.
+                Spanning the prime waterfront contours of the Ravi River, New City Paradise Lahore introduces sustainable urban infrastructure with direct Eastern Bypass connectivity.
               </DescriptionWords>
             </p>
           </div>
 
-          {/* Action Buttons */}
-          <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a
-              data-lahore-cta
+          {/* =============================================== */}
+          {/* CTA */}
+          {/* =============================================== */}
+          <div
+            ref={ctaRef}
+            className="
+              mt-9
+              flex
+              flex-wrap
+              items-center
+              justify-center
+              gap-3
+              sm:mt-10
+            "
+          >
+            <Link
+              data-cta
               href="#lahore-sectors"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-black transition-all duration-300 hover:bg-[#D9BD89] hover:text-black shadow-lg"
+              className="
+                group
+                inline-flex
+                min-h-12
+                items-center
+                justify-center
+                gap-4
+                rounded-full
+                bg-[#12110F]
+                px-7
+                py-3.5
+                text-[10px]
+                font-menu
+                font-semibold
+                uppercase
+                tracking-[0.14em]
+                text-[#FAF8F5]
+                shadow-[0_10px_30px_rgba(18,17,15,0.12)]
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:bg-[#8C7A58]
+                hover:shadow-[0_14px_35px_rgba(140,122,88,0.25)]
+                sm:text-xs
+              "
             >
-              Explore Sectors & Plots
-              <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+              <span>Explore Riverfront Sectors</span>
+              <ArrowRight
+                size={14}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-1
+                "
+              />
+            </Link>
 
-            <a
-              data-lahore-cta
-              href="#lahore-location"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/30 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:bg-white/15 hover:border-white/50"
+            <Link
+              data-cta
+              href={LAHORE_CONFIG.whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                group
+                inline-flex
+                min-h-12
+                items-center
+                justify-center
+                gap-3
+                rounded-full
+                border
+                border-[#12110F]/15
+                bg-white/60
+                px-7
+                py-3.5
+                text-[10px]
+                font-menu
+                font-medium
+                uppercase
+                tracking-[0.14em]
+                text-[#12110F]
+                backdrop-blur-sm
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:border-[#8C7A58]
+                hover:bg-white
+                hover:text-[#8C7A58]
+                sm:text-xs
+              "
             >
-              View Strategic Location
-            </a>
+              <span>Verified Lahore Desk</span>
+              <ArrowUpRight
+                size={14}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:-translate-y-0.5
+                  group-hover:translate-x-0.5
+                "
+              />
+            </Link>
           </div>
         </div>
       </div>

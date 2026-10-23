@@ -48,12 +48,12 @@ export default function FaqSection() {
 
               {/* Heading */}
               
-              <h2 className="mb-6 text-[clamp(2.5rem,4vw,3.5rem)] font-normal leading-[1.05] tracking-tight text-[#1A1C1B]">
+              <h2 className="mb-4 text-[clamp(2.5rem,4vw,3.5rem)] font-normal leading-[1.05] tracking-tight text-[#1A1C1B]">
                 Frequently Asked <br className="hidden lg:block" />
                 <span className="font-light italic text-champagne">Questions.</span>
               </h2>
-              <p className="mb-10 font-serif text-[15px] leading-relaxed text-black/60">
-                Find transparent, verified information regarding official approvals, plot sizes, and project development status directly from authorized sources.
+              <p className="mb-10 font-sans text-[15px] leading-relaxed text-black/60">
+                Verified details regarding approvals, inventory, and phased project development.
               </p>
 
             </div>

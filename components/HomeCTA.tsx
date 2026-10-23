@@ -62,26 +62,35 @@ export default function HomeCTA() {
           <div className="grain absolute inset-0" />
 
           <div className="relative z-10 flex min-h-[46rem] flex-col px-5 py-10 sm:min-h-[25rem] sm:px-8 sm:py-12 lg:px-14">
-            <SectionHeading
-              title="Your Place in Paradise Awaits"
-            />
-            <div className="mx-auto max-w-5xl text-center">
-              
+            <div className="mx-auto max-w-4xl text-center">
+              <span className="inline-block text-[10px] sm:text-[11px] font-sans font-medium uppercase tracking-[0.28em] text-champagne mb-4">
+                Begin Your Journey
+              </span>
+              <h2 className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-heading font-normal tracking-[-0.03em] leading-[1.05] text-white">
+                Your Place in Paradise <br />
+                <span className="font-light italic text-champagne">Awaits.</span>
+              </h2>
+              <p className="mt-4 text-[15px] sm:text-[17px] font-sans leading-relaxed text-white/75 max-w-lg mx-auto">
+                Discover exceptional residential enclaves and commercial investments crafted for tomorrow.
+              </p>
 
-              <div data-cta-reveal className="mt-7 flex justify-center gap-1.5">
+              <div data-cta-reveal className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
                 <Link
                   href="/contact"
-                  className="rounded-xl bg-white px-6 py-3.5 text-sm font-light uppercase tracking-[0.16em] text-ink transition-colors hover:bg-champagne hover:text-white"
+                  className="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-ink transition-all duration-300 hover:bg-champagne hover:text-white hover:shadow-xl"
                 >
-                  Contact us
+                  <span>Connect With Our Team</span>
+                  <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
-                <Link
-                  href="/contact"
-                  aria-label="Open contact page"
-                  className="grid h-11 w-11 place-items-center rounded-xl bg-white text-lg text-ink transition-colors hover:bg-champagne hover:text-white"
+
+                <a
+                  href={SITE_CONFIG.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-7 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-champagne hover:bg-champagne/20"
                 >
-                  ↗
-                </Link>
+                  WhatsApp Advisory
+                </a>
               </div>
             </div>
 

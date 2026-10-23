@@ -114,11 +114,11 @@ export default function HeroIntro() {
               "[data-cta]"
             );
           gsap.set(headingWords, {
-            color: "rgba(255,255,255,0.18)",
+            color: "rgba(18, 17, 15, 0.22)",
           });
 
           gsap.set(descriptionWords, {
-            color: "rgba(255,255,255,0.18)",
+            color: "rgba(18, 17, 15, 0.22)",
           });
 
           if (buttons?.length) {
@@ -130,35 +130,22 @@ export default function HeroIntro() {
 
           /*
            * MASTER TIMELINE
-           *
-           * The entire animation is tied to:
-           * section top -> section bottom
-           *
-           * Because sticky viewport remains inside
-           * this 320vh section, it cannot release
-           * before timeline completion.
            */
-
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: section,
-
               start: "top top",
               end: "bottom bottom",
-
               scrub: 1,
-
               invalidateOnRefresh: true,
             },
           });
 
           /*
            * ==========================================
-           * PHASE 1
-           * HEADING WORDS
+           * PHASE 1: HEADING WORDS
            * ==========================================
            */
-
           headingWords.forEach((word, index) => {
             const isChampagne =
               word.dataset.tone === "champagne";
@@ -167,9 +154,8 @@ export default function HeroIntro() {
               word,
               {
                 color: isChampagne
-                  ? "#D9BD89"
-                  : "#FFFFFF",
-
+                  ? "#8C7A58"
+                  : "#12110F",
                 duration: 0.7,
                 ease: "none",
               },
@@ -177,25 +163,18 @@ export default function HeroIntro() {
             );
           });
 
-          /*
-           * Small pause after heading
-           */
-
           tl.to({}, { duration: 0.45 });
 
           /*
            * ==========================================
-           * PHASE 2
-           * DESCRIPTION WORDS
+           * PHASE 2: DESCRIPTION WORDS
            * ==========================================
            */
-
           descriptionWords.forEach((word) => {
             tl.to(
               word,
               {
-                color: "rgba(255,255,255,0.84)",
-
+                color: "rgba(18, 17, 15, 0.78)",
                 duration: 0.4,
                 ease: "none",
               },
@@ -324,11 +303,11 @@ export default function HeroIntro() {
             );
 
           gsap.set(headingWords, {
-            color: "#FFFFFF",
+            color: "#12110F",
           });
 
           gsap.set(descriptionWords, {
-            color: "rgba(255,255,255,0.82)",
+            color: "rgba(18, 17, 15, 0.78)",
           });
 
           if (eyebrowRef.current) {
@@ -364,7 +343,7 @@ export default function HeroIntro() {
               "[data-heading-word]"
             ),
             {
-              color: "#FFFFFF",
+              color: "#12110F",
             }
           );
 
@@ -374,17 +353,7 @@ export default function HeroIntro() {
             ),
             {
               color:
-                "rgba(255,255,255,0.84)",
-            }
-          );
-
-          gsap.set(
-            section.querySelectorAll(
-              "[data-cta]"
-            ),
-            {
-              opacity: 1,
-              y: 0,
+                "rgba(18, 17, 15, 0.78)",
             }
           );
 
@@ -412,12 +381,16 @@ export default function HeroIntro() {
       ref={sectionRef}
       className="
         relative
+        z-20
         isolate
         min-h-screen
         overflow-visible
-        text-ink
-bg-champagne
-        lg:h-[320vh]
+        text-[#12110F]
+        bg-[#FAF8F5]
+        border-t
+        border-black/[0.08]
+        shadow-[0_-30px_70px_rgba(0,0,0,0.35)]
+        lg:h-[260vh]
       "
     >
       {/* ================================================= */}
@@ -430,6 +403,7 @@ bg-champagne
           relative
           min-h-screen
           overflow-hidden
+          bg-[#FAF8F5]
           lg:sticky
           lg:top-0
           lg:flex
@@ -438,37 +412,7 @@ bg-champagne
         "
       >
         {/* =============================================== */}
-        {/* BACKGROUND */}
-        {/* =============================================== */}
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            -z-30
-            overflow-hidden
-          "
-        >
-          <div
-            ref={backgroundRef}
-            className="
-              absolute
-              -inset-[6%]
-
-              bg-[url('/images/boulevard-loft.png')]
-              bg-cover
-              bg-center
-              bg-no-repeat
-
-              will-change-transform
-            "
-          />
-        </div>
-
-        {/* =============================================== */}
-        {/* CHAMPAGNE GLOW */}
+        {/* AMBIENT ARCHITECTURAL GLOW (Subtle Warmth) */}
         {/* =============================================== */}
 
         <div
@@ -479,17 +423,12 @@ bg-champagne
             -right-40
             top-1/2
             -z-10
-
             h-[600px]
             w-[600px]
-
             -translate-y-1/2
-
             rounded-full
-
-            bg-champagne/[0.08]
-
-            blur-[130px]
+            bg-[#E8DFC8]/40
+            blur-[140px]
           "
         />
 
@@ -503,16 +442,11 @@ bg-champagne
             mx-auto
             w-full
             max-w-[1440px]
-
-            px-5
+            px-6
             py-20
-
-            sm:px-8
-
-            lg:px-12
+            sm:px-10
+            lg:px-14
             lg:py-16
-
-            xl:px-16
           "
         >
           {/* =============================================== */}
@@ -530,12 +464,14 @@ bg-champagne
               className="
                 text-[10px]
                 font-menu
-                text-white/55
-                sm:text-sm
+                tracking-[0.24em]
+                uppercase
+                text-[#8C7A58]
+                font-medium
+                sm:text-xs
               "
             >
-              PHATA NOC Approved ·
-              DG-PHATA/W-I/PHS/61/2022
+              PHATA NOC Approved · DG-PHATA/W-I/PHS/61/2022
             </span>
           </div>
 
@@ -544,43 +480,36 @@ bg-champagne
           {/* =============================================== */}
 
           <div className="text-center">
-            <h1
+            <h2
               className="
                 mx-auto
-                max-w-[1250px]
-                text-[clamp(2.35rem,3vw,3rem)]
-                font-medium
+                max-w-[1050px]
+                text-[clamp(1.9rem,3.4vw,3.3rem)]
+                font-normal
                 capitalize
-                leading-[1.08]
-                tracking-[-0.025em]
+                leading-[1.12]
+                tracking-[-0.03em]
               "
             >
               <span className="block">
                 <HighlightWords>
-                  New City Paradise Wah —
+                  Mastery in Planning.
                 </HighlightWords>
               </span>
 
               <span
                 className="
-                  mt-1
+                  mt-1.5
                   block
-
                   font-light
                   italic
                 "
               >
-                <HighlightWords >
-                  Residential & Commercial Plots
+                <HighlightWords tone="champagne">
+                  Enduring in Legacy.
                 </HighlightWords>
               </span>
-
-              <span className="mt-1 block">
-                <HighlightWords>
-                  near Burhan Interchange.
-                </HighlightWords>
-              </span>
-            </h1>
+            </h2>
           </div>
 
           {/* =============================================== */}
@@ -590,27 +519,23 @@ bg-champagne
           <div
             className="
               mx-auto
-              mt-8
-              max-w-5xl
-
+              mt-6
+              max-w-2xl
               text-center
-
-              sm:mt-10
+              sm:mt-8
             "
           >
             <p
               className="
-                text-[15px]
-                leading-[1.95]
+                text-[14px]
+                leading-[1.8]
                 font-light
-                sm:text-[17px]
+                sm:text-[16px]
                 lg:text-[17px]
-
-                xl:text-xl
               "
             >
               <DescriptionWords>
-                A 20,000 Kanal master-planned community developed by the makers of New City Wah, strategically located on the 330-ft GT Road adjacent to the Burhan Interchange (M-1 Motorway) and the northern CPEC Route. Featuring verified residential plots of 3.5 Marla, 5 Marla, 10 Marla, and 1 Kanal, alongside prime commercial sectors.
+                A PHATA-approved master community on the 330-ft boulevard, designed for refined residential and commercial distinction.
               </DescriptionWords>
             </p>
           </div>
@@ -640,50 +565,33 @@ bg-champagne
               href="#plots-overview"
               className="
                 group
-
                 inline-flex
                 min-h-12
-
                 items-center
                 justify-center
-
                 gap-4
-
-                rounded-xl
-
-                bg-white
-
-                px-6
+                rounded-full
+                bg-[#12110F]
+                px-7
                 py-3.5
-
                 text-[10px]
-
                 font-menu
                 font-semibold
-
                 uppercase
-                tracking-[0.12em]
-
-                text-[#17231F]
-
-                shadow-lg
-
+                tracking-[0.14em]
+                text-[#FAF8F5]
+                shadow-[0_10px_30px_rgba(18,17,15,0.12)]
                 transition-all
                 duration-300
-
                 hover:-translate-y-0.5
-                hover:bg-champagne
-                hover:text-white
-
+                hover:bg-[#8C7A58]
+                hover:shadow-[0_14px_35px_rgba(140,122,88,0.25)]
                 sm:text-xs
               "
             >
-              <span>
-                Explore Plot Options
-              </span>
-
+              <span>Explore Masterplan</span>
               <ArrowRight
-                size={15}
+                size={14}
                 className="
                   transition-transform
                   duration-300
@@ -694,64 +602,44 @@ bg-champagne
 
             <Link
               data-cta
-              href={
-                SITE_CONFIG.whatsappLink
-              }
+              href={SITE_CONFIG.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="
                 group
-
                 inline-flex
                 min-h-12
-
                 items-center
                 justify-center
-
                 gap-3
-
-                rounded-xl
-
+                rounded-full
                 border
-                border-white/25
-
-                bg-white/10
-
-                px-6
+                border-[#12110F]/15
+                bg-white/60
+                px-7
                 py-3.5
-
                 text-[10px]
-
                 font-menu
                 font-medium
-
                 uppercase
-                tracking-[0.1em]
-
-                text-white
-
-                backdrop-blur-md
-
+                tracking-[0.14em]
+                text-[#12110F]
+                backdrop-blur-sm
                 transition-all
                 duration-300
-
                 hover:-translate-y-0.5
-                hover:border-champagne
-                hover:bg-champagne/20
-
+                hover:border-[#8C7A58]
+                hover:bg-white
+                hover:text-[#8C7A58]
                 sm:text-xs
               "
             >
-              <span>
-                Verified WhatsApp Desk
-              </span>
-
+              <span>Verified WhatsApp Desk</span>
               <ArrowUpRight
-                size={15}
+                size={14}
                 className="
                   transition-transform
                   duration-300
-
                   group-hover:-translate-y-0.5
                   group-hover:translate-x-0.5
                 "

@@ -6,6 +6,7 @@ import LahoreHero from "@/components/LahoreHero";
 import LahoreIntro from "@/components/LahoreIntro";
 import LahoreSectors from "@/components/LahoreSectors";
 import LahoreVision from "@/components/LahoreVision";
+import EditorialParallaxBanner from "@/components/EditorialParallaxBanner";
 import LahoreLocation from "@/components/LahoreLocation";
 import LahoreAmenities from "@/components/LahoreAmenities";
 import LahoreFaq from "@/components/LahoreFaq";
@@ -43,7 +44,19 @@ export default function LahorePage() {
         {/* 4. Vision & Scale Bar (matching VisionLegacy.tsx) */}
         <LahoreVision />
 
-        {/* 5. Strategic Location & Minutes from Landmarks (Timeline + Sticky Map) */}
+        {/* 5. Edge-to-Edge Editorial Parallax Banner before Location */}
+        <EditorialParallaxBanner
+          eyebrow="RUDA PHASE 1 • RIVERFRONT DEVELOPMENT"
+          headingTop="REDEFINING"
+          headingBottom="RIVERFRONT LUXURY"
+          description="Positioned directly on the Eastern Bypass (M-11), New City Paradise Lahore introduces Pakistan's premier smart waterfront community with uninterrupted connectivity."
+          ctaText="Explore Sectors"
+          ctaHref="#lahore-sectors"
+          imageSrc="/images/delivered/lahore-hero.jpg"
+          imageAlt="New City Paradise Lahore Riverfront Masterplan"
+        />
+
+        {/* 6. Strategic Location & Minutes from Landmarks (Timeline + Sticky Map) */}
         <LahoreLocation />
 
         {/* 6. Signature Amenities & Lifestyle Grid */}

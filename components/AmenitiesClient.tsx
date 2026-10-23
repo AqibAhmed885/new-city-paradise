@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { AMENITIES_DATA, AmenityItem } from "@/lib/amenitiesData";
 import { SITE_CONFIG } from "@/lib/siteConfig";
-import AzimutePerspectiveExperience from "./AzimutePerspectiveExperience";
 
 const categories = [
   "All Amenities",
@@ -28,107 +27,100 @@ export default function AmenitiesClient() {
   const featured = AMENITIES_DATA[0]; // Glow Park
 
   return (
-    <div className="bg-[#0b0a09] text-white min-h-screen selection:bg-champagne/30 selection:text-white">
+    <div className="bg-[#FAF8F5] text-[#12110F] min-h-screen selection:bg-[#8C7A58]/20 selection:text-[#12110F]">
       {/* Hero Section */}
-      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden pt-28 pb-16">
-        {/* Background Image with Cinematic Overlay */}
+      <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center overflow-hidden pt-32 pb-20 border-b border-black/[0.06]">
+        {/* Background Image with Soft Architectural Mist Overlay */}
         <div className="absolute inset-0">
           <Image
             src="/images/amenities/glow-park.jpg"
             alt="New City Paradise Amenities"
             fill
             priority
-            className="object-cover object-center scale-105 transition-transform duration-1000"
+            className="object-cover object-center scale-105 filter brightness-[0.95]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0a09] via-[#0b0a09]/75 to-[#0b0a09]/50" />
-          <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/40 to-black/80" />
+          {/* Light Ivory Architectural Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/85 to-[#FAF8F5]/60" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(250,248,245,0.7)_80%)]" />
         </div>
 
-        <div className="relative z-10 container-pad max-w-6xl mx-auto text-center px-4">
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-champagne/30 bg-black/40 backdrop-blur-md mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-            <span className="text-[10px] sm:text-xs font-menu uppercase tracking-[0.28em] text-champagne">
-              World-Class Living
+        <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#8C7A58]/25 bg-white/80 backdrop-blur-md mb-6 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8C7A58] animate-pulse" />
+            <span className="text-[10px] sm:text-xs font-sans font-semibold uppercase tracking-[0.24em] text-[#8C7A58]">
+              World-Class Living · Burhan CPEC
             </span>
           </div>
 
-          <h1 className="font-sans text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight uppercase max-w-4xl mx-auto leading-[1.08] text-white">
-            Unrivaled <span className="italic font-serif text-champagne font-light">Lifestyle</span> Amenities
+          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight uppercase max-w-4xl mx-auto leading-[1.08] text-[#12110F]">
+            Unrivaled <span className="italic font-light text-[#8C7A58]">Lifestyle</span> Amenities
           </h1>
 
-          <p className="mt-6 font-serif text-lg sm:text-xl md:text-2xl text-white/70 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="mt-6 font-sans text-base sm:text-lg md:text-xl text-[#12110F]/70 max-w-2xl mx-auto leading-relaxed font-light">
             Nestled strategically along the 330-ft arterial corridor, New City Paradise delivers an unmatched world of leisure, health, sports, and natural wonder.
           </p>
 
           {/* Quick stats pills */}
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-white/10">
-            <div>
-              <p className="font-sans text-2xl sm:text-3xl font-light text-white">14+</p>
-              <p className="text-[10px] font-menu uppercase tracking-wider text-white/50 mt-1">Lifestyle Hubs</p>
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-black/[0.08]">
+            <div className="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-black/[0.04] shadow-sm">
+              <p className="font-heading text-2xl sm:text-3xl font-normal text-[#12110F]">14+</p>
+              <p className="text-[10px] font-sans font-medium uppercase tracking-wider text-black/50 mt-1">Lifestyle Hubs</p>
             </div>
-            <div>
-              <p className="font-sans text-2xl sm:text-3xl font-light text-white">330 FT</p>
-              <p className="text-[10px] font-menu uppercase tracking-wider text-white/50 mt-1">Main Boulevard</p>
+            <div className="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-black/[0.04] shadow-sm">
+              <p className="font-heading text-2xl sm:text-3xl font-normal text-[#12110F]">330 FT</p>
+              <p className="text-[10px] font-sans font-medium uppercase tracking-wider text-black/50 mt-1">Main Boulevard</p>
             </div>
-            <div>
-              <p className="font-sans text-2xl sm:text-3xl font-light text-white">24/7</p>
-              <p className="text-[10px] font-menu uppercase tracking-wider text-white/50 mt-1">Hospital & Security</p>
+            <div className="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-black/[0.04] shadow-sm">
+              <p className="font-heading text-2xl sm:text-3xl font-normal text-[#12110F]">24/7</p>
+              <p className="text-[10px] font-sans font-medium uppercase tracking-wider text-black/50 mt-1">Hospital & Security</p>
             </div>
-            <div>
-              <p className="font-sans text-2xl sm:text-3xl font-light text-white">100%</p>
-              <p className="text-[10px] font-menu uppercase tracking-wider text-white/50 mt-1">Underground Power</p>
+            <div className="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-black/[0.04] shadow-sm">
+              <p className="font-heading text-2xl sm:text-3xl font-normal text-[#12110F]">100%</p>
+              <p className="text-[10px] font-sans font-medium uppercase tracking-wider text-black/50 mt-1">Underground Power</p>
             </div>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
-          <span className="text-[9px] uppercase tracking-[0.3em] font-menu text-white/60">Discover</span>
-          <div className="w-4 h-7 rounded-full border border-white/30 flex items-start justify-center p-1">
-            <div className="w-1 h-2 rounded-full bg-champagne animate-bounce" />
           </div>
         </div>
       </section>
 
       {/* Hero Highlight Banner: Glow Park Spotlight */}
-      <section className="container-pad max-w-7xl mx-auto px-4 -mt-10 relative z-20 mb-20">
-        <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-r from-stone-900/90 to-stone-950/90 backdrop-blur-xl p-6 sm:p-10 shadow-2xl">
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 -mt-10 relative z-20 mb-20">
+        <div className="relative rounded-3xl overflow-hidden border border-black/[0.08] bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.06)]">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 relative h-72 sm:h-96 w-full rounded-xl overflow-hidden group">
+            <div className="lg:col-span-7 relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden group">
               <Image
                 src={featured.image}
                 alt={featured.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <span className="px-3 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-menu uppercase tracking-widest text-champagne border border-champagne/30">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+                <span className="px-3.5 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-sans font-semibold uppercase tracking-widest text-[#12110F] shadow-sm">
                   {featured.tag}
                 </span>
-                <span className="text-[11px] font-menu uppercase tracking-wider text-white/80">
+                <span className="text-[11px] font-sans uppercase tracking-wider text-white drop-shadow">
                   Nighttime Illuminations
                 </span>
               </div>
             </div>
 
             <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
-              <span className="text-xs font-menu uppercase tracking-[0.25em] text-champagne">
+              <span className="text-xs font-sans font-semibold uppercase tracking-[0.22em] text-[#8C7A58]">
                 Crown Jewel Attraction
               </span>
-              <h2 className="font-sans text-3xl sm:text-4xl uppercase tracking-tight font-light text-white">
+              <h2 className="font-heading text-3xl sm:text-4xl uppercase tracking-tight font-normal text-[#12110F]">
                 {featured.title}
               </h2>
-              <p className="font-serif text-white/80 text-base sm:text-lg leading-relaxed font-light">
+              <p className="font-sans text-[#12110F]/70 text-base leading-relaxed font-light">
                 {featured.description}
               </p>
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-white/50 italic font-serif">
+              <div className="pt-4 border-t border-black/[0.08] flex items-center justify-between">
+                <span className="text-xs text-[#8C7A58] italic font-serif">
                   {featured.highlight}
                 </span>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 border border-champagne text-champagne hover:bg-champagne hover:text-black transition-colors px-4 py-2 text-[10px] font-menu uppercase tracking-widest"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#12110F] text-[#FAF8F5] hover:bg-[#8C7A58] transition-colors px-5 py-2.5 text-[10px] font-sans font-semibold uppercase tracking-widest"
                 >
                   Schedule Tour &rarr;
                 </Link>
@@ -139,13 +131,13 @@ export default function AmenitiesClient() {
       </section>
 
       {/* Category Filter Tabs */}
-      <section className="container-pad max-w-7xl mx-auto px-4 mb-14">
-        <div className="flex flex-col sm:flex-row items-center justify-between border-b border-white/15 pb-6 gap-6">
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 mb-12">
+        <div className="flex flex-col sm:flex-row items-center justify-between border-b border-black/[0.08] pb-6 gap-6">
           <div>
-            <p className="text-[10px] font-menu uppercase tracking-[0.28em] text-champagne">
+            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.24em] text-[#8C7A58]">
               Curated Masterplan
             </p>
-            <h3 className="font-sans text-2xl sm:text-3xl font-light uppercase tracking-tight text-white mt-1">
+            <h3 className="font-heading text-2xl sm:text-3xl font-normal uppercase tracking-tight text-[#12110F] mt-1">
               Explore By Category
             </h3>
           </div>
@@ -158,10 +150,10 @@ export default function AmenitiesClient() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-[11px] font-menu uppercase tracking-widest transition-all duration-300 ${
+                  className={`px-5 py-2.5 rounded-full text-[11px] font-sans font-semibold uppercase tracking-widest transition-all duration-300 ${
                     active
-                      ? "bg-white text-black font-medium shadow-lg"
-                      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10"
+                      ? "bg-[#12110F] text-[#FAF8F5] shadow-md"
+                      : "bg-white text-[#12110F]/70 hover:bg-[#8C7A58]/10 hover:text-[#12110F] border border-black/[0.08]"
                   }`}
                 >
                   {cat}
@@ -173,7 +165,7 @@ export default function AmenitiesClient() {
       </section>
 
       {/* Amenities Grid */}
-      <section className="container-pad max-w-7xl mx-auto px-4 pb-28">
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 pb-28">
         <motion.div
           layout
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -182,60 +174,60 @@ export default function AmenitiesClient() {
             {filtered.map((item, index) => (
               <motion.article
                 layout
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.45, delay: index * 0.04 }}
+                transition={{ duration: 0.4, delay: index * 0.03 }}
                 key={item.id}
                 onClick={() => setActiveItem(item)}
-                className="group relative cursor-pointer flex flex-col rounded-xl overflow-hidden border border-white/10 bg-[#141311] hover:border-champagne/50 hover:shadow-2xl transition-all duration-500"
+                className="group relative cursor-pointer flex flex-col rounded-2xl overflow-hidden border border-black/[0.08] bg-white hover:border-[#8C7A58]/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500"
               >
                 {/* Image Container with Hover Zoom */}
-                <div className="relative h-64 w-full overflow-hidden bg-black/40">
+                <div className="relative h-64 w-full overflow-hidden bg-black/5">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141311] via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   
                   {/* Category badge */}
                   <div className="absolute top-4 left-4">
-                    <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-md text-[9px] font-menu uppercase tracking-widest text-champagne border border-champagne/30">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[9px] font-sans font-semibold uppercase tracking-widest text-[#12110F] shadow-sm">
                       {item.tag}
                     </span>
                   </div>
 
                   {/* Corner indicator */}
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-xs">
+                    <span className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#12110F] text-xs shadow-sm">
                       &#x2922;
                     </span>
                   </div>
                 </div>
 
                 {/* Content Details */}
-                <div className="p-6 flex flex-col flex-1 justify-between space-y-4">
+                <div className="p-7 flex flex-col flex-1 justify-between space-y-4">
                   <div>
-                    <span className="text-[10px] font-menu uppercase tracking-widest text-white/40 block mb-1">
+                    <span className="text-[10px] font-sans font-semibold uppercase tracking-widest text-[#8C7A58] block mb-1">
                       {item.category}
                     </span>
-                    <h4 className="font-sans text-xl uppercase tracking-tight text-white group-hover:text-champagne transition-colors duration-300">
+                    <h4 className="font-heading text-xl uppercase tracking-tight text-[#12110F] group-hover:text-[#8C7A58] transition-colors duration-300">
                       {item.title}
                     </h4>
-                    <p className="mt-2.5 font-serif text-sm leading-relaxed text-white/65 line-clamp-3">
+                    <p className="mt-2.5 font-sans text-sm leading-relaxed text-[#12110F]/65 line-clamp-3 font-light">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Footer Highlights */}
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-menu">
-                    <span className="text-white/40 tracking-wider">
+                  <div className="pt-4 border-t border-black/[0.06] flex items-center justify-between text-[11px] font-sans">
+                    <span className="text-black/45 tracking-wider">
                       {item.highlight ? item.highlight.slice(0, 32) + "..." : "Master-Planned"}
                     </span>
-                    <span className="text-champagne uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span className="text-[#8C7A58] font-semibold uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       Details &rarr;
                     </span>
                   </div>
@@ -246,9 +238,6 @@ export default function AmenitiesClient() {
         </motion.div>
       </section>
 
-      {/* 5. Signature Masterplan Amenities & Helical Visual Explorer */}
-      <AzimutePerspectiveExperience />
-
       {/* Modal Lightbox for Deep-dive into an amenity */}
       <AnimatePresence>
         {activeItem && (
@@ -257,20 +246,20 @@ export default function AmenitiesClient() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveItem(null)}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-4 sm:p-6 md:p-10 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md p-4 sm:p-6 md:p-10 flex items-center justify-center"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-3xl w-full bg-[#161513] border border-white/20 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+              className="relative max-w-3xl w-full bg-[#FAF8F5] border border-black/[0.1] rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
             >
               {/* Close Button */}
               <button
                 onClick={() => setActiveItem(null)}
                 aria-label="Close modal"
-                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-white hover:text-black flex items-center justify-center transition-colors text-xl font-light"
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 text-[#12110F] hover:bg-[#12110F] hover:text-white flex items-center justify-center transition-colors text-xl font-light shadow-md"
               >
                 &times;
               </button>
@@ -283,9 +272,9 @@ export default function AmenitiesClient() {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161513] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-6">
-                  <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-md text-[10px] font-menu uppercase tracking-widest text-champagne border border-champagne/30">
+                  <span className="px-3.5 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-sans font-semibold uppercase tracking-widest text-[#12110F] shadow-sm">
                     {activeItem.category}
                   </span>
                 </div>
@@ -293,31 +282,31 @@ export default function AmenitiesClient() {
 
               {/* Modal Content */}
               <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
-                <h3 className="font-sans text-2xl sm:text-3xl uppercase tracking-tight text-white">
+                <h3 className="font-heading text-2xl sm:text-3xl uppercase tracking-tight text-[#12110F]">
                   {activeItem.title}
                 </h3>
-                <p className="font-serif text-base sm:text-lg text-white/80 leading-relaxed">
+                <p className="font-sans text-base sm:text-lg text-[#12110F]/75 leading-relaxed font-light">
                   {activeItem.description}
                 </p>
 
                 {activeItem.highlight && (
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <p className="text-[10px] font-menu uppercase tracking-widest text-champagne mb-1">
+                  <div className="p-4 rounded-xl bg-white border border-black/[0.08] shadow-sm">
+                    <p className="text-[10px] font-sans font-semibold uppercase tracking-widest text-[#8C7A58] mb-1">
                       Key Highlights
                     </p>
-                    <p className="font-serif text-sm text-white/90">
+                    <p className="font-sans text-sm text-[#12110F]/85">
                       {activeItem.highlight}
                     </p>
                   </div>
                 )}
 
-                <div className="pt-4 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between border-t border-white/10">
-                  <div className="text-xs text-white/50 font-menu uppercase tracking-wider">
+                <div className="pt-4 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between border-t border-black/[0.08]">
+                  <div className="text-xs text-black/50 font-sans uppercase tracking-wider">
                     New City Paradise Masterplan Feature
                   </div>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center px-6 py-3 bg-champagne text-black text-[11px] font-menu uppercase tracking-widest font-medium hover:bg-white transition-colors"
+                    className="inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#12110F] text-[#FAF8F5] text-[11px] font-sans font-semibold uppercase tracking-widest hover:bg-[#8C7A58] transition-colors shadow-md"
                   >
                     Inquire About Plots &rarr;
                   </Link>
@@ -329,21 +318,21 @@ export default function AmenitiesClient() {
       </AnimatePresence>
 
       {/* Bottom CTA Section */}
-      <section className="border-t border-white/10 bg-[#0e0d0c] py-20">
-        <div className="container-pad max-w-4xl mx-auto text-center px-4">
-          <p className="text-xs font-menu uppercase tracking-[0.25em] text-champagne mb-3">
+      <section className="border-t border-black/[0.08] bg-white py-20">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <p className="text-xs font-sans font-semibold uppercase tracking-[0.24em] text-[#8C7A58] mb-3">
             Experience It Firsthand
           </p>
-          <h2 className="font-sans text-3xl sm:text-5xl uppercase tracking-tight font-light text-white">
+          <h2 className="font-heading text-3xl sm:text-5xl uppercase tracking-tight font-normal text-[#12110F]">
             Ready to Build Your Future at New City Paradise?
           </h2>
-          <p className="mt-4 font-serif text-base sm:text-lg text-white/70 font-light max-w-xl mx-auto">
+          <p className="mt-4 font-sans text-base sm:text-lg text-[#12110F]/65 font-light max-w-xl mx-auto">
             Book an exclusive site visit today to tour the 330-ft main boulevard, Glow Park development, and recreational grounds.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/contact"
-              className="px-8 py-3.5 bg-champagne text-black text-xs font-menu uppercase tracking-widest font-medium hover:bg-white transition-colors"
+              className="px-8 py-3.5 rounded-full bg-[#12110F] text-[#FAF8F5] text-xs font-sans font-semibold uppercase tracking-widest hover:bg-[#8C7A58] transition-all shadow-md"
             >
               Book An On-Site Visit
             </Link>
@@ -351,7 +340,7 @@ export default function AmenitiesClient() {
               href={SITE_CONFIG.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-white/30 text-white text-xs font-menu uppercase tracking-widest hover:bg-white hover:text-black transition-colors"
+              className="px-8 py-3.5 rounded-full border border-black/20 text-[#12110F] text-xs font-sans font-semibold uppercase tracking-widest hover:bg-[#12110F] hover:text-white transition-all bg-white"
             >
               WhatsApp Us
             </a>

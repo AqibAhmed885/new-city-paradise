@@ -14,37 +14,27 @@ const communities = [
   {
     id: "residential-plots",
     number: "01",
-    tag: "VERIFIED PLOT SIZES",
+    tag: "VERIFIED PLOTS",
     title: "Residential Plots",
     sizes: "3.5 Marla · 5 Marla · 10 Marla · 1 Kanal",
     description:
-      "Official residential plots in New City Paradise planned around wide carpeted roads, underground electricity, serene parks, and planned civic amenities. Designed for modern family home construction with direct access from the 330-ft main boulevard.",
-    images: [
-      "/images/isla.jpg",
-      "/images/central-park.jpg",
-      "/images/crystal-lakes.jpg",
-      "/images/new-city-paradise-hero.png",
-    ],
+      "Master-planned residential plots configured along tree-lined avenues with underground utilities and parkland vistas.",
+    image: "/images/isla.jpg",
     theme: "bg-[#FBF9F4]",
-    linkText: "View Masterplan & Plots",
+    linkText: "View Masterplan",
     linkHref: "/masterplan",
   },
   {
     id: "commercial-plots",
     number: "02",
-    tag: "BUSINESS CORRIDOR",
+    tag: "COMMERCIAL AXIS",
     title: "Commercial Plots",
     sizes: "2.5 Marla · 4 Marla · 7 Marla",
     description:
-      "High-visibility commercial sectors strategically aligned along the 330-ft grand entrance boulevard and primary arterial avenues. Optimized for corporate retail, executive offices, financial centers, and upscale retail flagships.",
-    images: [
-      "/images/arcade1.png",
-      "/images/arcade2.png",
-      "/images/arcade3.png",
-      "/images/newcityarcade.png",
-    ],
+      "Prime retail and corporate hubs strategically commanding high-visibility frontage along the 330-ft boulevard.",
+    image: "/images/arcade1.png",
     theme: "bg-[#F5F2EC]",
-    linkText: "Explore Commercial Sectors",
+    linkText: "Explore Commercial",
     linkHref: "/masterplan",
   },
   {
@@ -54,31 +44,21 @@ const communities = [
     title: "Awami Block",
     sizes: "4 Marla · 6 Marla Planned Plots",
     description:
-      "A dedicated community-oriented sector thoughtfully planned with essential neighborhood amenities, community mosques, primary healthcare units, family parks, and water filtration facilities.",
-    images: [
-      "/images/garden-villa.jpg",
-      "/images/wellness-club.jpg",
-      "/images/learning-campus.jpg",
-      "/images/grand-estate.jpg",
-    ],
+      "A thoughtfully self-contained community sector prioritizing verdant neighborhood parks, mosques, and family convenience.",
+    image: "/images/garden-villa.jpg",
     theme: "bg-[#F1F3EF]",
-    linkText: "Inquire About Awami Block",
+    linkText: "Inquire Awami Block",
     linkHref: "/contact",
   },
   {
     id: "l-prime-block",
     number: "04",
-    tag: "L PRIME BLOCK",
+    tag: "ELITE SECTOR",
     title: "L Prime Block",
-    sizes: "Elite Residential Sector",
+    sizes: "Signature Residential Sector",
     description:
-      "Sculpted around dedicated green parks, wide carpeted avenues, and underground utilities — an elite residential sector offering an enduring standard of privacy and refined modern living.",
-    images: [
-      "/images/garden-villa.jpg",
-      "/images/garden-villa.jpg",
-      "/images/garden-villa.jpg",
-      "/images/garden-villa.jpg",
-    ],
+      "An exclusive enclave sculpted around dedicated green parks, wide carpeted avenues, and enduring privacy.",
+    image: "/images/wellness-club.jpg",
     theme: "bg-[#F7F1E9]",
     linkText: "View District Specs",
     linkHref: "/masterplan",
@@ -86,17 +66,12 @@ const communities = [
   {
     id: "waterfront-district",
     number: "05",
-    tag: "WATERFRONT DISTRICT",
-    title: "Water Front District",
+    tag: "RIVERSIDE PRECINCT",
+    title: "Waterfront District",
     sizes: "Riverside Residential Sector",
     description:
-      "A scenic riverside sanctuary along the natural contours of the Haro River, featuring tranquil promenades, lush green vistas, and curated leisure experiences.",
-    images: [
-      "/images/amenities/water-front.jpg",
-      "/images/amenities/water-front.jpg",
-      "/images/amenities/water-front.jpg",
-      "/images/amenities/water-front.jpg",
-    ],
+      "Tranquil waterside residences along the Haro River contours, blending scenic promenades with lush natural horizons.",
+    image: "/images/amenities/water-front.jpg",
     theme: "bg-[#EEF2F0]",
     linkText: "View District Specs",
     linkHref: "/masterplan",
@@ -130,14 +105,26 @@ export default function Communities() {
               section
             );
 
-          cards.forEach((card, index) => {
-            const panel =
-              card.querySelector<HTMLElement>(
-                "[data-stack-panel]"
-              );
+          cards.forEach((card) => {
+            const zoomTarget = card.querySelector<HTMLElement>("[data-community-zoom]");
+            if (!zoomTarget) return;
 
-            if (!panel) return;
-
+            gsap.fromTo(
+              zoomTarget,
+              {
+                scale: 1,
+              },
+              {
+                scale: 1.12,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1.2,
+                },
+              }
+            );
           });
         }
       );
@@ -317,14 +304,10 @@ export default function Communities() {
 
                       <h3
                         className="
-                          text-[clamp(2.8rem,4vw,5rem)]
-
+                          text-[clamp(2.1rem,3.2vw,3.6rem)]
                           font-normal
-
-                          leading-[0.98]
-
-                          tracking-[-0.05em]
-
+                          leading-[1.02]
+                          tracking-[-0.04em]
                           text-ink
                         "
                       >
@@ -335,13 +318,10 @@ export default function Communities() {
 
                       <div
                         className="
-                          mt-7
-
+                          mt-5
                           flex
                           flex-wrap
-
                           items-center
-
                           gap-x-3
                           gap-y-2
                         "
@@ -349,14 +329,10 @@ export default function Communities() {
                         <span
                           className="
                             text-[9px]
-
                             font-menu
                             font-semibold
-
                             uppercase
-
                             tracking-[0.14em]
-
                             text-black/40
                           "
                         >
@@ -366,26 +342,20 @@ export default function Communities() {
                         <span
                           className="
                             hidden
-
                             h-3
                             w-px
-
                             bg-black/15
-
                             sm:block
                           "
                         />
 
                         <span
                           className="
-                            text-[12px]
-
+                            text-[11.5px]
                             font-menu
                             font-medium
-
                             text-ink
-
-                            sm:text-[13px]
+                            sm:text-[12px]
                           "
                         >
                           {community.sizes}
@@ -396,19 +366,13 @@ export default function Communities() {
 
                       <p
                         className="
-                          mt-7
-
-                          max-w-[480px]
-
-                          font-serif
-
-                          text-[15px]
-
-                          leading-[1.8]
-
-                          text-black/60
-
-                          lg:text-[16px]
+                          mt-5
+                          max-w-[440px]
+                          font-sans
+                          text-[14px]
+                          leading-[1.75]
+                          text-black/65
+                          lg:text-[15px]
                         "
                       >
                         {community.description}
@@ -500,211 +464,102 @@ export default function Communities() {
                   </div>
 
                   {/* ===================================== */}
-                  {/* RIGHT MEDIA */}
+                  {/* RIGHT MEDIA (1 Hero Image with Scroll & Hover Zoom) */}
                   {/* ===================================== */}
 
                   <div
-                    data-stack-gallery
                     className="
+                      group
                       relative
-
-                      grid
-
-                      min-h-[520px]
-
-                      grid-cols-12
+                      min-h-[440px]
+                      w-full
                       overflow-hidden
-
+                      bg-black/5
+                      sm:min-h-[560px]
                       lg:col-span-6
                       lg:min-h-full
                     "
                   >
-                    {/* BIG IMAGE */}
-
                     <div
-                      data-stack-image
+                      data-community-zoom
                       className="
-                        group
-
                         relative
-
-                        col-span-12
-
-                        min-h-[330px]
-
+                        h-full
+                        w-full
                         overflow-hidden
-
-                        bg-black/5
-
-                        sm:col-span-8
-                        sm:min-h-[520px]
-
-                        lg:min-h-full
+                        will-change-transform
                       "
                     >
                       <Image
-                        src={community.images[0]}
-                        alt={`${community.title} primary view`}
+                        src={community.image}
+                        alt={`${community.title} architectural view`}
                         fill
                         priority={index === 0}
-                        sizes="
-                          (max-width: 640px) 100vw,
-                          (max-width: 1024px) 66vw,
-                          40vw
-                        "
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="
                           object-cover
-
                           transition-transform
-
-                          duration-[1600ms]
-
+                          duration-[1200ms]
                           ease-out
-
-                          group-hover:scale-[1.035]
-                        "
-                      />
-
-                      <div
-                        className="
-                          pointer-events-none
-
-                          absolute
-                          inset-0
-
-                          bg-gradient-to-t
-
-                          from-black/25
-
-                          via-transparent
-
-                          to-transparent
+                          group-hover:scale-[1.08]
                         "
                       />
                     </div>
 
-                    {/* SIDE GRID */}
-
+                    {/* SUBTLE CINEMATIC GRADIENT VEIL */}
                     <div
+                      aria-hidden="true"
                       className="
-                        col-span-12
-
-                        grid
-
-                        grid-cols-3
-
-                        gap-[2px]
-
-                        sm:col-span-4
-                        sm:grid-cols-1
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-black/50
+                        via-black/10
+                        to-transparent
+                        transition-opacity
+                        duration-700
+                        group-hover:from-black/60
                       "
-                    >
-                      {community.images
-                        .slice(1)
-                        .map(
-                          (
-                            image,
-                            imageIndex
-                          ) => (
-                            <div
-                              key={`${community.id}-image-${imageIndex}`}
-                              data-stack-image
-                              className="
-                                group
+                    />
 
-                                relative
-
-                                min-h-[150px]
-
-                                overflow-hidden
-
-                                bg-black/5
-
-                                sm:min-h-[172px]
-
-                                lg:min-h-0
-                              "
-                            >
-                              <Image
-                                src={image}
-                                alt={`${community.title} view ${imageIndex + 2
-                                  }`}
-                                fill
-                                sizes="
-                                  (max-width: 640px) 33vw,
-                                  (max-width: 1024px) 34vw,
-                                  20vw
-                                "
-                                className="
-                                  object-cover
-
-                                  transition-transform
-
-                                  duration-[1400ms]
-
-                                  ease-out
-
-                                  group-hover:scale-[1.05]
-                                "
-                              />
-
-                              <div
-                                className="
-                                  pointer-events-none
-
-                                  absolute
-                                  inset-0
-
-                                  bg-black/[0.05]
-                                "
-                              />
-                            </div>
-                          )
-                        )}
-                    </div>
-
-                    {/* MEDIA LABEL */}
-
+                    {/* MEDIA LABEL OVERLAY */}
                     <div
                       className="
                         pointer-events-none
-
                         absolute
-
-                        bottom-6
-                        left-6
-
+                        bottom-8
+                        left-8
+                        right-8
                         z-10
-
                         text-white
+                        transition-transform
+                        duration-500
+                        group-hover:-translate-y-1
                       "
                     >
                       <span
                         className="
+                          block
                           text-[9px]
-
                           font-menu
-                          font-medium
-
+                          font-semibold
                           uppercase
-
-                          tracking-[0.18em]
-
-                          text-white/65
+                          tracking-[0.22em]
+                          text-white/70
                         "
                       >
-                        New City Paradise
+                        New City Paradise · {community.tag}
                       </span>
 
                       <p
                         className="
-                          mt-1
-
+                          mt-1.5
                           font-serif
-
-                          text-xl
-
-                          sm:text-2xl
+                          text-2xl
+                          tracking-[-0.02em]
+                          text-white
+                          sm:text-3xl
                         "
                       >
                         {community.title}

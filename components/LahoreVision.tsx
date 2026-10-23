@@ -98,33 +98,33 @@ export default function LahoreVision() {
             <span className="inline-block text-[10px] sm:text-[11px] font-sans font-medium tracking-[0.24em] uppercase text-[#8C7A58] mb-3">
               In The Heart of RUDA Phase 1
             </span>
-            <h2 className="text-[clamp(2.4rem,5vw,4rem)] font-heading font-normal leading-[1.08] tracking-[-0.03em] text-[#12110F]">
+            <h2 className="text-[clamp(1.9rem,3.6vw,3.2rem)] font-heading font-normal leading-[1.1] tracking-[-0.03em] text-[#12110F]">
               A Riverfront Legacy in Lahore
             </h2>
-            <p className="mt-4 text-[15px] sm:text-[16px] font-sans leading-[1.75] text-[#12110F]/65 max-w-2xl mx-auto">
-              Introducing sustainable, technology-infused urban living along the prominent Ravi Urban Development Authority corridor, backed by New City Housing’s 45+ year legacy of excellence.
+            <p className="mt-3 text-[14px] sm:text-[15px] font-sans leading-[1.7] text-[#12110F]/65 max-w-xl mx-auto">
+              Introducing sustainable, technology-infused urban living along the prominent Ravi Urban Development Authority corridor, backed by New City Housing’s 45+ year legacy.
             </p>
           </div>
 
           {/* Stats Grid with Delicate Dividers */}
           <div
             ref={statsRef}
-            className="mt-16 sm:mt-20 lg:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/[0.06]"
+            className="mt-14 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/[0.06]"
           >
             {lahoreStats.map((stat, idx) => (
               <div
                 key={stat.label}
                 data-stat-col
-                className={`flex flex-col items-center justify-center text-center px-6 py-8 sm:py-6 lg:px-8 ${
-                  idx === 0 ? "pt-0 sm:pt-6" : ""
+                className={`flex flex-col items-center justify-center text-center px-6 py-7 sm:py-5 lg:px-7 ${
+                  idx === 0 ? "pt-0 sm:pt-5" : ""
                 }`}
               >
                 <div className="flex items-baseline justify-center gap-1.5">
-                  <span className="text-[clamp(2.6rem,4.4vw,3.8rem)] font-heading font-light tracking-[-0.03em] leading-none text-[#12110F]">
+                  <span className="text-[clamp(2.1rem,3.2vw,2.9rem)] font-heading font-light tracking-[-0.03em] leading-none text-[#12110F]">
                     {stat.value}
                   </span>
                   {stat.unit && (
-                    <span className="text-[clamp(1rem,1.5vw,1.3rem)] font-heading font-normal text-[#8C7A58] tracking-tight">
+                    <span className="text-[clamp(0.95rem,1.4vw,1.25rem)] font-heading font-normal text-[#8C7A58] tracking-tight">
                       {stat.unit}
                     </span>
                   )}

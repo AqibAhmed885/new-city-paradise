@@ -39,8 +39,8 @@ export default function LahoreTeaser() {
                 </span>
               </h2>
 
-              <p className="mt-5 text-[15px] sm:text-[17px] font-sans leading-relaxed text-white/75 max-w-xl">
-                Pakistan’s largest riverfront development in RUDA Phase 1, positioned directly on the Eastern Bypass (M-11) with 3-minute access to Lahore Ring Road.
+              <p className="mt-4 text-[15px] sm:text-[17px] font-sans leading-relaxed text-white/75 max-w-lg">
+                Pakistan’s premier riverfront masterplan in RUDA Phase 1, positioned directly on the M-11 Eastern Bypass.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">

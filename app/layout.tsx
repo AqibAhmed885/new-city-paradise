@@ -200,6 +200,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${optimaNova.variable} ${segoeUi.variable} ${helvetica.variable} ${azonix.variable}`}
     >
       <head>
@@ -208,7 +209,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans">
+      <body className="font-sans" suppressHydrationWarning>
         <Preloader />
         {children}
       </body>

@@ -26,37 +26,39 @@ export default function LahoreLocation() {
         if (heading) {
           gsap.fromTo(
             heading,
-            { opacity: 0, y: 30 },
+            { opacity: 0, y: 24 },
             {
               opacity: 1,
               y: 0,
-              duration: 1,
-              ease: "power3.out",
+              duration: 1.1,
+              ease: "power2.out",
               scrollTrigger: {
-                trigger: heading,
-                start: "top 85%",
+                trigger: section,
+                start: "top 80%",
+                once: true,
               },
             }
           );
         }
 
-        timelineNodes.forEach((node) => {
+        if (timelineNodes.length > 0) {
           gsap.fromTo(
-            node,
-            { opacity: 0, x: -30 },
+            timelineNodes,
+            { opacity: 0, y: 28 },
             {
               opacity: 1,
-              x: 0,
-              duration: 0.8,
+              y: 0,
+              duration: 0.9,
+              stagger: 0.14,
               ease: "power2.out",
               scrollTrigger: {
-                trigger: node,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
+                trigger: section,
+                start: "top 72%",
+                once: true,
               },
             }
           );
-        });
+        }
       });
 
       return () => {
@@ -82,18 +84,18 @@ export default function LahoreLocation() {
         {/* ================================================= */}
         <div className="relative w-full lg:w-1/2 px-6 py-16 lg:px-16 lg:py-24 xl:px-24">
           {/* Heading Section */}
-          <div data-heading className="mb-16 lg:mb-12 lg:mt-[2vh]">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-[10px] font-sans font-semibold uppercase tracking-[0.5em] text-champagne">
+          <div data-heading className="mb-14 lg:mb-10 lg:mt-[2vh]">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-[10px] font-sans font-semibold uppercase tracking-[0.35em] text-[#8C7A58]">
                 Strategic Position
               </span>
             </div>
-            <h2 className="text-[clamp(2.2rem,4vw,4rem)] font-heading font-normal leading-[1.2] tracking-tight text-[#1A1C1B]">
+            <h2 className="text-[clamp(1.85rem,3.2vw,3rem)] font-heading font-normal leading-[1.18] tracking-tight text-[#1A1C1B]">
               Minutes away from <br className="hidden lg:block" />
-              <span className="font-light italic text-champagne">Lahore’s primary corridors.</span>
+              <span className="font-light italic text-[#8C7A58]">Lahore’s primary corridors.</span>
             </h2>
-            <p className="mt-4 text-[15px] font-sans text-black/60 max-w-lg">
-              Located on the Eastern Bypass (Lahore-Sialkot Motorway M-11) within RUDA Phase 1, offering unparalleled high-speed access to the Ring Road, Airport, and city landmarks.
+            <p className="mt-3 text-[14px] font-sans text-black/60 max-w-md">
+              Located on the Eastern Bypass (Lahore-Sialkot Motorway M-11) within RUDA Phase 1, offering high-speed access to the Ring Road, Airport, and city landmarks.
             </p>
           </div>
 

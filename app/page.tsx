@@ -11,6 +11,7 @@ import HomeCTA from "@/components/HomeCTA";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
 import VisionLegacy from "@/components/VisionLegacy";
+import EditorialParallaxBanner from "@/components/EditorialParallaxBanner";
 import LahoreTeaser from "@/components/LahoreTeaser";
 
 const AzimutePerspectiveExperience = dynamic(
@@ -22,7 +23,7 @@ export default function Home() {
     <SmoothScroll>
       <Navbar />
       <main className="overflow-x-clip bg-ivory">
-        {/* 1. Cinematic Hero Video */}
+        {/* 1. Cinematic Hero Video with transparent scroll-revealed H1 */}
         <Hero />
 
         {/* 2. Canonical H1 & Verified Project Orientation immediately following video */}
@@ -37,7 +38,19 @@ export default function Home() {
         {/* 5. A Legacy Built on Vision - Project Scale & Milestones */}
         <VisionLegacy />
 
-        {/* 6. Strategic Position & Minutes Away from Major Landmarks Map Section */}
+        {/* 6. Edge-to-Edge Editorial Parallax Banner before Location */}
+        <EditorialParallaxBanner
+          eyebrow="PHATA APPROVED • 330-FT MAIN BOULEVARD"
+          headingTop="THE FUTURE OF"
+          headingBottom="URBAN LIVING"
+          description="Directly located at the 330-ft Burhan Interchange & CPEC Motorway intersection, New City Paradise sets a new standard for luxury, connectivity, and visionary master planning."
+          ctaText="Explore Masterplan"
+          ctaHref="#plots-overview"
+          imageSrc="/images/new-city-paradise-hero.png"
+          imageAlt="New City Paradise Architectural Landmark"
+        />
+
+        {/* 7. Strategic Position & Minutes Away from Major Landmarks Map Section */}
         <LocationMapSection />
 
         {/* 7. Dual-City Portfolio Discovery: New City Paradise Lahore */}

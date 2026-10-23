@@ -98,36 +98,36 @@ export default function VisionLegacy() {
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-14">
           {/* Header Section */}
           <div ref={headerRef} className="mx-auto max-w-3xl text-center">
-            <span className="inline-block text-[10px] sm:text-[11px] font-sans font-semibold tracking-[0.26em] uppercase text-champagne mb-4">
-              A Master-Planned Sanctuary
+            <span className="inline-block text-[10px] sm:text-[11px] font-sans font-semibold tracking-[0.26em] uppercase text-champagne mb-3">
+              Masterplan Scale
             </span>
-            <h2 className="text-[clamp(2.4rem,5.2vw,4.2rem)] font-heading leading-[1.08] tracking-[-0.03em] text-ink">
+            <h2 className="text-[clamp(1.9rem,3.6vw,3.2rem)] font-heading leading-[1.1] tracking-[-0.03em] text-ink">
               A Legacy Built on Vision
             </h2>
-            <p className="mt-5 text-[15px] sm:text-[16px] lg:text-[17px] font-sans leading-[1.75] text-black/60 max-w-2xl mx-auto">
-              Across residential, commercial, hospitality, and civic spaces, New City Paradise brings together an unparalleled 4,256+ Kanal masterplan created to stand the test of time.
+            <p className="mt-3 text-[14px] sm:text-[15px] font-sans leading-[1.7] text-black/60 max-w-lg mx-auto">
+              A 4,256+ Kanal master-planned sanctuary crafted to stand the test of time.
             </p>
           </div>
 
           {/* Stats Grid with Subtle Dividers */}
           <div
             ref={statsRef}
-            className="mt-16 sm:mt-20 lg:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/[0.08]"
+            className="mt-14 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/[0.08]"
           >
             {stats.map((stat, idx) => (
               <div
                 key={stat.label}
                 data-stat-col
-                className={`flex flex-col items-center justify-center text-center px-6 py-8 sm:py-6 lg:px-8 ${
-                  idx === 0 ? "pt-0 sm:pt-6" : ""
+                className={`flex flex-col items-center justify-center text-center px-6 py-7 sm:py-5 lg:px-7 ${
+                  idx === 0 ? "pt-0 sm:pt-5" : ""
                 }`}
               >
                 <div className="flex items-baseline justify-center gap-1.5 text-ink">
-                  <span className="text-[clamp(2.6rem,4.4vw,3.75rem)] font-heading font-normal tracking-[-0.03em] leading-none text-ink">
+                  <span className="text-[clamp(2.1rem,3.2vw,2.9rem)] font-heading font-normal tracking-[-0.03em] leading-none text-ink">
                     {stat.value}
                   </span>
                   {stat.unit && (
-                    <span className="text-[clamp(1.1rem,1.8vw,1.5rem)] font-heading font-light text-black/60 tracking-tight">
+                    <span className="text-[clamp(0.95rem,1.4vw,1.25rem)] font-heading font-light text-black/60 tracking-tight">
                       {stat.unit}
                     </span>
                   )}

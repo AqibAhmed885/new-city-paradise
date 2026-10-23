@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { LAHORE_CONFIG } from "@/lib/lahoreConfig";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const lahoreSectors = [
   {
@@ -14,12 +19,7 @@ const lahoreSectors = [
     sizes: "Scenic Waterfront Living",
     description:
       "Pakistan's premier riverfront promenade along the natural contours of the Ravi River. Featuring serene open-air board walks, sunset gazebos, marina leisure docks, and curated waterside dining avenues.",
-    images: [
-      "/images/delivered/lahore-hero.jpg",
-      "/images/central-park.jpg",
-      "/images/crystal-lakes.jpg",
-      "/images/delivered/lahore-intro.jpg",
-    ],
+    image: "/images/delivered/lahore-hero.jpg",
     theme: "bg-[#FBF9F4]",
     linkText: "View Marina Masterplan",
     linkHref: "/lahore/masterplan",
@@ -32,12 +32,7 @@ const lahoreSectors = [
     sizes: "3.5 · 5 · 10 Marla · 1 Kanal Planned Plots",
     description:
       "Designed with sustainable energy, wide carpeted avenues, underground electricity, optical fiber grids, and automated security. Crafted for modern family villas with instant access from the Eastern Bypass corridor.",
-    images: [
-      "/images/garden-villa.jpg",
-      "/images/wellness-club.jpg",
-      "/images/learning-campus.jpg",
-      "/images/luxury-villas.jpg",
-    ],
+    image: "/images/garden-villa.jpg",
     theme: "bg-[#F5F2EC]",
     linkText: "Inquire Residential Inventory",
     linkHref: "/lahore/contact",
@@ -50,12 +45,7 @@ const lahoreSectors = [
     sizes: "High-Visibility Corporate & Retail Plots",
     description:
       "A bustling commercial zone inspired by New City Arcade. Anchoring flagship retail brand outlets, corporate headquarters, executive financial centers, and open-air pedestrian plazas.",
-    images: [
-      "/images/arcade1.png",
-      "/images/arcade2.png",
-      "/images/arcade3.png",
-      "/images/delivered/nca.png",
-    ],
+    image: "/images/arcade1.png",
     theme: "bg-[#F1F3EF]",
     linkText: "Explore Commercial Sectors",
     linkHref: "/lahore/masterplan",
@@ -68,12 +58,7 @@ const lahoreSectors = [
     sizes: "International Community Infrastructure",
     description:
       "Dedicated world-class community hospital complex, multi-sport outdoor volleyball courts, jogging trails, and expansive community parks ensuring comprehensive wellness and lifestyle balance.",
-    images: [
-      "/images/health-pavilion.jpg",
-      "/images/sports-campus.jpg",
-      "/images/wellness-club.jpg",
-      "/images/grand-estate.jpg",
-    ],
+    image: "/images/wellness-club.jpg",
     theme: "bg-[#EEF2F0]",
     linkText: "View Master Amenities",
     linkHref: "/lahore/amenities",
@@ -81,6 +66,7 @@ const lahoreSectors = [
 ];
 
 export default function LahoreSectors() {
+  const sectionRef = useRef<HTMLElement>(null);
   const desktopStackClasses = [
     "lg:min-h-[400vh] lg:-mb-[300vh]",
     "lg:min-h-[300vh] lg:-mb-[200vh]",
@@ -88,8 +74,56 @@ export default function LahoreSectors() {
     "lg:min-h-[100vh] lg:mb-0",
   ];
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const cards = gsap.utils.toArray<HTMLElement>(
+            "[data-stack-card]",
+            section
+          );
+
+          cards.forEach((card) => {
+            const zoomTarget = card.querySelector<HTMLElement>("[data-lahore-zoom]");
+            if (!zoomTarget) return;
+
+            gsap.fromTo(
+              zoomTarget,
+              {
+                scale: 1,
+              },
+              {
+                scale: 1.12,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1.2,
+                },
+              }
+            );
+          });
+        }
+      );
+
+      return () => mm.revert();
+    }, section);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="lahore-sectors"
       aria-label="New City Paradise Lahore Sectors and Masterplan Zones"
       className="relative bg-[#EDEBE6]"
@@ -158,28 +192,37 @@ export default function LahoreSectors() {
                     "
                   >
                     <div className="max-w-[520px]">
-                      {/* Eyebrow */}
-                      <span className="text-[10px] font-sans font-semibold uppercase tracking-[0.22em] text-champagne">
+                      {/* Eyebrow Tag */}
+                      <span className="text-[10px] font-sans font-semibold uppercase tracking-[0.22em] text-[#8C7A58]">
                         {sector.tag}
                       </span>
 
                       {/* Title */}
-                      <h3 className="mt-3 text-[clamp(2.6rem,3.8vw,4.5rem)] font-heading font-normal leading-[1.05] tracking-[-0.035em] text-[#17231F]">
+                      <h3
+                        className="
+                          mt-3
+                          text-[clamp(2.1rem,3.2vw,3.6rem)]
+                          font-normal
+                          leading-[1.02]
+                          tracking-[-0.04em]
+                          text-ink
+                        "
+                      >
                         {sector.title}
                       </h3>
 
                       {/* Sizes */}
-                      <div className="mt-6 flex flex-wrap items-center gap-2">
-                        <span className="text-[10px] font-sans font-semibold uppercase tracking-[0.14em] text-black/40">
+                      <div className="mt-5 flex flex-wrap items-center gap-2">
+                        <span className="text-[9.5px] font-sans font-semibold uppercase tracking-[0.14em] text-black/40">
                           Sector Spec:
                         </span>
-                        <span className="text-xs font-heading font-medium tracking-wide text-ink/80">
+                        <span className="text-[11.5px] font-heading font-medium tracking-wide text-ink/80">
                           {sector.sizes}
                         </span>
                       </div>
 
                       {/* Description */}
-                      <p className="mt-6 font-sans text-[15px] leading-[1.8] text-black/65 lg:text-[16px]">
+                      <p className="mt-5 font-sans text-[14px] leading-[1.75] text-black/65 lg:text-[15px] max-w-[440px]">
                         {sector.description}
                       </p>
 
@@ -195,8 +238,8 @@ export default function LahoreSectors() {
                           rounded-full
                           bg-[#12110F]
                           px-6
-                          py-3
-                          text-[10.5px]
+                          py-3.5
+                          text-[10px]
                           font-sans
                           font-semibold
                           uppercase
@@ -204,6 +247,7 @@ export default function LahoreSectors() {
                           text-white
                           transition-all
                           duration-300
+                          hover:-translate-y-0.5
                           hover:bg-[#8C7A58]
                         "
                       >
@@ -235,89 +279,104 @@ export default function LahoreSectors() {
                     </span>
                   </div>
 
-                  {/* RIGHT MEDIA (Main Visual + Side Stack) */}
+                  {/* RIGHT MEDIA (1 Hero Image with Scroll & Hover Zoom) */}
                   <div
-                    data-stack-gallery
                     className="
+                      group
                       relative
-                      grid
-                      min-h-[520px]
-                      grid-cols-12
+                      min-h-[440px]
+                      w-full
                       overflow-hidden
+                      bg-black/5
+                      sm:min-h-[560px]
                       lg:col-span-6
                       lg:min-h-full
                     "
                   >
-                    {/* PRIMARY HERO IMAGE */}
                     <div
+                      data-lahore-zoom
                       className="
-                        group
                         relative
-                        col-span-12
-                        min-h-[380px]
+                        h-full
+                        w-full
                         overflow-hidden
-                        bg-black/5
-                        sm:col-span-8
-                        sm:min-h-[520px]
-                        lg:min-h-full
+                        will-change-transform
                       "
                     >
                       <Image
-                        src={sector.images[0]}
-                        alt={`${sector.title} primary view`}
+                        src={sector.image}
+                        alt={`${sector.title} architectural view`}
                         fill
                         priority={index === 0}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 40vw"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="
                           object-cover
                           transition-transform
-                          duration-[1600ms]
+                          duration-[1200ms]
                           ease-out
-                          group-hover:scale-[1.035]
+                          group-hover:scale-[1.08]
                         "
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                     </div>
 
-                    {/* SIDE IMAGE GRID */}
+                    {/* Subtle Cinematic Gradient Veil */}
+                    <div
+                      aria-hidden="true"
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-black/50
+                        via-black/10
+                        to-transparent
+                        transition-opacity
+                        duration-700
+                        group-hover:from-black/60
+                      "
+                    />
+
+                    {/* Media Label Overlay */}
                     <div
                       className="
-                        col-span-12
-                        grid
-                        grid-cols-3
-                        gap-[2px]
-                        sm:col-span-4
-                        sm:grid-cols-1
+                        pointer-events-none
+                        absolute
+                        bottom-8
+                        left-8
+                        right-8
+                        z-10
+                        text-white
+                        transition-transform
+                        duration-500
+                        group-hover:-translate-y-1
                       "
                     >
-                      {sector.images.slice(1).map((image, imageIndex) => (
-                        <div
-                          key={`${sector.id}-img-${imageIndex}`}
-                          className="
-                            group
-                            relative
-                            min-h-[150px]
-                            overflow-hidden
-                            bg-black/5
-                            sm:min-h-[172px]
-                            lg:min-h-0
-                          "
-                        >
-                          <Image
-                            src={image}
-                            alt={`${sector.title} view ${imageIndex + 2}`}
-                            fill
-                            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 34vw, 15vw"
-                            className="
-                              object-cover
-                              transition-transform
-                              duration-[1600ms]
-                              ease-out
-                              group-hover:scale-[1.06]
-                            "
-                          />
-                        </div>
-                      ))}
+                      <span
+                        className="
+                          block
+                          text-[9px]
+                          font-sans
+                          font-semibold
+                          uppercase
+                          tracking-[0.22em]
+                          text-white/70
+                        "
+                      >
+                        New City Paradise Lahore · {sector.tag}
+                      </span>
+
+                      <p
+                        className="
+                          mt-1.5
+                          font-serif
+                          text-2xl
+                          tracking-[-0.02em]
+                          text-white
+                          sm:text-3xl
+                        "
+                      >
+                        {sector.title}
+                      </p>
                     </div>
                   </div>
                 </div>
